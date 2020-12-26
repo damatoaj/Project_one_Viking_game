@@ -1,0 +1,73 @@
+* {
+    margin: 0 auto;
+    text-align: center;
+    border-sizing: border-box;
+    color: white;
+    font-family: 'Germania One', cursive;
+
+}
+
+body {
+    display: grid;
+    grid-template-rows: 50px 100px 450px 100px;
+    grid-template-columns: 100px 1fr 100px;
+    border: 15px solid black;
+    background-image: url('https://d332p1w15mxdmm.cloudfront.net/15-thick-walnut-blended-grain-countertop-25-wide-5fdbde66e3a22.jpg');
+    background-size: cover;
+    background-repeat: none;
+    
+}
+
+header {
+    grid-column: 1 / 4;
+    padding: 10px 50px 10px 50px;
+    font-size: 40px;
+}
+
+#p1 {
+    grid-column: 1 / 2;
+    font-size: 20px;
+    padding: 10px 50px 10px 50px
+    text-align: left;
+}
+
+#p2 {
+        grid-column: 2 / 3;
+        font-size: 20px;
+        padding: 10px 50px 10px 50px
+        text-align: left;
+}
+
+#p3 {
+    grid-column: 3 / 4;
+    font-size: 20px;
+    padding: 10px 50px 10px 50px
+    text-align: left;
+}
+
+main {
+    margin: 0px; 
+    padding: 0px;
+    border: 1px solid black;
+    grid-column: 2 / 3;
+    
+}
+canvas {
+    background-size: cover;
+    border: 1px dotted blue;
+}
+#playerOne {
+    grid-column: 1 / 2;
+    font-size: 30px;
+    padding: 10px;
+}
+
+#victory {
+grid-column: 2-3;
+}
+
+#playerTwo {
+    grid-column: 3-4;
+    font-size: 20px;
+    padding; 5px;
+}

@@ -1,0 +1,29 @@
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 600px;
+    height: 600px;
+
+}
+
+.grid div {
+    width: 200px;
+    height: 200px;
+    background-color: green;
+    margin-bottom: 5px;
+}
+
+.playerX {
+    background-image: url('https://i.imgur.com/BOaH87V.jpeg')
+}
+
+.player0 {
+    background-image: url('https://i.imgur.com/18rWdoo.jpg')
+}
+
+canvas {
+    height: 900px;
+    width: 900px;
+    border: 1px solid black;
+}
