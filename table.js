@@ -3,6 +3,10 @@ const ctx = canvas.getContext("2d");
 let victoryDisplay = document.getElementById('victory');
 canvas.height = '450';
 canvas.width = '450';
+const max_width = 400;
+const max_height = 400;
+const min_width = 0;
+const min_height = 0;
 //gameboard corners
 ctx.font = "15px Germania One";
 ctx.fillText('Escape', 0, 50)
@@ -230,7 +234,7 @@ let selectCharacter = defenderArray[characterIndex]
 
 let switchCharacter = () => {
     characterIndex++
-    if(characterIndex == defenderArray.length) {
+    if (characterIndex == defenderArray.length) {
         characterIndex = 0
     }
     selectCharacter = defenderArray[characterIndex]
@@ -243,16 +247,25 @@ let switchCharacter = () => {
 let movementHandler = (e) => {
     // let selectCharacter = king;
     if (e.key === 'w') { //move up
-        selectCharacter.y -= movement
+        if (selectCharacter.y - movement >= min_height) {
+            selectCharacter.y -= movement
+        }
+
     } else if (e.key === 'a') { //move left
-        selectCharacter.x -= movement
+        if (selectCharacter.x - movement >= min_height) {
+            selectCharacter.x -= movement
+        }
     } else if (e.key === 's') {
+        if(selectCharacter.y + movement <=max_height) {
         selectCharacter.y += movement
+        }
     } else if (e.key === 'd') {
+        if(selectCharacter.x + movement <= max_width) {
         selectCharacter.x += movement
-    } else if (e.which == '32'){
+        }
+    } else if (e.which == '32') {
         switchCharacter()
-    } 
+    }
     console.log(`x: ${selectCharacter.x}, y: ${selectCharacter.y}`)// 
     checkForVictory()
 }
