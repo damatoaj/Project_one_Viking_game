@@ -225,18 +225,17 @@ let checkForVictory = () => {
     detectCornerKing()
 }
 
-let selectCharacter = (click) => {
-    defenderArray.forEach(defender => {
-        console.log(click)
-        console.log(`clickx: ${click.x}, clicky: ${click.y}`)
-        if(click.x <= defender.x &&
-            click.y >= defender.y)  {
-                console.log('select defender')
-                console.log(defender)
-        }
-        console.log(`x: ${defender.x}, y: ${defender.y}`) 
-    });
+let characterIndex = 0
+let selectCharacter = defenderArray[characterIndex]
+
+let switchCharacter = () => {
+    characterIndex++
+    if(characterIndex == defenderArray.length) {
+        characterIndex = 0
+    }
+    selectCharacter = defenderArray[characterIndex]
 }
+
 
 
 //move my hero based on the key pressed.
@@ -244,22 +243,18 @@ let selectCharacter = (click) => {
 let movementHandler = (e) => {
     // let selectCharacter = king;
     if (e.key === 'w') { //move up
-        king.y -= movement
+        selectCharacter.y -= movement
     } else if (e.key === 'a') { //move left
         selectCharacter.x -= movement
     } else if (e.key === 's') {
         selectCharacter.y += movement
     } else if (e.key === 'd') {
         selectCharacter.x += movement
-    } else {
-        // console.log(`${e.key} won't make you work`)
-    }
+    } else if (e.which == '32'){
+        switchCharacter()
+    } 
     console.log(`x: ${selectCharacter.x}, y: ${selectCharacter.y}`)// 
     checkForVictory()
-}
-
-let clickHandler = (e) => {
-    selectCharacter(e)
 }
 
 
@@ -284,7 +279,6 @@ let clickHandler = (e) => {
 //      }
 //set listener event for key down
 document.addEventListener('keydown', movementHandler)
-document.addEventListener('click', clickHandler)
 
 // //helper function so my computer doesn't explode
 // document.querySelector('#btm-left').addEventListener('click', () => {
