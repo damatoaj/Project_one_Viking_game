@@ -227,7 +227,8 @@ let checkForVictory = () => {
 
 let selectCharacter = (click) => {
     defenderArray.forEach(defender => {
-        console.log(`x: ${click.x}, y: ${click.y}`)
+        console.log(click)
+        console.log(`clickx: ${click.x}, clicky: ${click.y}`)
         if(click.x <= defender.x &&
             click.y >= defender.y)  {
                 console.log('select defender')
