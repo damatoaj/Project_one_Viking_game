@@ -75,7 +75,7 @@ let checkForVictory = () => {
     detectCornerKing()
 }
 
-let characterIndex = 0
+let defenderIndex = 0
 let selectDefender = defenderArray[defenderIndex]
 
 let switchDefender = () => {
@@ -86,6 +86,16 @@ let switchDefender = () => {
     selectDefender = defenderArray[defenderIndex]
 }
 
+let attackerIndex = 0
+let selectAttacker = attackerArray[attackerIndex]
+
+let switchAttacker = () => {
+    attackerIndex++
+    if (attackerIndex == attackerArray.length) {
+        attackerIndex = 0
+    }
+    selectAttacker = attackerArray[attackerIndex]
+}
 
 
 //move my hero based on the key pressed.
@@ -105,19 +115,43 @@ let movementDefender = (e) => {
         selectDefender.y += movement
         }
     } else if (e.key === 'd') {
-        if(selectCharacter.x + movement <= max_width) {
-        selectCharacter.x += movement
+        if(selectDefender.x + movement <= max_width) {
+        selectDefender.x += movement
         }
     } else if (e.which == '32') {
         switchDefender()
     }
-    console.log(`x: ${selectCharacter.x}, y: ${selectCharacter.y}`)// 
+    console.log(`x: ${selectDefender.x}, y: ${selectDefender.y}`)// 
+    checkForVictory()
+}
+let movementAttacker = (e) => {
+    if (e.key === 'i') { //move up
+        if (selectAttacker.y - movement >= min_height) {
+            selectAttacker.y -= movement
+        }
+
+    } else if (e.key === 'j') { //move left
+        if (selectAttacker.x - movement >= min_height) {
+            selectAttacker.x -= movement
+        }
+    } else if (e.key === 'k') {
+        if(selectAttacker.y + movement <=max_height) {
+        selectAttacker.y += movement
+        }
+    } else if (e.key === 'l') {
+        if(selectAttacker.x + movement <= max_width) {
+        selectAttacker.x += movement
+        }
+    } else if (e.which == '76') {
+        switchAttacker()
+    }
+    console.log(`x: ${selectAttacker.x}, y: ${selectAttacker.y}`)// 
     checkForVictory()
 }
 
-
 //set listener event for key down
 document.addEventListener('keydown', movementDefender)
+document.addEventListener('keydown', movementAttacker)
 
 // //helper function so my computer doesn't explode
 // document.querySelector('#btm-left').addEventListener('click', () => {
