@@ -8,135 +8,6 @@ const max_height = 400;
 const min_width = 0;
 const min_height = 0;
 
-// //render board
-// let boardRender => render()
-// //gameboard corners
-// ctx.font = "15px Germania One";
-// ctx.fillText('Escape', 0, 50)
-// ctx.fillRect(0, 0, 50, 50)
-// ctx.fillRect(400, 0, 50, 50)
-// ctx.fillRect(0, 400, 50, 50)
-// ctx.fillRect(400, 400, 50, 50)
-
-// //castle square
-// ctx.fillStyle = 'yellow';
-// ctx.fillRect(200, 200, 50, 50)
-
-// // Defender Square
-// ctx.fillStyle = 'blue';
-// ctx.fillRect(150, 200, 50, 50)
-// ctx.fillRect(100, 200, 50, 50)
-// ctx.fillRect(250, 200, 50, 50)
-// ctx.fillRect(300, 200, 50, 50)
-// ctx.fillRect(200, 150, 50, 50)
-// ctx.fillRect(200, 100, 50, 50)
-// ctx.fillRect(200, 250, 50, 50)
-// ctx.fillRect(200, 300, 50, 50)
-// //Attacker Squares
-// ctx.fillStyle = 'red';
-// ctx.fillRect(200, 0, 50, 50)
-// ctx.fillRect(150, 0, 50, 50)
-// ctx.fillRect(250, 0, 50, 50)
-// ctx.fillRect(200, 50, 50, 50)
-// ctx.fillRect(400, 150, 50, 50)
-// ctx.fillRect(400, 200, 50, 50)
-// ctx.fillRect(400, 250, 50, 50)
-// ctx.fillRect(350, 200, 50, 50)
-// ctx.fillRect(150, 400, 50, 50)
-// ctx.fillRect(200, 400, 50, 50)
-// ctx.fillRect(250, 400, 50, 50)
-// ctx.fillRect(200, 350, 50, 50)
-// ctx.fillRect(0, 150, 50, 50)
-// ctx.fillRect(0, 200, 50, 50)
-// ctx.fillRect(0, 250, 50, 50)
-// ctx.fillRect(50, 200, 50, 50)
-
-// // lines for gameboard
-// ctx.beginPath();
-// ctx.moveTo(50, 0);
-// ctx.lineTo(50, 450);
-// ctx.stroke();
-
-// ctx.beginPath();
-// ctx.moveTo(100, 0);
-// ctx.lineTo(100, 450);
-// ctx.stroke();
-
-// ctx.beginPath();
-// ctx.moveTo(150, 0);
-// ctx.lineTo(150, 450);
-// ctx.stroke();
-
-// ctx.beginPath();
-// ctx.moveTo(200, 0);
-// ctx.lineTo(200, 450);
-// ctx.stroke();
-
-// ctx.beginPath();
-// ctx.moveTo(250, 0);
-// ctx.lineTo(250, 450);
-// ctx.stroke();
-
-// ctx.beginPath();
-// ctx.moveTo(300, 0);
-// ctx.lineTo(300, 450);
-// ctx.stroke();
-
-// ctx.beginPath();
-// ctx.moveTo(350, 0);
-// ctx.lineTo(350, 450);
-// ctx.stroke();
-
-// ctx.beginPath();
-// ctx.moveTo(400, 0);
-// ctx.lineTo(400, 450);
-// ctx.stroke();
-
-// ctx.beginPath();
-// ctx.moveTo(0, 50);
-// ctx.lineTo(450, 50);
-// ctx.stroke();
-
-// ctx.beginPath();
-// ctx.moveTo(0, 100);
-// ctx.lineTo(450, 100);
-// ctx.stroke();
-
-// ctx.beginPath();
-// ctx.moveTo(0, 150);
-// ctx.lineTo(450, 150);
-// ctx.stroke();
-
-// ctx.beginPath();
-// ctx.moveTo(0, 200);
-// ctx.lineTo(450, 200);
-// ctx.stroke();
-
-// ctx.beginPath();
-// ctx.moveTo(0, 250);
-// ctx.lineTo(450, 250);
-// ctx.stroke();
-
-// ctx.beginPath();
-// ctx.moveTo(0, 300);
-// ctx.lineTo(450, 300);
-// ctx.stroke();
-
-// ctx.beginPath();
-// ctx.moveTo(0, 350);
-// ctx.lineTo(450, 350);
-// ctx.stroke();
-
-// ctx.beginPath();
-// ctx.moveTo(0, 400);
-// ctx.lineTo(450, 400);
-// ctx.stroke();
-
-// ctx.beginPath();
-// ctx.moveTo(0, 450);
-// ctx.lineTo(450, 450);
-// ctx.stroke();
-
 //crawler
 function Crawler(x, y, width, height, color) {
     this.x = x;
@@ -185,34 +56,6 @@ let attackerArray = [attacker1, attacker2, attacker3, attacker4, attacker5, atta
 //movement
 let movement = 50;
 
-// //render test
-// king.render()
-// defender1.render()
-// defender2.render()
-// defender3.render()
-// defender4.render()
-// defender5.render()
-// defender6.render()
-// defender7.render()
-// defender8.render()
-
-// attacker1.render()
-// attacker2.render()
-// attacker3.render()
-// attacker4.render()
-// attacker5.render()
-// attacker6.render()
-// attacker7.render()
-// attacker8.render()
-// attacker9.render()
-// attacker10.render()
-// attacker11.render()
-// attacker12.render()
-// attacker13.render()
-// attacker14.render()
-// attacker15.render()
-// attacker16.render()
-
 let defendersWin = () => {
     victoryDisplay.innerText = "Defenders Win!!!"
 }
@@ -233,68 +76,48 @@ let checkForVictory = () => {
 }
 
 let characterIndex = 0
-let selectCharacter = defenderArray[characterIndex]
+let selectDefender = defenderArray[defenderIndex]
 
-let switchCharacter = () => {
-    characterIndex++
-    if (characterIndex == defenderArray.length) {
-        characterIndex = 0
+let switchDefender = () => {
+    defenderIndex++
+    if (defenderIndex == defenderArray.length) {
+        defenderIndex = 0
     }
-    selectCharacter = defenderArray[characterIndex]
+    selectDefender = defenderArray[defenderIndex]
 }
 
 
 
 //move my hero based on the key pressed.
 //passive movement in the game loop, active movement in the movement handler
-let movementHandler = (e) => {
-    // let selectCharacter = king;
+let movementDefender = (e) => {
     if (e.key === 'w') { //move up
-        if (selectCharacter.y - movement >= min_height) {
-            selectCharacter.y -= movement
+        if (selectDefender.y - movement >= min_height) {
+            selectDefender.y -= movement
         }
 
     } else if (e.key === 'a') { //move left
-        if (selectCharacter.x - movement >= min_height) {
-            selectCharacter.x -= movement
+        if (selectDefender.x - movement >= min_height) {
+            selectDefender.x -= movement
         }
     } else if (e.key === 's') {
-        if(selectCharacter.y + movement <=max_height) {
-        selectCharacter.y += movement
+        if(selectDefender.y + movement <=max_height) {
+        selectDefender.y += movement
         }
     } else if (e.key === 'd') {
         if(selectCharacter.x + movement <= max_width) {
         selectCharacter.x += movement
         }
     } else if (e.which == '32') {
-        switchCharacter()
+        switchDefender()
     }
     console.log(`x: ${selectCharacter.x}, y: ${selectCharacter.y}`)// 
     checkForVictory()
 }
 
 
-// let movementHandler = (e) => {
-
-//     switch(e.key) {
-//     case 'w':
-//         attacker16.y -= 50 // move up
-//         break //takes you out of the above block of code
-//         case 'a':
-//             attacker16.x -= 50 //move left
-//          break
-//         case 's':
-//             attacker16.y += 50//move down
-//             break
-//         case 'd':
-//             attacker16.x += 50//move right
-//         default: console.log(`${e.key} won't make you work`)
-//          }
-
-//          console.log(e)
-//      }
 //set listener event for key down
-document.addEventListener('keydown', movementHandler)
+document.addEventListener('keydown', movementDefender)
 
 // //helper function so my computer doesn't explode
 // document.querySelector('#btm-left').addEventListener('click', () => {
@@ -308,8 +131,6 @@ let gameLoop = () => {
     //render board
 
 //gameboard corners
-ctx.font = "15px Germania One";
-ctx.fillText('Escape', 0, 50)
 ctx.fillStyle = '#323538';
 ctx.fillRect(0, 0, 50, 50)
 ctx.fillRect(400, 0, 50, 50)
@@ -529,7 +350,6 @@ ctx.stroke();
     // console.log("characters")
 
 }
-// console.log("hello")
 
 //initialize game
 let gameInterval = setInterval(gameLoop, 100)
