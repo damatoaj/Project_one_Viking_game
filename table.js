@@ -26,16 +26,16 @@ function Crawler(x, y, width, height, color) {
 //king
 let king = new Crawler(200, 200, 50, 50, '#6b6f78')
 //defenders
-const defenders = [
-    new Crawler(150, 200, 50, 50, '#e4e7ed'),
-    new Crawler(100, 200, 50, 50, '#e4e7ed'),
-    new Crawler(250, 200, 50, 50, '#e4e7ed'),
-    new Crawler(300, 200, 50, 50, '#e4e7ed'),
-    new Crawler(200, 150, 50, 50, '#e4e7ed'),
-    new Crawler(200, 100, 50, 50, '#e4e7ed'),
-    new Crawler(200, 250, 50, 50, '#e4e7ed'),
-    new Crawler(200, 300, 50, 50, '#e4e7ed'),
-]
+// const defenders = [
+//     new Crawler(150, 200, 50, 50, '#e4e7ed'),
+//     new Crawler(100, 200, 50, 50, '#e4e7ed'),
+//     new Crawler(250, 200, 50, 50, '#e4e7ed'),
+//     new Crawler(300, 200, 50, 50, '#e4e7ed'),
+//     new Crawler(200, 150, 50, 50, '#e4e7ed'),
+//     new Crawler(200, 100, 50, 50, '#e4e7ed'),
+//     new Crawler(200, 250, 50, 50, '#e4e7ed'),
+//     new Crawler(200, 300, 50, 50, '#e4e7ed'),
+// ]
 let defender1 = new Crawler(150, 200, 50, 50, '#e4e7ed')
 let defender2 = new Crawler(100, 200, 50, 50, '#e4e7ed')
 let defender3 = new Crawler(250, 200, 50, 50, '#e4e7ed')
@@ -95,26 +95,17 @@ let selectPlayer = playerArray[playerIndex]
 let currentPiece = 0;
 
 let switchPlayer = (e) => {
+    e.preventDefault()
     playerIndex = (playerIndex+1) % 2
     selectPlayer = playerArray[playerIndex] //selectplayer is the array of the current player's pieces
-    currentPiece = 0;
+    currentPiece = 0;                       //every time a new turn starts the same piece is picked
    
     console.log("player", playerIndex)
 }
 let turnButton = document.getElementById("turns").addEventListener('click', switchPlayer)
+
 console.log(playerIndex)
 
-// //switch between defender characters
-// let defenderIndex = 0
-// let selectDefender = defenderArray[defenderIndex]
-
-// let switchDefender = () => {
-//     defenderIndex++
-//     if (defenderIndex == defenderArray.length) {
-//         defenderIndex = 0
-//     }    
-//     selectDefender = defenderArray[defenderIndex]
-// }    
 
 // //switch between attacking characters
 // let attackerIndex = 0
@@ -128,61 +119,108 @@ console.log(playerIndex)
 //     selectAttacker = attackerArray[attackerIndex]
 // }    
 
+//change who the current piece is
+let changePiece = (e) => {
+    if(e.which == '32') {
+        e.preventDefault()
+       console.log(selectPlayer)
+       console.log(selectPlayer[currentPiece])
+       currentPiece++
+    }
+}
+document.addEventListener('keydown', changePiece)
 
-//move my hero based on the key pressed.
+console.log(currentPiece)
+
+//move my current piece based on the key pressed.
 //passive movement in the game loop, active movement in the movement handler
-let movementDefender = (e) => {
+let move = (e) => {
+    //initialize current direction in move()
+    let currentDirection 
+
     if (e.key === 'w') { //move up
-        if (selectDefender.y - movement >= min_height) {
-            selectDefender.y -= movement
-        }    
+        currentDirection = 
+       if (selectPlayer[currentPiece].y - movement >= min_height) {
+            selectPlayer[currentPiece].y -= movement
+        }        
 
     } else if (e.key === 'a') { //move left
-        if (selectDefender.x - movement >= min_height) {
-            selectDefender.x -= movement
+      if (selectPlayer[currentPiece].x - movement >= min_height) {
+        selectPlayer[currentPiece].x -= movement
         }    
     } else if (e.key === 's') { //move down
-        if(selectDefender.y + movement <=max_height) {
-        selectDefender.y += movement    
+        if(selectPlayer[currentPiece].y + movement <=max_height) {
+            selectPlayer[currentPiece].y += movement    
         }
     } else if (e.key === 'd') { //move right
-        if(selectDefender.x + movement <= max_width) {
-        selectDefender.x += movement    
+        if(selectPlayer[currentPiece].x + movement <= max_width) {
+            selectPlayer[currentPiece].x += movement    
         }
     } else if (e.which == '32') {
-        switchDefender()
+        
     }    
-    console.log(`x: ${selectDefender.x}, y: ${selectDefender.y}`)// 
-    checkForVictory()
-}    
-let movementAttacker = (e) => { //same movement codes but for attacking pieces
-    if (e.key === 'i') { //move up
-        if (selectAttacker.y - movement >= min_height) {
-            selectAttacker.y -= movement
-        }    
+        console.log(`x: ${selectPlayer[currentPiece].x}, y: ${selectPlayer[currentPiece].y}`)// 
+        checkForVictory()
+}     
 
-    } else if (e.key === 'j') { //move left
-        if (selectAttacker.x - movement >= min_height) {
-            selectAttacker.x -= movement
-        }    
-    } else if (e.key === 'k') { //  move down
-        if(selectAttacker.y + movement <=max_height) {
-        selectAttacker.y += movement    
-        }
-    } else if (e.key === 'l') { //move right
-        if(selectAttacker.x + movement <= max_width) {
-        selectAttacker.x += movement    
-        }
-    } else if (e.which == '76') {
-        switchAttacker()
-    }    
-    console.log(`x: ${selectAttacker.x}, y: ${selectAttacker.y}`)// 
-    checkForVictory()
-}    
+
+
+
+
+// let movementDefender = (e) => {
+//     if (e.key === 'w') { //move up
+//         if (selectDefender.y - movement >= min_height) {
+//             selectDefender.y -= movement
+//         }    
+
+//     } else if (e.key === 'a') { //move left
+//         if (selectDefender.x - movement >= min_height) {
+//             selectDefender.x -= movement
+//         }    
+//     } else if (e.key === 's') { //move down
+//         if(selectDefender.y + movement <=max_height) {
+//         selectDefender.y += movement    
+//         }
+//     } else if (e.key === 'd') { //move right
+//         if(selectDefender.x + movement <= max_width) {
+//         selectDefender.x += movement    
+//         }
+//     } else if (e.which == '32') {
+//         switchDefender()
+//     }    
+//     console.log(`x: ${selectDefender.x}, y: ${selectDefender.y}`)// 
+//     checkForVictory()
+// }    
+// let movementAttacker = (e) => { //same movement codes but for attacking pieces
+//     if (e.key === 'i') { //move up
+//         if (selectAttacker.y - movement >= min_height) {
+//             selectAttacker.y -= movement
+//         }    
+
+//     } else if (e.key === 'j') { //move left
+//         if (selectAttacker.x - movement >= min_height) {
+//             selectAttacker.x -= movement
+//         }    
+//     } else if (e.key === 'k') { //  move down
+//         if(selectAttacker.y + movement <=max_height) {
+//         selectAttacker.y += movement    
+//         }
+//     } else if (e.key === 'l') { //move right
+//         if(selectAttacker.x + movement <= max_width) {
+//         selectAttacker.x += movement    
+//         }
+//     } else if (e.which == '76') {
+//         switchAttacker()
+//     }    
+//     console.log(`x: ${selectAttacker.x}, y: ${selectAttacker.y}`)// 
+//     checkForVictory()
+// }    
 
 //set listener event for key down
-document.addEventListener('keydown', movementDefender)
-document.addEventListener('keydown', movementAttacker)
+document.addEventListener('keydown', move)
+
+// document.addEventListener('keydown', movementDefender)
+// document.addEventListener('keydown', movementAttacker)
 
 
 
