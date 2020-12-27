@@ -18,6 +18,11 @@ body {
     
 }
 
+button {
+    color: black;
+    height: 50px;
+}
+
 header {
     grid-column: 1 / 4;
     padding: 10px 50px 10px 50px;
