@@ -7,6 +7,7 @@ const max_width = 400;
 const max_height = 400;
 const min_width = 0;
 const min_height = 0;
+
 let currentDirection
 
 //crawler
@@ -23,7 +24,23 @@ function Crawler(x, y, width, height, color) {
         ctx.fillStyle = this.color;
         ctx.fillRect(this.x, this.y, this.width, this.height);
     }
+    this.crashWith = function(currentPiece) { //find a way to do collision checks with every other piece checking if they collide w current piece
+        let myleft = this.x;
+        let myright = this.x + (this.width);
+        let mytop = this.y;
+        let mybottom = this.y + (this.height);
+        let currentPieceleft = currentPiece.x;
+        let currentPieceright = currentPiece.x + (currentPiece.width);
+        let currentPiecetop = currentPiece.y;
+        let currentPiecebottom = currentPiece.y + (currentPiece.height);
+        let crash = true;
+        if ((mybottom < currentPiecetop) || (mytop > currentPiecebottom) || (myright < currentPieceleft) || (myleft > currentPieceright)) {
+            crash = false;
+        }
+        return crash;
+    }
 }
+
 //king
 let king = new Crawler(200, 200, 50, 50, '#6b6f78')
 //defenders
@@ -64,7 +81,11 @@ let attacker14 = new Crawler(0, 200, 50, 50, '#964b4a')
 let attacker15 = new Crawler(0, 250, 50, 50, '#964b4a')
 let attacker16 = new Crawler(50, 200, 50, 50, '#964b4a')
 let attackerArray = [attacker1, attacker2, attacker3, attacker4, attacker5, attacker6, attacker7, attacker8, attacker9, attacker10, attacker11, attacker12, attacker13, attacker14, attacker15, attacker16]
+
 //movement
+
+let hitAttacker = false;
+let hitDefender = false;
 let movement = 50;
 
 let defendersWin = () => {
@@ -102,11 +123,8 @@ let switchPlayer = (e) => {
     currentPiece = 0;     
     currentDirection = false;                  //every time a new turn starts the same piece is picked
    
-    console.log("player", playerIndex)
 }
 let turnButton = document.getElementById("turns").addEventListener('click', switchPlayer)
-
-console.log(playerIndex)
 
 
 // //switch between attacking characters
@@ -133,8 +151,6 @@ let changePiece = (e) => {
 }
 document.addEventListener('keydown', changePiece)
 
-console.log(currentPiece)
-
 //move my current piece based on the key pressed.
 //passive movement in the game loop, active movement in the movement handler
 let move = (e) => {
@@ -143,9 +159,27 @@ let move = (e) => {
 
     if (e.key === 'w' && currentDirection === false || currentDirection === 'w') { //move up
         currentDirection = 'w' 
-       if (selectPlayer[currentPiece].y - movement >= min_height) {
-            selectPlayer[currentPiece].y -= movement
-        }        
+         if(selectPlayer[currentPiece].y - movement >= min_height) {
+                selectPlayer[currentPiece].y -= movement
+        } 
+      
+          defenderArray.forEach(defender => {
+            if(selectPlayer[currentPiece].y - movement >= defender.y + defender.height &&
+                selectPlayer[currentPiece].x === defender.x) {
+                    selectPlayer[currentPiece].y -= movement
+                    console.log('my current piece hit a defender')
+                    console.log(defender)
+                }
+            })      
+        attackerArray.forEach(attacker => {
+            if(selectPlayer[currentPiece].y  - movement >= attacker.y + attacker.height &&
+                selectPlayer[currentPiece].x === attacker.x) {
+                selectPlayer[currentPiece].y -= movement
+                console.log('my piece hit an attacker')
+                console.log(attacker)
+            }
+        })   
+     
 
     } else if (e.key === 'a' && currentDirection === false || currentDirection === 'a') { //move left
         currentDirection = 'a'
@@ -171,8 +205,19 @@ let move = (e) => {
 //set listener event for key down
 document.addEventListener('keydown', move)
 
+//function for collision detection that if true kills a piece
 
 
+// let detectHit = () => {
+//     let detectFriendly( 
+//         king.x + king.width >= attacker1.x &&
+//         king.x <= attacker1.x + attacker1.width &&
+//         king.y <= attacker1.y + attacker1.height &&
+//         king.y + king.height >= attacker1.y
+//     ) {
+//         console.log('hit')
+//     }
+// }
 
 // //helper function so my computer doesn't explode
 // document.querySelector('#btm-left').addEventListener('click', () => {
@@ -184,6 +229,14 @@ let gameLoop = () => {
     //clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     //render board
+
+//  if(king.crashWith(defender1)){
+//     currentDirection = true;
+//     console.log('crash')
+//  }
+// //  if(defender1.crashWith(defenderArray)){
+//      console.log('hello')
+//  }
 
 //gameboard corners
 ctx.fillStyle = '#323538';
@@ -313,11 +366,18 @@ ctx.stroke();
     // if characters if alive
     if (king.alive) {
         king.render()
+        //  if(king.crashWith(selectPlayer[currentPiece])){
+        //     console.log('crash')
+//  }
         //   detect collision
         // detectHit()
     }
     if (defender1.alive) {
         defender1.render()
+    //      if(defender1.crashWith(currentPiece)){
+    // currentDirection = true;
+    // console.log('crash')
+    // }
     }
     if (defender2.alive) {
         defender2.render()
