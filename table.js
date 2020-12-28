@@ -24,7 +24,7 @@ function Crawler(x, y, width, height, color) {
         ctx.fillStyle = this.color;
         ctx.fillRect(this.x, this.y, this.width, this.height);
     }
-    this.crashWith = function(currentPiece) { //find a way to do collision checks with every other piece checking if they collide w current piece
+    this.crashCurrent = function(mypiece) { //find a way to do collision checks with every other piece checking if they collide w current piece
         let myleft = this.x;
         let myright = this.x + (this.width);
         let mytop = this.y;
@@ -33,11 +33,11 @@ function Crawler(x, y, width, height, color) {
         let currentPieceright = currentPiece.x + (currentPiece.width);
         let currentPiecetop = currentPiece.y;
         let currentPiecebottom = currentPiece.y + (currentPiece.height);
-        let crash = true;
-        if ((mybottom < currentPiecetop) || (mytop > currentPiecebottom) || (myright < currentPieceleft) || (myleft > currentPieceright)) {
-            crash = false;
+        let currentDirection = true;
+        if ((mybottom > currentPiecetop) || (mytop < currentPiecebottom) || (myright > currentPieceleft) || (myleft < currentPieceright)) {
+            currentDirection = false;
         }
-        return crash;
+        return currentDirection;
     }
 }
 
@@ -155,30 +155,40 @@ document.addEventListener('keydown', changePiece)
 //passive movement in the game loop, active movement in the movement handler
 let move = (e) => {
     // initialize current direction in move()
-    
-
+let everyOne = defenderArray.concat(attackerArray); 
+let indexEquals = currentPiece + attackerArray.length ? playerIndex : currentPiece;
+    console.log(indexEquals)
     if (e.key === 'w' && currentDirection === false || currentDirection === 'w') { //move up
         currentDirection = 'w' 
          if(selectPlayer[currentPiece].y - movement >= min_height) {
                 selectPlayer[currentPiece].y -= movement
         } 
       
-          defenderArray.forEach(defender => {
-            if(selectPlayer[currentPiece].y === defender.y &&
-                selectPlayer[currentPiece].x === defender.x) {
-                    selectPlayer[currentPiece].y = defender.y + defender.height
-                    console.log('my current piece hit a defender')
-                    console.log(defender)
-                }
-            })      
-        attackerArray.forEach(attacker => {
-            if(selectPlayer[currentPiece].y === attacker.y &&
-                selectPlayer[currentPiece].x === attacker.x) {
-                selectPlayer[currentPiece].y = attacker.y + attacker.height
-                console.log('my piece hit an attacker')
-                console.log(attacker)
+        everyOne.forEach((piece , index) => {
+            if(index != indexEquals) {
+            if(selectPlayer[currentPiece.y] === piece.y && 
+                selectPlayer[currentPiece].x === piece.x) {
+                selectPlayer[currentPiece].y = piece.y + piece.height
+                console.log('my current piece hit a piece')
+                console.log(piece)
             }
-        })   
+            }
+        })      
+        //     if(selectPlayer[currentPiece].y === defender.y &&
+        //         selectPlayer[currentPiece].x === defender.x) {
+        //             selectPlayer[currentPiece].y = defender.y + defender.height
+        //             console.log('my current piece hit a defender')
+        //             console.log(defender)
+        //         }
+        //     })      
+        // attackerArray.forEach(attacker => {
+        //     if(selectPlayer[currentPiece].y === attacker.y &&
+        //         selectPlayer[currentPiece].x === attacker.x) {
+        //         selectPlayer[currentPiece].y = attacker.y + attacker.height
+        //         console.log('my piece hit an attacker')
+        //         console.log(attacker)
+        //     }
+        // })   
      
 
     } else if (e.key === 'a' && currentDirection === false || currentDirection === 'a') { //move left
@@ -201,6 +211,12 @@ let move = (e) => {
         checkForVictory()
 }     
 
+// let crashUp = () => {  //if the current piece crashes into any player in direction w then direction w is off
+//     if (crashCurrent(playerArray)) {
+//         currentDirection == !'w'
+//         console.log('hit')
+//     }
+// }
 
 //set listener event for key down
 document.addEventListener('keydown', move)
