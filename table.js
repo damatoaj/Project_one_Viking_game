@@ -164,17 +164,17 @@ let move = (e) => {
         } 
       
           defenderArray.forEach(defender => {
-            if(selectPlayer[currentPiece].y - movement >= defender.y + defender.height &&
+            if(selectPlayer[currentPiece].y === defender.y &&
                 selectPlayer[currentPiece].x === defender.x) {
-                    selectPlayer[currentPiece].y -= movement
+                    selectPlayer[currentPiece].y = defender.y + defender.height
                     console.log('my current piece hit a defender')
                     console.log(defender)
                 }
             })      
         attackerArray.forEach(attacker => {
-            if(selectPlayer[currentPiece].y  - movement >= attacker.y + attacker.height &&
+            if(selectPlayer[currentPiece].y === attacker.y &&
                 selectPlayer[currentPiece].x === attacker.x) {
-                selectPlayer[currentPiece].y -= movement
+                selectPlayer[currentPiece].y = attacker.y + attacker.height
                 console.log('my piece hit an attacker')
                 console.log(attacker)
             }
