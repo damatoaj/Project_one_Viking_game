@@ -155,40 +155,50 @@ document.addEventListener('keydown', changePiece)
 //passive movement in the game loop, active movement in the movement handler
 let move = (e) => {
     // initialize current direction in move()
-let everyOne = defenderArray.concat(attackerArray); 
-let indexEquals = currentPiece + attackerArray.length ? playerIndex : currentPiece;
-    console.log(indexEquals)
+// let everyOne = defenderArray.concat(attackerArray); 
+// let indexEquals = currentPiece + attackerArray.length ? playerIndex : currentPiece;
+//     console.log(indexEquals)
     if (e.key === 'w' && currentDirection === false || currentDirection === 'w') { //move up
         currentDirection = 'w' 
          if(selectPlayer[currentPiece].y - movement >= min_height) {
                 selectPlayer[currentPiece].y -= movement
         } 
       
-        everyOne.forEach((piece , index) => {
-            if(index != indexEquals) {
-            if(selectPlayer[currentPiece.y] === piece.y && 
-                selectPlayer[currentPiece].x === piece.x) {
-                selectPlayer[currentPiece].y = piece.y + piece.height
-                console.log('my current piece hit a piece')
-                console.log(piece)
-            }
-            }
-        })      
-        //     if(selectPlayer[currentPiece].y === defender.y &&
-        //         selectPlayer[currentPiece].x === defender.x) {
-        //             selectPlayer[currentPiece].y = defender.y + defender.height
-        //             console.log('my current piece hit a defender')
-        //             console.log(defender)
-        //         }
-        //     })      
-        // attackerArray.forEach(attacker => {
-        //     if(selectPlayer[currentPiece].y === attacker.y &&
-        //         selectPlayer[currentPiece].x === attacker.x) {
-        //         selectPlayer[currentPiece].y = attacker.y + attacker.height
-        //         console.log('my piece hit an attacker')
-        //         console.log(attacker)
+        // everyOne.forEach((piece , index) => {
+        //     if (!Object.is(selectPlayer[currentPiece], piece)) {
+                
+        //     if(selectPlayer[currentPiece.y] === piece.y && 
+        //         selectPlayer[currentPiece].x === piece.x) {
+        //         selectPlayer[currentPiece].y = piece.y + piece.height
+        //         console.log('my current piece hit a piece')
+        //         console.log(piece)
+        //     } 
         //     }
-        // })   
+        // })
+        defenderArray.forEach(defender => {
+            if(!Object.is(selectPlayer[currentPiece], defender)) {
+                console.log('not defender')     
+            if(selectPlayer[currentPiece].y === defender.y &&
+                selectPlayer[currentPiece].x === defender.x) {
+                    selectPlayer[currentPiece].y = defender.y + defender.height
+                    console.log('my current piece hit a defender')
+                    console.log(defender)
+             } 
+            }
+         })      
+            
+        attackerArray.forEach(attacker => {
+            if(!Object.is(selectPlayer[currentPiece], attacker)) {
+                console.log('not me')
+                if(selectPlayer[currentPiece].y === attacker.y &&
+                    selectPlayer[currentPiece].x === attacker.x) {
+                    selectPlayer[currentPiece].y = attacker.y + attacker.height
+                    console.log('my piece hit an attacker')
+                    console.log(attacker)
+                } 
+            }
+            
+        })   
      
 
     } else if (e.key === 'a' && currentDirection === false || currentDirection === 'a') { //move left
