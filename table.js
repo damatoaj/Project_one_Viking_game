@@ -129,15 +129,17 @@ let changePiece = (e) => {
        selectPlayer[currentPiece].color = 'yellow';
         console.log(selectPlayer[currentPiece], 'what')
 
-        if (playerArray[0]) {
+        if (!playerIndex) { //selects defenderArray
             if (previousPiece == 0) {
                 selectPlayer[previousPiece].color = '#6b6f78';
              } else if (previousPiece >= 1) {
                selectPlayer[previousPiece].color = '#e4e7ed';
             } else {selectPlayer[previousPiece].color = 'black';}
-        }
-        if (playerArray[1]) {
+        } 
+        if (playerIndex) { //selects attackerArray
+            if (previousPiece >= 0) {
             selectPlayer[previousPiece].color = '#964b4a';
+            }
         }
     } 
 }
