@@ -147,6 +147,7 @@ let changePiece = (e) => {
        console.log(selectPlayer[currentPiece])
        currentPiece++
        currentDirection = false;
+       style.currentPiece('yellow')
     }
 }
 document.addEventListener('keydown', changePiece)
@@ -164,17 +165,6 @@ let move = (e) => {
                 selectPlayer[currentPiece].y -= movement
         } 
       
-        // everyOne.forEach((piece , index) => {
-        //     if (!Object.is(selectPlayer[currentPiece], piece)) {
-                
-        //     if(selectPlayer[currentPiece.y] === piece.y && 
-        //         selectPlayer[currentPiece].x === piece.x) {
-        //         selectPlayer[currentPiece].y = piece.y + piece.height
-        //         console.log('my current piece hit a piece')
-        //         console.log(piece)
-        //     } 
-        //     }
-        // })
         defenderArray.forEach(defender => {
             if(!Object.is(selectPlayer[currentPiece], defender)) {
                 console.log('not defender')     
@@ -200,22 +190,97 @@ let move = (e) => {
             
         })   
      
-
     } else if (e.key === 'a' && currentDirection === false || currentDirection === 'a') { //move left
         currentDirection = 'a'
       if (selectPlayer[currentPiece].x - movement >= min_height) {
         selectPlayer[currentPiece].x -= movement
         }    
+      
+        defenderArray.forEach(defender => {
+            if(!Object.is(selectPlayer[currentPiece], defender)) {
+                console.log('not defender')     
+            if(selectPlayer[currentPiece].y === defender.y &&
+                selectPlayer[currentPiece].x === defender.x) {
+                    selectPlayer[currentPiece].x = defender.x + defender.width
+                    console.log('my current piece hit a defender')
+                    console.log(defender)
+             } 
+            }
+         })      
+            
+        attackerArray.forEach(attacker => {
+            if(!Object.is(selectPlayer[currentPiece], attacker)) {
+                console.log('not me')
+                if(selectPlayer[currentPiece].y === attacker.y &&
+                    selectPlayer[currentPiece].x === attacker.x) {
+                    selectPlayer[currentPiece].x = attacker.x + attacker.width
+                    console.log('my piece hit an attacker')
+                    console.log(attacker)
+                } 
+            }
+            
+        })         
+   
     } else if (e.key === 's' && currentDirection === false || currentDirection === 's') { //move down
         currentDirection = 's'
         if(selectPlayer[currentPiece].y + movement <=max_height) {
             selectPlayer[currentPiece].y += movement    
         }
+      
+        defenderArray.forEach(defender => {
+            if(!Object.is(selectPlayer[currentPiece], defender)) {
+                console.log('not defender')     
+            if(selectPlayer[currentPiece].y === defender.y &&
+                selectPlayer[currentPiece].x === defender.x) {
+                    selectPlayer[currentPiece].y = defender.y - defender.height
+                    console.log('my current piece hit a defender')
+                    console.log(defender)
+             } 
+            }
+         })      
+            
+        attackerArray.forEach(attacker => {
+            if(!Object.is(selectPlayer[currentPiece], attacker)) {
+                console.log('not me')
+                if(selectPlayer[currentPiece].y === attacker.y &&
+                    selectPlayer[currentPiece].x === attacker.x) {
+                    selectPlayer[currentPiece].y = attacker.y - attacker.height
+                    console.log('my piece hit an attacker')
+                    console.log(attacker)
+                } 
+            }
+            
+        })         
     } else if (e.key === 'd' && currentDirection === false || currentDirection === 'd') { //move right
         currentDirection = 'd'
         if(selectPlayer[currentPiece].x + movement <= max_width) {
             selectPlayer[currentPiece].x += movement    
         }
+      
+        defenderArray.forEach(defender => {
+            if(!Object.is(selectPlayer[currentPiece], defender)) {
+                console.log('not defender')     
+            if(selectPlayer[currentPiece].y === defender.y &&
+                selectPlayer[currentPiece].x === defender.x) {
+                    selectPlayer[currentPiece].x = defender.x - defender.width
+                    console.log('my current piece hit a defender')
+                    console.log(defender)
+             } 
+            }
+         })      
+            
+        attackerArray.forEach(attacker => {
+            if(!Object.is(selectPlayer[currentPiece], attacker)) {
+                console.log('not me')
+                if(selectPlayer[currentPiece].y === attacker.y &&
+                    selectPlayer[currentPiece].x === attacker.x) {
+                    selectPlayer[currentPiece].x = attacker.x - attacker.width
+                    console.log('my piece hit an attacker')
+                    console.log(attacker)
+                } 
+            }
+            
+        }) 
     }   
         console.log(`x: ${selectPlayer[currentPiece].x}, y: ${selectPlayer[currentPiece].y}`)// 
         checkForVictory()
