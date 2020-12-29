@@ -44,16 +44,7 @@ function Crawler(x, y, width, height, color) {
 //king
 let king = new Crawler(200, 200, 50, 50, '#6b6f78')
 //defenders
-// const defenders = [
-//     new Crawler(150, 200, 50, 50, '#e4e7ed'),
-//     new Crawler(100, 200, 50, 50, '#e4e7ed'),
-//     new Crawler(250, 200, 50, 50, '#e4e7ed'),
-//     new Crawler(300, 200, 50, 50, '#e4e7ed'),
-//     new Crawler(200, 150, 50, 50, '#e4e7ed'),
-//     new Crawler(200, 100, 50, 50, '#e4e7ed'),
-//     new Crawler(200, 250, 50, 50, '#e4e7ed'),
-//     new Crawler(200, 300, 50, 50, '#e4e7ed'),
-// ]
+
 let defender1 = new Crawler(150, 200, 50, 50, '#e4e7ed')
 let defender2 = new Crawler(100, 200, 50, 50, '#e4e7ed')
 let defender3 = new Crawler(250, 200, 50, 50, '#e4e7ed')
@@ -107,10 +98,6 @@ let checkForVictory = () => {
     detectCornerKing()
 }
 
-//set player switch button
-// let turnButton = document.getElementById("turns").addEventListener('onclick', selectPlayer)
-
-
 let playerIndex = 0;
 let playerArray = [defenderArray, attackerArray]
 let selectPlayer = playerArray[playerIndex]
@@ -124,41 +111,42 @@ let switchPlayer = (e) => {
     currentDirection = false;                  //every time a new turn starts the same piece is picked
    
 }
-let turnButton = document.getElementById("turns").addEventListener('click', switchPlayer)
+let turnButton = document.getElementById("turns").addEventListener('click', switchPlayer)//switch between players
 
-
-// //switch between attacking characters
-// let attackerIndex = 0
-// let selectAttacker = attackerArray[attackerIndex]
-
-// let switchAttacker = () => {
-//     attackerIndex++
-//     if (attackerIndex == attackerArray.length) {
-//         attackerIndex = 0
-//     }    
-//     selectAttacker = attackerArray[attackerIndex]
-// }    
 
 //change who the current piece is
+/* i need the current player to be a different color from the other pieces on the board so that we know who's moving
+spacebar selects the character and that can change its color, how about on key up the color revert */
 let changePiece = (e) => {
     if(e.which == '32') {
+        currentPiece++
+        let previousPiece = currentPiece - 1;
         e.preventDefault()
        console.log(selectPlayer)
-       console.log(selectPlayer[currentPiece])
-       currentPiece++
+       console.log(selectPlayer[currentPiece], "howdy")
+       console.log('previousPiece', previousPiece)
        currentDirection = false;
-       style.currentPiece('yellow')
-    }
+       selectPlayer[currentPiece].color = 'yellow';
+        console.log(selectPlayer[currentPiece], 'what')
+
+        if (playerArray[0]) {
+            if (previousPiece == 0) {
+                selectPlayer[previousPiece].color = '#6b6f78';
+             } else if (previousPiece >= 1) {
+               selectPlayer[previousPiece].color = '#e4e7ed';
+            } else {selectPlayer[previousPiece].color = 'black';}
+        }
+        if (playerArray[1]) {
+            selectPlayer[previousPiece].color = '#964b4a';
+        }
+    } 
 }
 document.addEventListener('keydown', changePiece)
 
 //move my current piece based on the key pressed.
 //passive movement in the game loop, active movement in the movement handler
 let move = (e) => {
-    // initialize current direction in move()
-// let everyOne = defenderArray.concat(attackerArray); 
-// let indexEquals = currentPiece + attackerArray.length ? playerIndex : currentPiece;
-//     console.log(indexEquals)
+
     if (e.key === 'w' && currentDirection === false || currentDirection === 'w') { //move up
         currentDirection = 'w' 
          if(selectPlayer[currentPiece].y - movement >= min_height) {
@@ -167,24 +155,20 @@ let move = (e) => {
       
         defenderArray.forEach(defender => {
             if(!Object.is(selectPlayer[currentPiece], defender)) {
-                console.log('not defender')     
             if(selectPlayer[currentPiece].y === defender.y &&
                 selectPlayer[currentPiece].x === defender.x) {
                     selectPlayer[currentPiece].y = defender.y + defender.height
                     console.log('my current piece hit a defender')
-                    console.log(defender)
              } 
             }
          })      
             
         attackerArray.forEach(attacker => {
             if(!Object.is(selectPlayer[currentPiece], attacker)) {
-                console.log('not me')
                 if(selectPlayer[currentPiece].y === attacker.y &&
                     selectPlayer[currentPiece].x === attacker.x) {
                     selectPlayer[currentPiece].y = attacker.y + attacker.height
                     console.log('my piece hit an attacker')
-                    console.log(attacker)
                 } 
             }
             
@@ -198,24 +182,18 @@ let move = (e) => {
       
         defenderArray.forEach(defender => {
             if(!Object.is(selectPlayer[currentPiece], defender)) {
-                console.log('not defender')     
             if(selectPlayer[currentPiece].y === defender.y &&
                 selectPlayer[currentPiece].x === defender.x) {
                     selectPlayer[currentPiece].x = defender.x + defender.width
-                    console.log('my current piece hit a defender')
-                    console.log(defender)
              } 
             }
          })      
             
         attackerArray.forEach(attacker => {
             if(!Object.is(selectPlayer[currentPiece], attacker)) {
-                console.log('not me')
                 if(selectPlayer[currentPiece].y === attacker.y &&
                     selectPlayer[currentPiece].x === attacker.x) {
                     selectPlayer[currentPiece].x = attacker.x + attacker.width
-                    console.log('my piece hit an attacker')
-                    console.log(attacker)
                 } 
             }
             
@@ -229,24 +207,18 @@ let move = (e) => {
       
         defenderArray.forEach(defender => {
             if(!Object.is(selectPlayer[currentPiece], defender)) {
-                console.log('not defender')     
             if(selectPlayer[currentPiece].y === defender.y &&
                 selectPlayer[currentPiece].x === defender.x) {
                     selectPlayer[currentPiece].y = defender.y - defender.height
-                    console.log('my current piece hit a defender')
-                    console.log(defender)
              } 
             }
          })      
             
         attackerArray.forEach(attacker => {
             if(!Object.is(selectPlayer[currentPiece], attacker)) {
-                console.log('not me')
                 if(selectPlayer[currentPiece].y === attacker.y &&
                     selectPlayer[currentPiece].x === attacker.x) {
                     selectPlayer[currentPiece].y = attacker.y - attacker.height
-                    console.log('my piece hit an attacker')
-                    console.log(attacker)
                 } 
             }
             
@@ -259,24 +231,18 @@ let move = (e) => {
       
         defenderArray.forEach(defender => {
             if(!Object.is(selectPlayer[currentPiece], defender)) {
-                console.log('not defender')     
             if(selectPlayer[currentPiece].y === defender.y &&
                 selectPlayer[currentPiece].x === defender.x) {
                     selectPlayer[currentPiece].x = defender.x - defender.width
-                    console.log('my current piece hit a defender')
-                    console.log(defender)
              } 
             }
          })      
             
         attackerArray.forEach(attacker => {
             if(!Object.is(selectPlayer[currentPiece], attacker)) {
-                console.log('not me')
                 if(selectPlayer[currentPiece].y === attacker.y &&
                     selectPlayer[currentPiece].x === attacker.x) {
                     selectPlayer[currentPiece].x = attacker.x - attacker.width
-                    console.log('my piece hit an attacker')
-                    console.log(attacker)
                 } 
             }
             
@@ -286,29 +252,11 @@ let move = (e) => {
         checkForVictory()
 }     
 
-// let crashUp = () => {  //if the current piece crashes into any player in direction w then direction w is off
-//     if (crashCurrent(playerArray)) {
-//         currentDirection == !'w'
-//         console.log('hit')
-//     }
-// }
 
 //set listener event for key down
 document.addEventListener('keydown', move)
 
 //function for collision detection that if true kills a piece
-
-
-// let detectHit = () => {
-//     let detectFriendly( 
-//         king.x + king.width >= attacker1.x &&
-//         king.x <= attacker1.x + attacker1.width &&
-//         king.y <= attacker1.y + attacker1.height &&
-//         king.y + king.height >= attacker1.y
-//     ) {
-//         console.log('hit')
-//     }
-// }
 
 // //helper function so my computer doesn't explode
 // document.querySelector('#btm-left').addEventListener('click', () => {
@@ -321,13 +269,6 @@ let gameLoop = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     //render board
 
-//  if(king.crashWith(defender1)){
-//     currentDirection = true;
-//     console.log('crash')
-//  }
-// //  if(defender1.crashWith(defenderArray)){
-//      console.log('hello')
-//  }
 
 //gameboard corners
 ctx.fillStyle = '#323538';
