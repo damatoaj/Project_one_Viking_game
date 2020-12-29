@@ -23,22 +23,7 @@ function Crawler(x, y, width, height, color) {
         ctx.strokeRect(this.x, this.y, this.width, this.height);
         ctx.fillStyle = this.color;
         ctx.fillRect(this.x, this.y, this.width, this.height);
-    }
-    this.crashCurrent = function(mypiece) { //find a way to do collision checks with every other piece checking if they collide w current piece
-        let myleft = this.x;
-        let myright = this.x + (this.width);
-        let mytop = this.y;
-        let mybottom = this.y + (this.height);
-        let currentPieceleft = currentPiece.x;
-        let currentPieceright = currentPiece.x + (currentPiece.width);
-        let currentPiecetop = currentPiece.y;
-        let currentPiecebottom = currentPiece.y + (currentPiece.height);
-        let currentDirection = true;
-        if ((mybottom > currentPiecetop) || (mytop < currentPiecebottom) || (myright > currentPieceleft) || (myleft < currentPieceright)) {
-            currentDirection = false;
-        }
-        return currentDirection;
-    }
+    } 
 }
 
 //king
@@ -83,6 +68,15 @@ let defendersWin = () => {
     victoryDisplay.innerText = "Defenders Win!!!"
 }
 
+let attackersWin = () => {
+    victoryDisplay.innerText = "Attackers Win!!!"
+}
+
+let detectKingDeath = () => {
+    if (king.alive = false) {
+        attackersWin()
+    }
+}
 let detectCornerKing = () => {
     if (
         (king.x == 0 && king.y == 0) ||
@@ -115,8 +109,7 @@ let turnButton = document.getElementById("turns").addEventListener('click', swit
 
 
 //change who the current piece is
-/* i need the current player to be a different color from the other pieces on the board so that we know who's moving
-spacebar selects the character and that can change its color, how about on key up the color revert */
+
 let changePiece = (e) => {
     if(e.which == '32') {
         currentPiece++
@@ -156,24 +149,27 @@ let move = (e) => {
         } 
       
         defenderArray.forEach(defender => {
-            if(!Object.is(selectPlayer[currentPiece], defender)) {
-            if(selectPlayer[currentPiece].y === defender.y &&
-                selectPlayer[currentPiece].x === defender.x) {
-                    selectPlayer[currentPiece].y = defender.y + defender.height
-                    console.log('my current piece hit a defender')
-             } 
-            }
+            if (defender.alive) {
+                if (!Object.is(selectPlayer[currentPiece], defender)) {
+                    if(selectPlayer[currentPiece].y === defender.y &&
+                        selectPlayer[currentPiece].x === defender.x) {
+                        selectPlayer[currentPiece].y = defender.y + defender.height
+                        console.log('my current piece hit a defender')
+                    }    
+                }
+            }    
          })      
             
         attackerArray.forEach(attacker => {
-            if(!Object.is(selectPlayer[currentPiece], attacker)) {
-                if(selectPlayer[currentPiece].y === attacker.y &&
-                    selectPlayer[currentPiece].x === attacker.x) {
-                    selectPlayer[currentPiece].y = attacker.y + attacker.height
-                    console.log('my piece hit an attacker')
-                } 
+            if(attacker.alive) {
+                if(!Object.is(selectPlayer[currentPiece], attacker)) {
+                    if(selectPlayer[currentPiece].y === attacker.y &&
+                        selectPlayer[currentPiece].x === attacker.x) {
+                        selectPlayer[currentPiece].y = attacker.y + attacker.height
+                        console.log('my piece hit an attacker')
+                    } 
+                }
             }
-            
         })   
      
     } else if (e.key === 'a' && currentDirection === false || currentDirection === 'a') { //move left
@@ -183,22 +179,25 @@ let move = (e) => {
         }    
       
         defenderArray.forEach(defender => {
-            if(!Object.is(selectPlayer[currentPiece], defender)) {
-            if(selectPlayer[currentPiece].y === defender.y &&
-                selectPlayer[currentPiece].x === defender.x) {
-                    selectPlayer[currentPiece].x = defender.x + defender.width
-             } 
-            }
+            if(defender.alive) {
+                if(!Object.is(selectPlayer[currentPiece], defender)) {
+                if(selectPlayer[currentPiece].y === defender.y &&
+                     selectPlayer[currentPiece].x === defender.x) {
+                     selectPlayer[currentPiece].x = defender.x + defender.width
+                } 
+                }
+            }    
          })      
             
         attackerArray.forEach(attacker => {
-            if(!Object.is(selectPlayer[currentPiece], attacker)) {
-                if(selectPlayer[currentPiece].y === attacker.y &&
-                    selectPlayer[currentPiece].x === attacker.x) {
-                    selectPlayer[currentPiece].x = attacker.x + attacker.width
-                } 
+            if(attacker.alive) {
+                if(!Object.is(selectPlayer[currentPiece], attacker)) {
+                    if(selectPlayer[currentPiece].y === attacker.y &&
+                        selectPlayer[currentPiece].x === attacker.x) {
+                        selectPlayer[currentPiece].x = attacker.x + attacker.width
+                    } 
+                }
             }
-            
         })         
    
     } else if (e.key === 's' && currentDirection === false || currentDirection === 's') { //move down
@@ -208,22 +207,26 @@ let move = (e) => {
         }
       
         defenderArray.forEach(defender => {
-            if(!Object.is(selectPlayer[currentPiece], defender)) {
-            if(selectPlayer[currentPiece].y === defender.y &&
-                selectPlayer[currentPiece].x === defender.x) {
-                    selectPlayer[currentPiece].y = defender.y - defender.height
-             } 
-            }
-         })      
+            if (defender.alive) {
+                if(!Object.is(selectPlayer[currentPiece], defender)) {
+                    if(selectPlayer[currentPiece].y === defender.y &&
+                        selectPlayer[currentPiece].x === defender.x) {
+                        selectPlayer[currentPiece].y = defender.y - defender.height
+                    } 
+                }
+            }       
+         })
+      
             
         attackerArray.forEach(attacker => {
-            if(!Object.is(selectPlayer[currentPiece], attacker)) {
-                if(selectPlayer[currentPiece].y === attacker.y &&
-                    selectPlayer[currentPiece].x === attacker.x) {
-                    selectPlayer[currentPiece].y = attacker.y - attacker.height
-                } 
+            if (attacker.alive) {
+                if(!Object.is(selectPlayer[currentPiece], attacker)) {
+                    if(selectPlayer[currentPiece].y === attacker.y &&
+                        selectPlayer[currentPiece].x === attacker.x) {
+                        selectPlayer[currentPiece].y = attacker.y - attacker.height
+                    } 
+                }
             }
-            
         })         
     } else if (e.key === 'd' && currentDirection === false || currentDirection === 'd') { //move right
         currentDirection = 'd'
@@ -232,38 +235,35 @@ let move = (e) => {
         }
       
         defenderArray.forEach(defender => {
-            if(!Object.is(selectPlayer[currentPiece], defender)) {
-            if(selectPlayer[currentPiece].y === defender.y &&
-                selectPlayer[currentPiece].x === defender.x) {
-                    selectPlayer[currentPiece].x = defender.x - defender.width
-             } 
-            }
+            if (defender.alive) {
+                if(!Object.is(selectPlayer[currentPiece], defender)) {
+                    if(selectPlayer[currentPiece].y === defender.y &&
+                        selectPlayer[currentPiece].x === defender.x) {
+                        selectPlayer[currentPiece].x = defender.x - defender.width
+                    } 
+                }
+            }    
          })      
             
         attackerArray.forEach(attacker => {
-            if(!Object.is(selectPlayer[currentPiece], attacker)) {
-                if(selectPlayer[currentPiece].y === attacker.y &&
-                    selectPlayer[currentPiece].x === attacker.x) {
-                    selectPlayer[currentPiece].x = attacker.x - attacker.width
-                } 
-            }
-            
+            if (attacker.alive) {
+                if(!Object.is(selectPlayer[currentPiece], attacker)) {
+                    if(selectPlayer[currentPiece].y === attacker.y &&
+                        selectPlayer[currentPiece].x === attacker.x) {
+                        selectPlayer[currentPiece].x = attacker.x - attacker.width
+                    } 
+                }
+            } 
         }) 
-    }   
+    }  
+} 
         console.log(`x: ${selectPlayer[currentPiece].x}, y: ${selectPlayer[currentPiece].y}`)// 
         checkForVictory()
-}     
+     
 
 
 //set listener event for key down
 document.addEventListener('keydown', move)
-
-//function for collision detection that if true kills a piece
-
-// //helper function so my computer doesn't explode
-// document.querySelector('#btm-left').addEventListener('click', () => {
-//     clearInterval(gameInterval)
-// })
 
 //gameloop
 let gameLoop = () => {
@@ -398,74 +398,77 @@ ctx.moveTo(0, 450);
 ctx.lineTo(450, 450);
 ctx.stroke();
 
-defenderArray.forEach (defender => {
-    let top = false;
-    let bottom = false;
-    let right = false;
-    let left = false
-    attackerArray.forEach (attacker => {
-        if (defender.x == attacker.x + attacker.width &&
-            defender.x + defender.height == attacker.x + attacker.width + attacker.height &&
-            defender.y == attacker.y) {
-            left = true;
-            }
-        if (defender.x + defender.width == attacker.x &&
-            defender.x + defender.width + defender.height == attacker.x + attacker.height &&
-            defender.y == attacker.y) {
-            right = true;
-        }
-        if (defender.y == attacker.y + attacker.height &&
-            defender.y + defender.width == attacker.y + attacker.height + attacker.width &&
-            defender.x == attacker.x) {
-            top = true;
-        }
-        if (defender.y + defender.height == attacker.y &&
-            defender.y + defender.width + defender.height == attacker.y + attacker.width &&
-            defender.x == attacker.x) {
-            bottom = true;
-        }                  
-    })
-    if (left && right) {defender.alive = false}
-    if (top && bottom) {defender.alive = false}
-})
-attackerArray.forEach (attacker => {
-    let top = false;
-    let bottom = false;
-    let right = false;
-    let left = false
+if (playerIndex) {
     defenderArray.forEach (defender => {
-        if (attacker.x == defender.x + defender.width &&
-            attacker.x + attacker.height == defender.x + defender.width + defender.height &&
-            attacker.y == defender.y) {
-            left = true;
+        let top = false;
+        let bottom = false;
+        let right = false;
+        let left = false
+        attackerArray.forEach (attacker => {
+            if (defender.x == attacker.x + attacker.width &&
+                defender.x + defender.height == attacker.x + attacker.width + attacker.height &&
+                defender.y == attacker.y) {
+                left = true;
+                }
+            if (defender.x + defender.width == attacker.x &&
+                defender.x + defender.width + defender.height == attacker.x + attacker.height &&
+                defender.y == attacker.y) {
+                right = true;
             }
-        if (attacker.x + attacker.width == defender.x &&
-            attacker.x + attacker.width + attacker.height == defender.x + defender.height &&
-            attacker.y == defender.y) {
-            right = true;
-        }
-        if (attacker.y == defender.y + defender.height &&
-            attacker.y + attacker.width == defender.y + defender.height + defender.width &&
-            attacker.x == defender.x) {
-            top = true;
-        }
-        if (attacker.y + attacker.height == defender.y &&
-            attacker.y + attacker.width + attacker.height == defender.y + defender.width &&
-            attacker.x == defender.x) {
-            bottom = true;
-        }                  
+            if (defender.y == attacker.y + attacker.height &&
+                defender.y + defender.width == attacker.y + attacker.height + attacker.width &&
+                defender.x == attacker.x) {
+                top = true;
+            }
+            if (defender.y + defender.height == attacker.y &&
+                defender.y + defender.width + defender.height == attacker.y + attacker.width &&
+                defender.x == attacker.x) {
+                bottom = true;
+            }                  
+        })
+        if (left && right) {defender.alive = false}
+        if (top && bottom) {defender.alive = false}
     })
-    if (left && right) {attacker.alive = false}
-    if (top && bottom) {attacker.alive = false}
-})
+}
+if (!playerIndex) {
+    attackerArray.forEach (attacker => {
+        let top = false;
+        let bottom = false;
+        let right = false;
+        let left = false
+        defenderArray.forEach (defender => {
+            if (attacker.x == defender.x + defender.width &&
+                attacker.x + attacker.height == defender.x + defender.width + defender.height &&
+                attacker.y == defender.y) {
+                left = true;
+                }
+            if (attacker.x + attacker.width == defender.x &&
+                attacker.x + attacker.width + attacker.height == defender.x + defender.height &&
+                attacker.y == defender.y) {
+                right = true;
+            }
+            if (attacker.y == defender.y + defender.height &&
+                attacker.y + attacker.width == defender.y + defender.height + defender.width &&
+                attacker.x == defender.x) {
+                top = true;
+            }
+            if (attacker.y + attacker.height == defender.y &&
+                attacker.y + attacker.width + attacker.height == defender.y + defender.width &&
+                attacker.x == defender.x) {
+                bottom = true;
+            }                  
+        })
+        if (left && right) {attacker.alive = false}
+        if (top && bottom) {attacker.alive = false}
+    })
+}
     // if characters if alive
     if (king.alive) {
         king.render()
-        //  if(king.crashWith(selectPlayer[currentPiece])){
-        //     console.log('crash')
-//  }
-        //   detect collision
-        // detectHit()
+        if (!king.alive) {
+            attackersWin()
+        }
+ 
     }
     if (defender1.alive) {
         defender1.render()
