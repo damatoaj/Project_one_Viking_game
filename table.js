@@ -428,7 +428,36 @@ defenderArray.forEach (defender => {
     if (left && right) {defender.alive = false}
     if (top && bottom) {defender.alive = false}
 })
-
+attackerArray.forEach (attacker => {
+    let top = false;
+    let bottom = false;
+    let right = false;
+    let left = false
+    defenderArray.forEach (defender => {
+        if (attacker.x == defender.x + defender.width &&
+            attacker.x + attacker.height == defender.x + defender.width + defender.height &&
+            attacker.y == defender.y) {
+            left = true;
+            }
+        if (attacker.x + attacker.width == defender.x &&
+            attacker.x + attacker.width + attacker.height == defender.x + defender.height &&
+            attacker.y == defender.y) {
+            right = true;
+        }
+        if (attacker.y == defender.y + defender.height &&
+            attacker.y + attacker.width == defender.y + defender.height + defender.width &&
+            attacker.x == defender.x) {
+            top = true;
+        }
+        if (attacker.y + attacker.height == defender.y &&
+            attacker.y + attacker.width + attacker.height == defender.y + defender.width &&
+            attacker.x == defender.x) {
+            bottom = true;
+        }                  
+    })
+    if (left && right) {attacker.alive = false}
+    if (top && bottom) {attacker.alive = false}
+})
     // if characters if alive
     if (king.alive) {
         king.render()
@@ -474,7 +503,7 @@ defenderArray.forEach (defender => {
     if (attacker3.alive) {
         attacker3.render()
         // if(attacker3.x == defender.x + defender.width &&
-        //     attacker3.x + attacker.width == defender.width) {
+        //     attacker3.x + blah.width == defender.width) {
         //         alive =false;
         //     }
 
