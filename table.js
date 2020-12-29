@@ -397,6 +397,38 @@ ctx.beginPath();
 ctx.moveTo(0, 450);
 ctx.lineTo(450, 450);
 ctx.stroke();
+
+defenderArray.forEach (defender => {
+    let top = false;
+    let bottom = false;
+    let right = false;
+    let left = false
+    attackerArray.forEach (attacker => {
+        if (defender.x == attacker.x + attacker.width &&
+            defender.x + defender.height == attacker.x + attacker.width + attacker.height &&
+            defender.y == attacker.y) {
+            left = true;
+            }
+        if (defender.x + defender.width == attacker.x &&
+            defender.x + defender.width + defender.height == attacker.x + attacker.height &&
+            defender.y == attacker.y) {
+            right = true;
+        }
+        if (defender.y == attacker.y + attacker.height &&
+            defender.y + defender.width == attacker.y + attacker.height + attacker.width &&
+            defender.x == attacker.x) {
+            top = true;
+        }
+        if (defender.y + defender.height == attacker.y &&
+            defender.y + defender.width + defender.height == attacker.y + attacker.width &&
+            defender.x == attacker.x) {
+            bottom = true;
+        }                  
+    })
+    if (left && right) {defender.alive = false}
+    if (top && bottom) {defender.alive = false}
+})
+
     // if characters if alive
     if (king.alive) {
         king.render()
@@ -408,10 +440,6 @@ ctx.stroke();
     }
     if (defender1.alive) {
         defender1.render()
-    //      if(defender1.crashWith(currentPiece)){
-    // currentDirection = true;
-    // console.log('crash')
-    // }
     }
     if (defender2.alive) {
         defender2.render()
@@ -445,6 +473,10 @@ ctx.stroke();
     }
     if (attacker3.alive) {
         attacker3.render()
+        // if(attacker3.x == defender.x + defender.width &&
+        //     attacker3.x + attacker.width == defender.width) {
+        //         alive =false;
+        //     }
 
     }
     if (attacker4.alive) {
