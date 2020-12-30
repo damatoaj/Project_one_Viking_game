@@ -468,12 +468,6 @@ if (!playerIndex) {
     // if characters if alive
     if (king.alive) {
         king.render()
-        let detectKingDeath = () => {
-            if (king.alive = false) {
-                console.log('victory')
-                attackersWin()
-    }
-}
     }
     if (defender1.alive) {
         defender1.render()
@@ -560,37 +554,18 @@ if (!playerIndex) {
     if (attacker16.alive) {
         attacker16.render()
     }
+    
+    let attackersWin = () => {
+        victoryDisplay.innerText = "Attackers Win!!!"
+    }
+    
+    let detectKingDeath = () => {
+        if (!king.alive) {
+            attackersWin()
+            }
+        }
+    detectKingDeath ()
 
-    // let defendersWin = () => {
-    //     victoryDisplay.innerText = "Defenders Win!!!"
-    // }
-    
-    // let attackersWin = () => {
-    //     victoryDisplay.innerText = "Attackers Win!!!"
-    // }
-    
-    // let detectKingDeath = () => {
-    //     if (top && bottom && right && left) {
-    //         king.alive = false;
-    //         attackersWin()
-    //     }
-    // }
-    // let detectCornerKing = () => {
-    //     if (
-    //         (king.x == 0 && king.y == 0) ||
-    //         (king.x == 0 && king.y == 400) ||
-    //         (king.x == 400 && king.y == 0) ||
-    //         (king.x == 400 && king.y == 400)
-    //     ) {
-    //         defendersWin()
-    //     }
-    // }
-    
-    // let checkForVictory = () => {
-    //     detectCornerKing()
-    //     detectKingDeath()
-    //     console.log('victory')
-    // }
 }
 
 //initialize game
