@@ -10,8 +10,25 @@ const max_height = 400;
 const min_width = 0;
 const min_height = 0;
 
+let backGroundMusic = document.getElementById('backgroundMusic')
+backGroundMusic.loop = true;
 let currentDirection
 
+//all sounds constructor
+function sound(src) {
+    this.sound = document.createElement('audio');
+    this.sound.src
+    // this.sound.setAttribute('preload', 'auto');
+    this.sound.setAttribute('controls', 'none');
+    this.sound.style.display = 'none';
+    document.body.appendChild(this.sound);
+    this.play = function() {
+        this.sound.play();
+    }
+    this.stop = function() {
+        this.sound.pause();
+    }
+} 
 //crawler
 function Crawler(x, y, width, height, color) {
     this.x = x;
@@ -289,13 +306,13 @@ let move = (e) => {
 } 
         console.log(`x: ${selectPlayer[currentPiece].x}, y: ${selectPlayer[currentPiece].y}`)// 
      
-
-
 //set listener event for key down
 document.addEventListener('keydown', move)
 
 //gameloop
 let gameLoop = () => {
+
+
     // checkForVictory
     //clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height)

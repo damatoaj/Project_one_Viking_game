@@ -67,3 +67,7 @@ canvas {
     font-size: 25px;
     padding: 10px;
 }
+
+audio {
+    text-align: center;
+}
