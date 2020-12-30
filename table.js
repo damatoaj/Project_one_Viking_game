@@ -59,35 +59,27 @@ let attacker16 = new Crawler(50, 200, 50, 50, '#964b4a')
 let attackerArray = [attacker1, attacker2, attacker3, attacker4, attacker5, attacker6, attacker7, attacker8, attacker9, attacker10, attacker11, attacker12, attacker13, attacker14, attacker15, attacker16]
 
 //movement
-
-let hitAttacker = false;
-let hitDefender = false;
 let movement = 50;
 
-// let defendersWin = () => {
-//     victoryDisplay.innerText = "Defenders Win!!!"
-// }
+let defendersWin = () => {
+    victoryDisplay.innerText = "Defenders Win!!!"
+}
 
-// // let attackersWin = () => {
-//     victoryDisplay.innerText = "Attackers Win!!!"
-// }
+let attackersWin = () => {
+    victoryDisplay.innerText = "Attackers Win!!!"
+}
 
-// let detectKingDeath = () => {
-//     if (top && bottom && right && left) {
-//         king.alive = false;
-//         attackersWin()
-//     }
-// }
-// let detectCornerKing = () => {
-//     if (
-//         (king.x == 0 && king.y == 0) ||
-//         (king.x == 0 && king.y == 400) ||
-//         (king.x == 400 && king.y == 0) ||
-//         (king.x == 400 && king.y == 400)
-//     ) {
-//         defendersWin()
-//     }
-// }
+let detectCornerKing = () => {
+    if (
+        (king.x == 0 && king.y == 0) ||
+        (king.x == 0 && king.y == 400) ||
+        (king.x == 400 && king.y == 0) ||
+        (king.x == 400 && king.y == 400)
+    ) {
+        defendersWin()
+        // console.log('victory')
+    }
+}
 
 // let checkForVictory = () => {
 //     detectCornerKing()
@@ -259,9 +251,10 @@ let move = (e) => {
             } 
         }) 
     }  
+    detectCornerKing()
+    // detectKingDeath()
 } 
         console.log(`x: ${selectPlayer[currentPiece].x}, y: ${selectPlayer[currentPiece].y}`)// 
-        // checkForVictory()
      
 
 
@@ -404,7 +397,6 @@ ctx.stroke();
 
 if (playerIndex) {
     defenderArray.forEach ((defender, index) => {
-        console.log(index)
         let top = false;
         let bottom = false;
         let right = false;
@@ -476,6 +468,12 @@ if (!playerIndex) {
     // if characters if alive
     if (king.alive) {
         king.render()
+        let detectKingDeath = () => {
+            if (king.alive = false) {
+                console.log('victory')
+                attackersWin()
+    }
+}
     }
     if (defender1.alive) {
         defender1.render()
@@ -563,36 +561,36 @@ if (!playerIndex) {
         attacker16.render()
     }
 
-    let defendersWin = () => {
-        victoryDisplay.innerText = "Defenders Win!!!"
-    }
+    // let defendersWin = () => {
+    //     victoryDisplay.innerText = "Defenders Win!!!"
+    // }
     
-    let attackersWin = () => {
-        victoryDisplay.innerText = "Attackers Win!!!"
-    }
+    // let attackersWin = () => {
+    //     victoryDisplay.innerText = "Attackers Win!!!"
+    // }
     
-    let detectKingDeath = () => {
-        if (top && bottom && right && left) {
-            king.alive = false;
-            attackersWin()
-        }
-    }
-    let detectCornerKing = () => {
-        if (
-            (king.x == 0 && king.y == 0) ||
-            (king.x == 0 && king.y == 400) ||
-            (king.x == 400 && king.y == 0) ||
-            (king.x == 400 && king.y == 400)
-        ) {
-            defendersWin()
-        }
-    }
+    // let detectKingDeath = () => {
+    //     if (top && bottom && right && left) {
+    //         king.alive = false;
+    //         attackersWin()
+    //     }
+    // }
+    // let detectCornerKing = () => {
+    //     if (
+    //         (king.x == 0 && king.y == 0) ||
+    //         (king.x == 0 && king.y == 400) ||
+    //         (king.x == 400 && king.y == 0) ||
+    //         (king.x == 400 && king.y == 400)
+    //     ) {
+    //         defendersWin()
+    //     }
+    // }
     
-    let checkForVictory = () => {
-        detectCornerKing()
-        detectKingDeath()
-        console.log('victory')
-    }
+    // let checkForVictory = () => {
+    //     detectCornerKing()
+    //     detectKingDeath()
+    //     console.log('victory')
+    // }
 }
 
 //initialize game
