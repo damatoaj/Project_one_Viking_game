@@ -9,9 +9,18 @@
 </head>
 <body>
     <header>Hnafetafl</header>
-    <p id="p1">Instructions</p>
-    <p id="p2"></p>
-    <p id="p3">Instructions</p>
+    
+        <p id="p1">
+            Goals</br>
+                The Swedes win if the king escapes to any of the fields at the edge of the board.</br>
+                The Muscovites win if they capture the king.</br>
+            Movement</br>
+                Any piece may move any number of vacant spaces in any straight line.</br>
+                No piece may ever pass over another piece in its path.</br>
+                An enemy piece is captured and removed from the board if you move one of your pieces so that the enemy piece becomes surrounded on two opposite sides. </br>
+                The king is also captured in this way, but must surrounded on all four sides.</br>
+                A piece may be moved in between two enemy pieces without being captured.</br>
+        </p>
     <div id="left"></div>
     <main>  
         <canvas id="canvas">
@@ -22,9 +31,9 @@
         <button type="button" id="turns" >Switch Player</button>>
     </div>
     
-    <div id="playerOne">Player One Turn</div>
-    <div id="victory">Victory Display</div>
-    <div id="playerTwo">Player Two Turn</div>
+    <div id="playerOne">Player One's Turn</div>
+    <div id="victory">Who Will Win?</div>
+    <div id="playerTwo"></div>
     
     <script src="table.js"></script>
 </body>

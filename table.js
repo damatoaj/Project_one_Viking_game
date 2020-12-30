@@ -1,6 +1,8 @@
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 let victoryDisplay = document.getElementById('victory');
+let playerOneDisplay = document.getElementById('playerOne')
+let playerTwoDisplay = document.getElementById('playerTwo')
 canvas.height = '450';
 canvas.width = '450';
 const max_width = 400;
@@ -27,7 +29,7 @@ function Crawler(x, y, width, height, color) {
 }
 
 //king
-let king = new Crawler(200, 200, 50, 50, '#6b6f78')
+let king = new Crawler(200, 200, 50, 50, 'yellow')
 //defenders
 
 let defender1 = new Crawler(150, 200, 50, 50, '#e4e7ed')
@@ -61,6 +63,7 @@ let attackerArray = [attacker1, attacker2, attacker3, attacker4, attacker5, atta
 //movement
 let movement = 50;
 
+//Text Displays
 let defendersWin = () => {
     victoryDisplay.innerText = "Defenders Win!!!"
 }
@@ -69,6 +72,17 @@ let attackersWin = () => {
     victoryDisplay.innerText = "Attackers Win!!!"
 }
 
+let playerOneTurn = () => {
+    playerOneDisplay.innerText = "Player One's Turn"
+    playerTwoDisplay.innerText = "                 "
+}
+
+let playerTwoTurn = () => {
+    playerOneDisplay.innerText = "                 "
+    playerTwoDisplay.innerText = "Player Two's Turn"
+}
+
+//detect victory condition for defenders
 let detectCornerKing = () => {
     if (
         (king.x == 0 && king.y == 0) ||
@@ -81,24 +95,38 @@ let detectCornerKing = () => {
     }
 }
 
-// let checkForVictory = () => {
-//     detectCornerKing()
-//     detectKingDeath()
-//     console.log('victory')
-// }
-
 let playerIndex = 0;
 let playerArray = [defenderArray, attackerArray]
 let selectPlayer = playerArray[playerIndex]
 let currentPiece = 0;
+let previousPiece = currentPiece - 1;
 
 let switchPlayer = (e) => {
     e.preventDefault()
+    console.log(selectPlayer[currentPiece])
+
+    if (!playerIndex) { //selects defenderArray
+        if (currentPiece == 0) {
+            selectPlayer[currentPiece].color = '#6b6f78';
+         } else if (currentPiece >= 1) {
+           selectPlayer[currentPiece].color = '#e4e7ed';
+        }  
+    } 
+    if (playerIndex) { //selects attackerArray
+        selectPlayer[currentPiece].color = '#964b4a';
+        }
+
     playerIndex = (playerIndex+1) % 2
     selectPlayer = playerArray[playerIndex] //selectplayer is the array of the current player's pieces
+    currentDirection = false;
+    
+    
     currentPiece = 0;     
-    currentDirection = false;                  //every time a new turn starts the same piece is picked
-   
+    selectPlayer[currentPiece].color = 'yellow'
+    //every time a new turn starts the same piece is picked
+    if (playerIndex == 0) {
+        playerOneTurn()
+    } else {playerTwoTurn()}
 }
 let turnButton = document.getElementById("turns").addEventListener('click', switchPlayer)//switch between players
 
@@ -110,23 +138,28 @@ let changePiece = (e) => {
         currentPiece++
         let previousPiece = currentPiece - 1;
         e.preventDefault()
-       console.log(selectPlayer)
-       console.log(selectPlayer[currentPiece], "howdy")
        console.log('previousPiece', previousPiece)
        currentDirection = false;
        selectPlayer[currentPiece].color = 'yellow';
-        console.log(selectPlayer[currentPiece], 'what')
 
         if (!playerIndex) { //selects defenderArray
             if (previousPiece == 0) {
                 selectPlayer[previousPiece].color = '#6b6f78';
              } else if (previousPiece >= 1) {
                selectPlayer[previousPiece].color = '#e4e7ed';
-            } else {selectPlayer[previousPiece].color = 'black';}
+            }
+            if (currentPiece == defenderArray.length-1)  {
+                currentPiece = 0
+                defenderArray[defenderArray.length - 1].color = '#e4e7ed'
+            }
         } 
         if (playerIndex) { //selects attackerArray
             if (previousPiece >= 0) {
             selectPlayer[previousPiece].color = '#964b4a';
+            }
+            if (currentPiece == attackerArray.length - 1) {
+                currentPiece = 0
+                attackerArray[attackerArray.length - 1].color = '#964b4a'
             }
         }
     } 
@@ -291,7 +324,7 @@ ctx.fillRect(200, 100, 50, 50)
 ctx.fillRect(200, 250, 50, 50)
 ctx.fillRect(200, 300, 50, 50)
 //Attacker Squares
-ctx.fillStyle = '#802f3f';
+ctx.fillStyle = '#4d7855';
 ctx.fillRect(200, 0, 50, 50)
 ctx.fillRect(150, 0, 50, 50)
 ctx.fillRect(250, 0, 50, 50)
