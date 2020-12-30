@@ -64,33 +64,36 @@ let hitAttacker = false;
 let hitDefender = false;
 let movement = 50;
 
-let defendersWin = () => {
-    victoryDisplay.innerText = "Defenders Win!!!"
-}
+// let defendersWin = () => {
+//     victoryDisplay.innerText = "Defenders Win!!!"
+// }
 
-let attackersWin = () => {
-    victoryDisplay.innerText = "Attackers Win!!!"
-}
+// // let attackersWin = () => {
+//     victoryDisplay.innerText = "Attackers Win!!!"
+// }
 
-let detectKingDeath = () => {
-    if (king.alive = false) {
-        attackersWin()
-    }
-}
-let detectCornerKing = () => {
-    if (
-        (king.x == 0 && king.y == 0) ||
-        (king.x == 0 && king.y == 400) ||
-        (king.x == 400 && king.y == 0) ||
-        (king.x == 400 && king.y == 400)
-    ) {
-        defendersWin()
-    }
-}
+// let detectKingDeath = () => {
+//     if (top && bottom && right && left) {
+//         king.alive = false;
+//         attackersWin()
+//     }
+// }
+// let detectCornerKing = () => {
+//     if (
+//         (king.x == 0 && king.y == 0) ||
+//         (king.x == 0 && king.y == 400) ||
+//         (king.x == 400 && king.y == 0) ||
+//         (king.x == 400 && king.y == 400)
+//     ) {
+//         defendersWin()
+//     }
+// }
 
-let checkForVictory = () => {
-    detectCornerKing()
-}
+// let checkForVictory = () => {
+//     detectCornerKing()
+//     detectKingDeath()
+//     console.log('victory')
+// }
 
 let playerIndex = 0;
 let playerArray = [defenderArray, attackerArray]
@@ -258,7 +261,7 @@ let move = (e) => {
     }  
 } 
         console.log(`x: ${selectPlayer[currentPiece].x}, y: ${selectPlayer[currentPiece].y}`)// 
-        checkForVictory()
+        // checkForVictory()
      
 
 
@@ -267,6 +270,7 @@ document.addEventListener('keydown', move)
 
 //gameloop
 let gameLoop = () => {
+    // checkForVictory
     //clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     //render board
@@ -399,7 +403,8 @@ ctx.lineTo(450, 450);
 ctx.stroke();
 
 if (playerIndex) {
-    defenderArray.forEach (defender => {
+    defenderArray.forEach ((defender, index) => {
+        console.log(index)
         let top = false;
         let bottom = false;
         let right = false;
@@ -426,8 +431,14 @@ if (playerIndex) {
                 bottom = true;
             }                  
         })
-        if (left && right) {defender.alive = false}
-        if (top && bottom) {defender.alive = false}
+        if (index == 0) {
+            if (left && right) {defender.alive}
+            if (top && bottom) {defender.alive}
+            if (left && right && bottom && top) {defender.alive = false}
+        } else {
+            if (left && right) {defender.alive = false}
+            if (top && bottom) {defender.alive = false}
+        }
     })
 }
 if (!playerIndex) {
@@ -465,10 +476,6 @@ if (!playerIndex) {
     // if characters if alive
     if (king.alive) {
         king.render()
-        if (!king.alive) {
-            attackersWin()
-        }
- 
     }
     if (defender1.alive) {
         defender1.render()
@@ -505,11 +512,6 @@ if (!playerIndex) {
     }
     if (attacker3.alive) {
         attacker3.render()
-        // if(attacker3.x == defender.x + defender.width &&
-        //     attacker3.x + blah.width == defender.width) {
-        //         alive =false;
-        //     }
-
     }
     if (attacker4.alive) {
         attacker4.render()
@@ -560,8 +562,37 @@ if (!playerIndex) {
     if (attacker16.alive) {
         attacker16.render()
     }
-    // console.log("characters")
 
+    let defendersWin = () => {
+        victoryDisplay.innerText = "Defenders Win!!!"
+    }
+    
+    let attackersWin = () => {
+        victoryDisplay.innerText = "Attackers Win!!!"
+    }
+    
+    let detectKingDeath = () => {
+        if (top && bottom && right && left) {
+            king.alive = false;
+            attackersWin()
+        }
+    }
+    let detectCornerKing = () => {
+        if (
+            (king.x == 0 && king.y == 0) ||
+            (king.x == 0 && king.y == 400) ||
+            (king.x == 400 && king.y == 0) ||
+            (king.x == 400 && king.y == 400)
+        ) {
+            defendersWin()
+        }
+    }
+    
+    let checkForVictory = () => {
+        detectCornerKing()
+        detectKingDeath()
+        console.log('victory')
+    }
 }
 
 //initialize game
