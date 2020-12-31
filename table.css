@@ -39,6 +39,9 @@ h2 {
     text-align: center;
 }
 
+#left {
+    grid-column: 1 / 2;
+}
 main {
     margin: 0px; 
     padding: 0px;
@@ -49,6 +52,10 @@ main {
 canvas {
     background-size: cover;
     border: 1px dotted blue;
+}
+
+#right {
+    grid-column: 3 / 4;
 }
 #playerOne {
     grid-column: 1 / 2;

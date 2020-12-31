@@ -3,6 +3,8 @@ const ctx = canvas.getContext("2d");
 let victoryDisplay = document.getElementById('victory');
 let playerOneDisplay = document.getElementById('playerOne')
 let playerTwoDisplay = document.getElementById('playerTwo')
+let startButton = document.getElementById('start')
+let resetButton = document.getElementById('reset')
 canvas.height = '450';
 canvas.width = '450';
 const max_width = 400;
@@ -15,20 +17,13 @@ backGroundMusic.loop = true;
 let currentDirection
 
 //all sounds constructor
-function sound(src) {
-    this.sound = document.createElement('audio');
-    this.sound.src
-    // this.sound.setAttribute('preload', 'auto');
-    this.sound.setAttribute('controls', 'none');
-    this.sound.style.display = 'none';
-    document.body.appendChild(this.sound);
-    this.play = function() {
-        this.sound.play();
-    }
-    this.stop = function() {
-        this.sound.pause();
-    }
-} 
+
+let screamOne = new Audio('scream1.mp3');
+let screamTwo = new Audio('scream2.mp3');
+let screamThree = new Audio('scream3.mp3');
+let cheerOne = new Audio('cheer1.mp3');
+let cheerTwo = new Audio('cheer2.mp3');
+
 //crawler
 function Crawler(x, y, width, height, color) {
     this.x = x;
@@ -83,10 +78,12 @@ let movement = 50;
 //Text Displays
 let defendersWin = () => {
     victoryDisplay.innerText = "Defenders Win!!!"
+    cheerOne.play
 }
 
 let attackersWin = () => {
     victoryDisplay.innerText = "Attackers Win!!!"
+    cheerTwo.play
 }
 
 let playerOneTurn = () => {
@@ -476,7 +473,7 @@ if (playerIndex) {
         if (index == 0) {
             if (left && right) {defender.alive}
             if (top && bottom) {defender.alive}
-            if (left && right && bottom && top) {defender.alive = false}
+            if (left && right && bottom && top) {defender.alive = false; screamThree.play();}
         } else {
             if (left && right) {defender.alive = false}
             if (top && bottom) {defender.alive = false}
@@ -521,32 +518,49 @@ if (!playerIndex) {
     }
     if (defender1.alive) {
         defender1.render()
+    } else {
+        screamOne.play()
     }
     if (defender2.alive) {
         defender2.render()
+    } else {
+        screamOne.play();
     }
     if (defender3.alive) {
         defender3.render()
+    } else {
+        screamOne.play();
     }
     if (defender4.alive) {
         defender4.render()
+    } else {
+        screamOne.play();
     }
     if (defender5.alive) {
         defender5.render()
+    } else {
+        screamOne.play();
     }
     if (defender6.alive) {
         defender6.render()
+    } else {
+        screamOne.play();
     }
     if (defender7.alive) {
         defender7.render()
+    } else {
+        screamOne.play();
     }
     if (defender8.alive) {
         defender8.render()
+    } else {
+        screamOne.play();
     }
 
     if (attacker1.alive) {
         attacker1.render()
-
+    } else {
+        screamOne.play();
     }
     if (attacker2.alive) {
         attacker2.render()
@@ -620,3 +634,6 @@ if (!playerIndex) {
 
 //initialize game
 let gameInterval = setInterval(gameLoop, 100)
+
+
+//end game and reset board
