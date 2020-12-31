@@ -22,8 +22,8 @@
                 A piece may be moved in between two enemy pieces without being captured.</br>
         </p>
     <div id="left">
-        <button id="start">Start</button>
-        <button id="reset">Reset</button>
+        <button id="start" onclick="initialize()">Start</button>
+        <button id="reset" onclick="reset">Reset</button>
     </div>
     <main>  
         <canvas id="canvas">
@@ -37,7 +37,7 @@
     <div id="playerOne">Player One's Turn</div>
     <div id="victory">Who Will Win?</div>
     <div id="playerTwo"></div>
-    <audio>
+    <audio controls>
         <source id="backgroundMusic" src='Wind in the Waves.m4a' type="audio/mpeg">
     </audio>
     

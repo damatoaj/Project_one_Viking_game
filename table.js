@@ -24,6 +24,16 @@ let screamThree = new Audio('scream3.mp3');
 let cheerOne = new Audio('cheer1.mp3');
 let cheerTwo = new Audio('cheer2.mp3');
 
+// function sOnePause() {screamOne.pause(); console.log('scream over')}
+// function sTwoPause()  {console.log('another scream')}
+// function sThreePause()  {setInterval(screamThree.pause(), 3000)}
+// function cOnePause()  {setInterval(cheerOne.pause(), 3000)}
+// function cTwoPause()  {setInterval(cheerTwo.pause(), 3000)}
+
+// let sOne = setTimeout(sOnePause, 10000);
+// let sTwo = setTimeout(sTwoPause, 3000);
+ 
+
 //crawler
 function Crawler(x, y, width, height, color) {
     this.x = x;
@@ -71,6 +81,7 @@ let attacker14 = new Crawler(0, 200, 50, 50, '#964b4a')
 let attacker15 = new Crawler(0, 250, 50, 50, '#964b4a')
 let attacker16 = new Crawler(50, 200, 50, 50, '#964b4a')
 let attackerArray = [attacker1, attacker2, attacker3, attacker4, attacker5, attacker6, attacker7, attacker8, attacker9, attacker10, attacker11, attacker12, attacker13, attacker14, attacker15, attacker16]
+
 
 //movement
 let movement = 50;
@@ -146,7 +157,6 @@ let turnButton = document.getElementById("turns").addEventListener('click', swit
 
 
 //change who the current piece is
-
 let changePiece = (e) => {
     if(e.which == '32') {
         currentPiece++
@@ -155,7 +165,7 @@ let changePiece = (e) => {
        console.log('previousPiece', previousPiece)
        currentDirection = false;
        selectPlayer[currentPiece].color = 'yellow';
-
+       console.log(currentPiece)
         if (!playerIndex) { //selects defenderArray
             if (previousPiece == 0) {
                 selectPlayer[previousPiece].color = '#6b6f78';
@@ -171,13 +181,14 @@ let changePiece = (e) => {
             if (previousPiece >= 0) {
             selectPlayer[previousPiece].color = '#964b4a';
             }
-            if (currentPiece == attackerArray.length - 1) {
+            if (currentPiece == attackerArray.length-1) {
                 currentPiece = 0
                 attackerArray[attackerArray.length - 1].color = '#964b4a'
             }
         }
     } 
 }
+
 document.addEventListener('keydown', changePiece)
 
 //move my current piece based on the key pressed.
@@ -307,6 +318,8 @@ let move = (e) => {
 document.addEventListener('keydown', move)
 
 //gameloop
+
+
 let gameLoop = () => {
 
 
@@ -475,8 +488,8 @@ if (playerIndex) {
             if (top && bottom) {defender.alive}
             if (left && right && bottom && top) {defender.alive = false; screamThree.play();}
         } else {
-            if (left && right) {defender.alive = false}
-            if (top && bottom) {defender.alive = false}
+            if (left && right) {defender.alive = false; screamOne.play();}
+            if (top && bottom) {defender.alive = false; screamOne.play();}
         }
     })
 }
@@ -519,48 +532,55 @@ if (!playerIndex) {
     if (defender1.alive) {
         defender1.render()
     } else {
-        screamOne.play()
-    }
+        defender1.x = 0;
+        defender1.y = 0;
+        }
     if (defender2.alive) {
         defender2.render()
     } else {
-        screamOne.play();
-    }
+        defender2.x = 0;
+        defender2.y = 0;
+        }
     if (defender3.alive) {
         defender3.render()
     } else {
-        screamOne.play();
-    }
+        defender3.x = 0;
+        defender3.y = 0;
+        }
     if (defender4.alive) {
         defender4.render()
     } else {
-        screamOne.play();
-    }
+        defender4.x = 0;
+        defender4.y = 0;
+        }
+      
     if (defender5.alive) {
         defender5.render()
     } else {
-        screamOne.play();
-    }
+        defender5.x = 0;
+        defender5.y = 0;
+        }
     if (defender6.alive) {
         defender6.render()
     } else {
-        screamOne.play();
-    }
+        defender6.x = 0;
+        defender6.y = 0;
+        }
     if (defender7.alive) {
         defender7.render()
     } else {
-        screamOne.play();
-    }
+        defender7.x = 0;
+        defender7.y = 0;
+        }
     if (defender8.alive) {
         defender8.render()
     } else {
-        screamOne.play();
-    }
+        defender8.x = 0;
+        defender8.y = 0;
+        }
 
     if (attacker1.alive) {
         attacker1.render()
-    } else {
-        screamOne.play();
     }
     if (attacker2.alive) {
         attacker2.render()
@@ -569,52 +589,55 @@ if (!playerIndex) {
     if (attacker3.alive) {
         attacker3.render()
     }
+
     if (attacker4.alive) {
         attacker4.render()
-
     }
+
     if (attacker5.alive) {
         attacker5.render()
-
     }
+
     if (attacker6.alive) {
         attacker6.render()
-
     }
+
     if (attacker7.alive) {
         attacker7.render()
-
     }
+
     if (attacker8.alive) {
         attacker8.render()
-
     }
+
     if (attacker9.alive) {
         attacker9.render()
-
     }
+
     if (attacker10.alive) {
         attacker10.render()
-
     }
+
     if (attacker11.alive) {
         attacker11.render()
-
     }
+
     if (attacker12.alive) {
         attacker12.render()
-
     }
+
     if (attacker13.alive) {
         attacker13.render()
-
     }
+
     if (attacker14.alive) {
         attacker14.render()
     }
+
     if (attacker15.alive) {
         attacker15.render()
     }
+
     if (attacker16.alive) {
         attacker16.render()
     }
@@ -632,8 +655,10 @@ if (!playerIndex) {
 
 }
 
-//initialize game
-let gameInterval = setInterval(gameLoop, 100)
 
+//initialize game
+startButton.addEventListener('onclick', gameLoop())
+console.log(startButton)
+let gameInterval = setInterval(gameLoop, 100)
 
 //end game and reset board
