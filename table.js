@@ -89,12 +89,12 @@ let movement = 50;
 //Text Displays
 let defendersWin = () => {
     victoryDisplay.innerText = "Defenders Win!!!"
-    cheerOne.play
+    cheerOne.play()
 }
 
 let attackersWin = () => {
     victoryDisplay.innerText = "Attackers Win!!!"
-    cheerTwo.play
+    cheerTwo.play()
 }
 
 let playerOneTurn = () => {
@@ -486,7 +486,7 @@ if (playerIndex) {
         if (index == 0) {
             if (left && right) {defender.alive}
             if (top && bottom) {defender.alive}
-            if (left && right && bottom && top) {defender.alive = false; screamThree.play();}
+            if (left && right && bottom && top) {defender.alive = false; cheerTwo.play();}
         } else {
             if (left && right) {defender.alive = false; screamOne.play();}
             if (top && bottom) {defender.alive = false; screamOne.play();}
@@ -528,6 +528,9 @@ if (!playerIndex) {
     // if characters if alive
     if (king.alive) {
         king.render()
+    } else {
+        king.x = 200;
+        king.y = 200;
     }
     if (defender1.alive) {
         defender1.render()
