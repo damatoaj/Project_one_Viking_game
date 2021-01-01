@@ -9,7 +9,7 @@
 
 body {
     display: grid;
-    grid-template-rows: 50px 450px 450px 100px;
+    grid-template-rows: 50px 500px 450px 100px 100px;
     grid-template-columns: 100px 1fr 100px;
     border: 15px solid black;
     background-image: url('https://d332p1w15mxdmm.cloudfront.net/15-thick-walnut-blended-grain-countertop-25-wide-5fdbde66e3a22.jpg');
@@ -25,6 +25,7 @@ button {
 
 header {
     grid-column: 1 / 4;
+    grid-row: 1 / 2;
     padding: 10px 50px 10px 50px;
     font-size: 40px;
 }
@@ -34,6 +35,7 @@ h2 {
 
 #p1 {
     grid-column: 2 / 3;
+    grid-row: 2 / 3;
     font-size: 20px;
     padding: 10px 50px 10px 50px
     text-align: center;
@@ -41,12 +43,14 @@ h2 {
 
 #left {
     grid-column: 1 / 2;
+    grid-row: 3 / 4;
 }
 main {
     margin: 0px; 
     padding: 0px;
     border: 1px solid black;
     grid-column: 2 / 3;
+    grid-row: 3 / 4;
     
 }
 canvas {
@@ -56,25 +60,40 @@ canvas {
 
 #right {
     grid-column: 3 / 4;
+    grid-row: 3 / 4;
 }
 #playerOne {
     grid-column: 1 / 2;
+    grid-row: 4 / 5;
     font-size: 25px;
     padding: 10px;
 }
 
 #victory {
-    grid-column: 2-3;
+    grid-column: 2 / 3;
+    grid-row: 4 / 5;
     font-size: 40px;
     padding: 20px 20px 10px 20px;
 }
 
 #playerTwo {
-    grid-column: 3-4;
+    grid-column: 3 / 4;
+    grid-row: 4 / 5;
     font-size: 25px;
     padding: 10px;
 }
 
 audio {
     text-align: center;
+    margin: 0;
+    padding: 0;
+}
+#songOne {
+    grid-row: 5 / 6;
+    grid-column: 1 / 2;
+}
+
+#songTwo {
+    grid-row: 5 / 6;
+    grid-column: 2 / 3;
 }

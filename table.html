@@ -11,18 +11,23 @@
     <header>Hnafetafl</header>
     
         <p id="p1">
-            Goals</br>
-                The Swedes win if the king escapes to any of the fields at the edge of the board.</br>
-                The Muscovites win if they capture the king.</br>
-            Movement</br>
+        </br>
+            <strong>Goals</strong></br></br>
+                The defenders win if the king (center) escapes to any of the corner tiles</br>
+                The ttackers win if they capture the king, by surrounding him on four sides.</br></br>
+            <strong>Movement</strong></br></br>
                 Any piece may move any number of vacant spaces in any straight line.</br>
                 No piece may ever pass over another piece in its path.</br>
                 An enemy piece is captured and removed from the board if you move one of your pieces so that the enemy piece becomes surrounded on two opposite sides. </br>
-                The king is also captured in this way, but must surrounded on all four sides.</br>
-                A piece may be moved in between two enemy pieces without being captured.</br>
+                A piece may be moved in between two enemy pieces without being captured.</br></br>
+            <strong>Turns after one player either kills their opponent's piece or has moved their character as far as they wanted</strong>
+    </br></br>
+        <button>W is up</button><button>A is left</button><button>D is right</button><button>S is down</button><button>Tab Selects Pieces</button>
+        <br>
+        <button>And Clicking the Switch Player Button Switches Teams</button>
         </p>
     <div id="left">
-        <button id="start" onclick="initialize()">Start</button>
+        <button id="start" >Start</button>
         <button id="reset" onclick="reset">Reset</button>
     </div>
     <main>  
@@ -37,9 +42,18 @@
     <div id="playerOne">Player One's Turn</div>
     <div id="victory">Who Will Win?</div>
     <div id="playerTwo"></div>
-    <audio controls>
-        <source id="backgroundMusic" src='Wind in the Waves.m4a' type="audio/mpeg">
-    </audio>
+    <div id="songOne">
+        <audio controls>
+            <source src='Wind in the Waves.m4a' type="audio/mpeg">
+        </audio>
+    </div>
+</br>
+
+    <div id="songTwo">
+        <audio controls>
+            <source src='Cut me up.m4a' type='audio/mpeg'>
+        </audio>
+    </div>
     
     <script src="table.js"></script>
 </body>
