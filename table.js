@@ -81,6 +81,9 @@ let previousPiece = currentPiece - 1;
 
 //Text display functions 
 let defendersWin = () => {
+    document.removeEventListener('keydown', changePiece);
+    document.removeEventListener('keydown', move);
+    document.getElementById("turns").removeEventListener('click', switchPlayer);
     victoryDisplay.innerText = "Defenders Win!!!"
     cheerOne.play()
 }
@@ -669,6 +672,9 @@ if (playerIndex) {
     let detectKingDeath = () => {
         if (!king.alive) {
             attackersWin()
+            document.removeEventListener('keydown', changePiece);
+            document.removeEventListener('keydown', move);
+            document.getElementById("turns").removeEventListener('click', switchPlayer);
         }
     }
     detectKingDeath()
@@ -683,7 +689,7 @@ console.log(startButton)
 //end game and reset board
 
 function reset() {
-
+    
 }
 
 resetButton.addEventListener('onclick', reset())
