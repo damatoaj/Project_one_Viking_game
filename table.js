@@ -15,6 +15,10 @@ const min_height = 0;
 let movement = 50;
 let backGroundMusic = document.getElementById('backgroundMusic')
 let currentDirection
+function reloadGame() {
+    console.log('reload')
+    setTimeout(location.reload(), 1000000);
+}
 
 //all sounds constructor, learned that sounds can be created like components and then be plugged into functions; 
 
@@ -80,13 +84,16 @@ let currentPiece = 0;
 let previousPiece = currentPiece - 1;
 
 //Text display functions 
+// setTimeout(reset, 100);
 let defendersWin = () => {
     document.removeEventListener('keydown', changePiece);
     document.removeEventListener('keydown', move);
     document.getElementById("turns").removeEventListener('click', switchPlayer);
     victoryDisplay.innerText = "Defenders Win!!!"
     cheerOne.play()
+    setTimeout(reloadGame(), 5000)
 }
+// setTimeout(reset, 100);
 
 let attackersWin = () => {
     victoryDisplay.innerText = "Attackers Win!!!"
@@ -692,4 +699,4 @@ function reset() {
     
 }
 
-resetButton.addEventListener('onclick', reset())
+// resetButton.addEventListener('click', )
