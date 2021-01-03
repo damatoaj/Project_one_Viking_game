@@ -45,7 +45,7 @@ function Crawler(x, y, width, height, color) { //other functions can be programm
 }
 
 //king
-let king = new Crawler(200, 200, 50, 50, 'yellow')
+let king = new Crawler(200, 200, 50, 50, '#6b6f78')
 //defenders
 let defender1 = new Crawler(150, 200, 50, 50, '#e4e7ed')
 let defender2 = new Crawler(100, 200, 50, 50, '#e4e7ed')
@@ -156,37 +156,60 @@ let turnButton = document.getElementById("turns").addEventListener('click', swit
 //change who the current piece is within a team
 let changePiece = (e) => {
     if (e.which == '9') {
+        if (playerIndex) { //selects attackerArray
+            if(currentPiece == attackerArray.length - 1) {
+                attackerArray[currentPiece].color = '#964b4a'
+                currentPiece = 0
+                attackerArray[currentPiece].color = 'yellow'
+            } else {
+                attackerArray[currentPiece].color = '#964b4a'
+                currentPiece++
+                attackerArray[currentPiece].color = 'yellow'
+            } 
+        }   else if(currentPiece == defenderArray.length - 1) {
+                    defenderArray[currentPiece].color = '#e4e7ed'
+                    currentPiece = 0
+                    defenderArray[currentPiece].color = 'yellow'
+                }  else {
+                        defenderArray[currentPiece].color = '#e4e7ed'
+                        currentPiece++
+                        defenderArray[currentPiece].color = 'yellow'
+                    } if(currentPiece != 0) {
+                                defenderArray[0].color = '#6b6f78'
+                    } 
+            
+                // if (previousPiece >= 0) {
+                //     selectPlayer[previousPiece].color = '#964b4a';
+                // // }
+                // if (currentPiece == attackerArray.length - 1) {
+                //     currentPiece = 0
+                //     attackerArray[attackerArray.length - 1].color = '#964b4a'
+                // }
+            
+        // } else {
+        //     if (previousPiece == 0) {
+        //         selectPlayer[previousPiece].color = '#6b6f78';
+        //     } else if (previousPiece >= 1) {
+        //         selectPlayer[previousPiece].color = '#e4e7ed';
+        //     }
+        //     if (currentPiece == defenderArray.length) {
+        //         currentPiece = 0
+        //         defenderArray[defenderArray.length -1].color = '#e4e7ed'
+        //     }
+        // } 
         currentDirection = false;
         e.preventDefault()
-
-        currentPiece++
-        console.log(currentPiece)
-
-        let previousPiece = currentPiece - 1;
-        console.log('previousPiece', previousPiece)
-
-        selectPlayer[currentPiece].color = 'yellow';
         
-        if (!playerIndex) { //selects defenderArray
-            if (previousPiece == 0) {
-                selectPlayer[previousPiece].color = '#6b6f78';
-            } else if (previousPiece >= 1) {
-                selectPlayer[previousPiece].color = '#e4e7ed';
-            }
-            if (currentPiece == defenderArray.length) {
-                currentPiece = 0
-                defenderArray[defenderArray.length -1].color = '#e4e7ed'
-            }
-        }
-        if (playerIndex) { //selects attackerArray
-            if (previousPiece >= 0) {
-                selectPlayer[previousPiece].color = '#964b4a';
-            }
-            if (currentPiece == attackerArray.length - 1) {
-                currentPiece = 0
-                attackerArray[attackerArray.length - 1].color = '#964b4a'
-            }
-        }
+        // currentPiece++
+        // console.log(currentPiece)
+        
+        // let previousPiece = currentPiece - 1;
+        // console.log('previousPiece', previousPiece)
+
+        // selectPlayer[currentPiece].color = 'yellow';
+
+        // if (!playerIndex) { //selects defenderArray
+        // }
     }
 }
 
