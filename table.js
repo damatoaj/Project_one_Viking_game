@@ -177,39 +177,8 @@ let changePiece = (e) => {
                     } if(currentPiece != 0) {
                                 defenderArray[0].color = '#6b6f78'
                     } 
-            
-                // if (previousPiece >= 0) {
-                //     selectPlayer[previousPiece].color = '#964b4a';
-                // // }
-                // if (currentPiece == attackerArray.length - 1) {
-                //     currentPiece = 0
-                //     attackerArray[attackerArray.length - 1].color = '#964b4a'
-                // }
-            
-        // } else {
-        //     if (previousPiece == 0) {
-        //         selectPlayer[previousPiece].color = '#6b6f78';
-        //     } else if (previousPiece >= 1) {
-        //         selectPlayer[previousPiece].color = '#e4e7ed';
-        //     }
-        //     if (currentPiece == defenderArray.length) {
-        //         currentPiece = 0
-        //         defenderArray[defenderArray.length -1].color = '#e4e7ed'
-        //     }
-        // } 
         currentDirection = false;
         e.preventDefault()
-        
-        // currentPiece++
-        // console.log(currentPiece)
-        
-        // let previousPiece = currentPiece - 1;
-        // console.log('previousPiece', previousPiece)
-
-        // selectPlayer[currentPiece].color = 'yellow';
-
-        // if (!playerIndex) { //selects defenderArray
-        // }
     }
 }
 
@@ -713,13 +682,6 @@ if (playerIndex) {
     }
     detectKingDeath()
 }
-
-
 //initialize game
 let gameInterval = setInterval(gameLoop, 100)
-// startButton.addEventListener('onclick', gameLoop())  
 console.log(startButton)
-
-//end game and reset board
-
-// resetButton.addEventListener('click', )

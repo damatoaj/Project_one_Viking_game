@@ -2,18 +2,17 @@
     margin: 0 auto;
     text-align: center;
     border-sizing: border-box;
-    color: #bdc2c9;
     font-family: 'Germania One', cursive;
 }
 
 body {
     display: grid;
-    grid-template-rows: 100px 300px 450px 100px 100px;
+    grid-template-rows: 100px 100px 450px 100px 100px;
     grid-template-columns: 150px 150px 1fr 150px 150px;
-    background-image: url('https://d332p1w15mxdmm.cloudfront.net/15-thick-walnut-blended-grain-countertop-25-wide-5fdbde66e3a22.jpg');
+    background-image: url('https://mk0lovehomedesiksan9.kinstacdn.com/wp-content/uploads/2017/03/shutterstock_537353776.jpg');
     background-size: cover;
     background-repeat: none;
-    
+    color: #262d38;
 }
 
 button {
@@ -32,7 +31,7 @@ header {
     text-align: center;
     margin: 0;
     width: 100%;
-
+    color: #bdc2c9;
 }
 h2 {
     text-align: center;
@@ -52,6 +51,8 @@ main {
     padding: 0px;
     grid-column: 3 / 4;
     grid-row: 3 / 4;
+    background-image: url('https://cdn.shopify.com/s/files/1/1434/3274/products/r-white-oak-big_d13f65a4-c9eb-4325-be3b-bcf83ec2e6de.jpg?v=1477167446');
+    background-size: cover;
 }
 canvas {
     background-size: cover;
@@ -74,6 +75,7 @@ canvas {
     grid-row: 4 / 5;
     font-size: 25px;
     padding: 10px;
+    color: #262d38;
 }
 
 #victory {
@@ -81,6 +83,7 @@ canvas {
     grid-row: 4 / 5;
     font-size: 40px;
     padding: 20px 20px 10px 20px;
+    color: #262d38;
 }
 
 #playerTwo {
@@ -88,6 +91,7 @@ canvas {
     grid-row: 4 / 5;
     font-size: 25px;
     padding: 10px;
+    color: #262d38;
 }
 
 audio {
@@ -143,7 +147,7 @@ audio {
     grid-column: 5 / 6 ;
     text-align: left;
     width: 100%;
-    margin: 10px 50px;
+    margin: 10px 100px 10px 0px;
 }
 
 .dropdown-content {
@@ -157,6 +161,7 @@ audio {
     margin: 35px 10px 10px 10px;
     background-color: #262d38;
     box-shadow: 0px 10px 0px 10px #bdc2c9;
+    color: #bdc2c9;
 }
 
 .dropdown:hover .dropdown-content {
@@ -166,6 +171,18 @@ audio {
 span {
     text-align: left;
     margin: 10px 10px 10px 10px;
-    font-size: 25px
+    font-size: 25px;
+    color: #262d38;
+}
 
+#turns {
+    width: 150px;
+    font-size: 20px;
+    border-radius: 12px;
+}
+
+#reset {
+    width: 150px;
+    font-size: 20px;
+    border-radius: 12px;
 }
