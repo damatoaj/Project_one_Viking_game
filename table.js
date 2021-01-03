@@ -16,8 +16,7 @@ let movement = 50;
 let backGroundMusic = document.getElementById('backgroundMusic')
 let currentDirection
 function reloadGame() {
-    console.log('reload')
-    setTimeout(location.reload(), 1000000);
+    location.reload()
 }
 
 //all sounds constructor, learned that sounds can be created like components and then be plugged into functions; 
@@ -682,6 +681,7 @@ if (playerIndex) {
             document.removeEventListener('keydown', changePiece);
             document.removeEventListener('keydown', move);
             document.getElementById("turns").removeEventListener('click', switchPlayer);
+            setTimeout(reloadGame(), 5000);
         }
     }
     detectKingDeath()
@@ -690,13 +690,9 @@ if (playerIndex) {
 
 //initialize game
 let gameInterval = setInterval(gameLoop, 100)
-startButton.addEventListener('onclick', gameLoop())
+// startButton.addEventListener('onclick', gameLoop())
 console.log(startButton)
 
 //end game and reset board
-
-function reset() {
-    
-}
 
 // resetButton.addEventListener('click', )
