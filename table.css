@@ -2,16 +2,15 @@
     margin: 0 auto;
     text-align: center;
     border-sizing: border-box;
-    color: white;
+    color: #bdc2c9;
     font-family: 'Germania One', cursive;
 
 }
 
 body {
     display: grid;
-    grid-template-rows: 50px 500px 450px 100px 100px;
-    grid-template-columns: 100px 1fr 100px;
-    border: 15px solid black;
+    grid-template-rows: 100px 500px 450px 100px 100px;
+    grid-template-columns: 350px 1fr 350px;
     background-image: url('https://d332p1w15mxdmm.cloudfront.net/15-thick-walnut-blended-grain-countertop-25-wide-5fdbde66e3a22.jpg');
     background-size: cover;
     background-repeat: none;
@@ -21,46 +20,60 @@ body {
 button {
     color: black;
     height: 50px;
+    border: 2px solid black;
 }
 
 header {
     grid-column: 1 / 4;
     grid-row: 1 / 2;
-    padding: 10px 50px 10px 50px;
+    padding: 20px 50px 10px 50px;
     font-size: 40px;
+    background: #262d38;
+    border: 5px solid #bdc2c9;
+    text-align: center;
+    margin: 0;
+
 }
 h2 {
     text-align: center;
 }
 
 #p1 {
-    grid-column: 2 / 3;
+    grid-column: 1 / 4;
     grid-row: 2 / 3;
     font-size: 20px;
     padding: 10px 50px 10px 50px
-    text-align: center;
+    width: 300px;
 }
 
 #left {
     grid-column: 1 / 2;
     grid-row: 3 / 4;
+    background-image: url('https://thegreywayfarer.files.wordpress.com/2018/09/odin-002.jpg');
+    background-size: cover;
+    border: 5px solid #bdc2c9;
+    width: 300px;
 }
 main {
     margin: 0px; 
     padding: 0px;
-    border: 1px solid black;
     grid-column: 2 / 3;
     grid-row: 3 / 4;
     
 }
 canvas {
     background-size: cover;
-    border: 1px dotted blue;
+    border: 5px solid black;
 }
 
 #right {
     grid-column: 3 / 4;
     grid-row: 3 / 4;
+    background-image: url('https://i.pinimg.com/originals/76/8d/cc/768dccc199db0efed7daf3ff162e63aa.jpg');
+    background-size: cover;
+    border: 5px solid #bdc2c9;
+    width: 300px;
+
 }
 #playerOne {
     grid-column: 1 / 2;

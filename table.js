@@ -16,7 +16,7 @@ let movement = 50;
 let backGroundMusic = document.getElementById('backgroundMusic')
 let currentDirection
 function reloadGame() {
-    location.reload()
+    window.location.reload()
 }
 
 //all sounds constructor, learned that sounds can be created like components and then be plugged into functions; 
@@ -88,9 +88,9 @@ let defendersWin = () => {
     document.removeEventListener('keydown', changePiece);
     document.removeEventListener('keydown', move);
     document.getElementById("turns").removeEventListener('click', switchPlayer);
-    victoryDisplay.innerText = "Defenders Win!!!"
-    cheerOne.play()
-    setTimeout(reloadGame(), 5000)
+    victoryDisplay.innerText = "Defenders Win!!!";
+    cheerOne.play();
+    setTimeout(() => window.location.reload(), 10000);
 }
 // setTimeout(reset, 100);
 
@@ -156,22 +156,26 @@ let turnButton = document.getElementById("turns").addEventListener('click', swit
 //change who the current piece is within a team
 let changePiece = (e) => {
     if (e.which == '9') {
-        currentPiece++
-        let previousPiece = currentPiece - 1;
-        e.preventDefault()
-        console.log('previousPiece', previousPiece)
         currentDirection = false;
-        selectPlayer[currentPiece].color = 'yellow';
+        e.preventDefault()
+
+        currentPiece++
         console.log(currentPiece)
+
+        let previousPiece = currentPiece - 1;
+        console.log('previousPiece', previousPiece)
+
+        selectPlayer[currentPiece].color = 'yellow';
+        
         if (!playerIndex) { //selects defenderArray
             if (previousPiece == 0) {
                 selectPlayer[previousPiece].color = '#6b6f78';
             } else if (previousPiece >= 1) {
                 selectPlayer[previousPiece].color = '#e4e7ed';
             }
-            if (currentPiece == defenderArray.length - 1) {
+            if (currentPiece == defenderArray.length) {
                 currentPiece = 0
-                defenderArray[defenderArray.length - 1].color = '#e4e7ed'
+                defenderArray[defenderArray.length -1].color = '#e4e7ed'
             }
         }
         if (playerIndex) { //selects attackerArray
@@ -681,7 +685,7 @@ if (playerIndex) {
             document.removeEventListener('keydown', changePiece);
             document.removeEventListener('keydown', move);
             document.getElementById("turns").removeEventListener('click', switchPlayer);
-            setTimeout(reloadGame(), 5000);
+            setTimeout(() => window.location.reload(), 10000);
         }
     }
     detectKingDeath()
@@ -690,7 +694,7 @@ if (playerIndex) {
 
 //initialize game
 let gameInterval = setInterval(gameLoop, 100)
-// startButton.addEventListener('onclick', gameLoop())
+// startButton.addEventListener('onclick', gameLoop())  
 console.log(startButton)
 
 //end game and reset board
