@@ -4,7 +4,6 @@
     border-sizing: border-box;
     color: #bdc2c9;
     font-family: 'Germania One', cursive;
-
 }
 
 body {
@@ -32,6 +31,7 @@ header {
     border: 5px solid #bdc2c9;
     text-align: center;
     margin: 0;
+    width: 100%;
 
 }
 h2 {
@@ -52,11 +52,12 @@ main {
     padding: 0px;
     grid-column: 3 / 4;
     grid-row: 3 / 4;
-    
 }
 canvas {
     background-size: cover;
     border: 5px solid black;
+    background-image: url('https://www.onlinefabricstore.net/images/product-images/xl/NLNNAT_1.jpg');
+    background-size: cover;
 }
 
 #right {
@@ -110,7 +111,7 @@ audio {
     grid-row: 2 / 3;
     grid-column: 1 /2 ;
     text-align: left;
-    width: 300px;
+    width: 100%;
     margin: 10px 10px 10px 50px;
 }
 
@@ -120,7 +121,7 @@ audio {
     grid-row: 2 / 3;
     grid-column: 2 / 3 ;
     text-align: right;
-    width: 300px;
+    width: 100%;
     margin: 10px;
 
 }
@@ -131,7 +132,7 @@ audio {
     grid-row: 2 / 3;
     grid-column: 4 / 5 ;
     text-align: left;
-    width: 300px;
+    width: 100%;
     margin: 10px;
 }
 
@@ -141,7 +142,7 @@ audio {
     grid-row: 2 / 3;
     grid-column: 5 / 6 ;
     text-align: left;
-    width: 300px;
+    width: 100%;
     margin: 10px 50px;
 }
 
@@ -150,7 +151,7 @@ audio {
     position: absolute;
     text-align: left;
     font-size: 20px;
-    min-width: 300px;
+    min-width: 100%;
     padding: 12px 16px;
     z-index: 1;
     margin: 35px 10px 10px 10px;
