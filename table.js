@@ -516,164 +516,27 @@ if (playerIndex) {
                 }
             })
             function checkAttackerDeath() {
-            if (left && right) { attacker.alive = false}
-            if (top && bottom) { attacker.alive = false}
+                if (left && right) { attacker.alive = false}
+                if (top && bottom) { attacker.alive = false}
             }
             let deathBtnTwo = document.getElementById("turns").addEventListener('click', checkAttackerDeath);
         })
     }
 // if characters are alive, then they are rendered. if not, no more rendering and the x,y position is changed to eliminate a post-death bug
-    if (king.alive) {
-        king.render()
-    } else {
-        king.x = 200;
-        king.y = 200;
-    }
-    if (defender1.alive) {
-        defender1.render()
-    } else {
-        defender1.x = 0;
-        defender1.y = 0;
-    }
-    if (defender2.alive) {
-        defender2.render()
-    } else {
-        defender2.x = 0;
-        defender2.y = 0;
-    }
-    if (defender3.alive) {
-        defender3.render()
-    } else {
-        defender3.x = 0;
-        defender3.y = 0;
-    }
-    if (defender4.alive) {
-        defender4.render()
-    } else {
-        defender4.x = 0;
-        defender4.y = 0;
-    }
+   for (pieceArray of playerArray) {
+        console.log(pieceArray)
+        for (viking of pieceArray) {
+            if (viking.alive)  {
+                viking.render()   
+            } else {
+                viking.x = 0;
+                viking.y = 0;
+            }
+        } 
+   }
+  
 
-    if (defender5.alive) {
-        defender5.render()
-    } else {
-        defender5.x = 0;
-        defender5.y = 0;
-    }
-    if (defender6.alive) {
-        defender6.render()
-    } else {
-        defender6.x = 0;
-        defender6.y = 0;
-    }
-    if (defender7.alive) {
-        defender7.render()
-    } else {
-        defender7.x = 0;
-        defender7.y = 0;
-    }
-    if (defender8.alive) {
-        defender8.render()
-    } else {
-        defender8.x = 0;
-        defender8.y = 0;
-    }
-    if (attacker1.alive) {
-        attacker1.render()
-    } else {
-        attacker1.x = 0;
-        attacker1.y = 0;
-    }
-    if (attacker2.alive) {
-        attacker2.render()
-    } else {
-        attacker2.x = 0;
-        attacker2.y = 0;
-    }
-    if (attacker3.alive) {
-        attacker3.render()
-    } else {
-        attacker3.x = 0;
-        attacker3.y = 0;
-    }
-    if (attacker4.alive) {
-        attacker4.render()
-    } else {
-        attacker4.x = 0;
-        attacker4.y = 0;
-    }
-    if (attacker5.alive) {
-        attacker5.render()
-    } else {
-        attacker5.x = 0;
-        attacker5.y = 0;
-    }
-    if (attacker6.alive) {
-        attacker6.render()
-    } else {
-        attacker6.x = 0;
-        attacker6.y = 0;
-    }
-    if (attacker7.alive) {
-        attacker7.render()
-    } else {
-        attacker7.x = 0;
-        attacker7.y = 0;
-    }
-    if (attacker8.alive) {
-        attacker8.render()
-    } else {
-        attacker8.x = 0;
-        attacker8.y = 0;
-    }
-    if (attacker9.alive) {
-        attacker9.render()
-    } else {
-        attacker9.x = 0;
-        attacker9.y = 0;
-    }
-    if (attacker10.alive) {
-        attacker10.render()
-    } else {
-        attacker10.x = 0;
-        attacker10.y = 0;
-    }
-    if (attacker11.alive) {
-        attacker11.render()
-    } else {
-        attacker11.x = 0;
-        attacker11.y = 0;
-    }
-    if (attacker12.alive) {
-        attacker12.render()
-    } else {
-        attacker12.x = 0;
-        attacker12.y = 0;
-    }
-    if (attacker13.alive) {
-        attacker13.render()
-    } else {
-        attacker13.x = 0;
-        attacker13.y = 0;
-    }
-    if (attacker14.alive) {
-        attacker14.render()
-    } else {
-        attacker14.x = 0;
-        attacker14.y = 0;
-    }
-    if (attacker15.alive) {
-        attacker15.render()
-    } else {
-        attacker15.x = 0;
-        attacker15.y = 0;
-    }
-    if (attacker16.alive) {
-        attacker16.render()
-    } else {
-        attacker16.x = 0;
-        attacker16.y = 0;
-    }
+
 //death conditions for the king trigger the win for the attackers
     let attackersWin = () => {
     victoryDisplay.innerText = "Attackers Win!!!"
