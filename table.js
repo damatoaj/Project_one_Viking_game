@@ -15,6 +15,7 @@ const min_height = 0;
 let movement = 50;
 let backGroundMusic = document.getElementById('backgroundMusic')
 let currentDirection
+
 function reloadGame() {
     window.location.reload()
 }
@@ -473,14 +474,17 @@ if (playerIndex) {
                     bottom = true;
                 }
             })
+        function checkDefenderDeath() {    
             if (index == 0) {
-                if (left && right) { defender.alive }
-                if (top && bottom) { defender.alive }
-                if (left && right && bottom && top) { defender.alive = false; cheerTwo.play(); }
+                if (left && right) {defender.alive}
+                if (top && bottom) {defender.alive}
+                if (left && right && bottom && top) {defender.alive = false; cheerTwo.play();}
             } else {
-                if (left && right) { defender.alive = false; screamOne.play(); }
-                if (top && bottom) { defender.alive = false; screamOne.play(); }
+                if (left && right) {defender.alive = false}
+                if (top && bottom) {defender.alive = false}
             }
+            }
+            let deathBtnOne = document.getElementById("turns").addEventListener('click', checkDefenderDeath);
         })
     }
     if (!playerIndex) {
@@ -511,8 +515,11 @@ if (playerIndex) {
                     bottom = true;
                 }
             })
-            if (left && right) { attacker.alive = false; screamTwo.play() }
-            if (top && bottom) { attacker.alive = false; screamTwo.play() }
+            function checkAttackerDeath() {
+            if (left && right) { attacker.alive = false}
+            if (top && bottom) { attacker.alive = false}
+            }
+            let deathBtnTwo = document.getElementById("turns").addEventListener('click', checkAttackerDeath);
         })
     }
 // if characters are alive, then they are rendered. if not, no more rendering and the x,y position is changed to eliminate a post-death bug
@@ -682,6 +689,7 @@ if (playerIndex) {
     }
     detectKingDeath()
 }
+// let deathBtn = document.getElementById("turns").addEventListener('click', checkDefenderDeath();
 //initialize game
 let gameInterval = setInterval(gameLoop, 100)
 console.log(startButton)
