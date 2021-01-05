@@ -24,6 +24,9 @@ button {
 header {
     grid-column: 1 / 6;
     grid-row: 1 / 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 20px 50px 10px 50px;
     font-size: 40px;
     background: #262d38;

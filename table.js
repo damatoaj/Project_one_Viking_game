@@ -30,7 +30,15 @@ let cheerTwo = new Audio('cheer2.mp3');
 
 /* Crawler  in retropect I should have put more functions in the crawlers that could be called later in the game, or made the
 the placement of the characters a function that could be used for the reset */
-function Crawler(x, y, width, height, color) { //other functions can be programmed right here in the Crawler/Component that then get called later
+
+
+function Crawler(x, y, width, height, color, type) { //other functions can be programmed right here in the Crawler/Component that then get called later
+    this.type;
+    if (type == 'image') {
+        this.image = new Image();
+        this.image.src = color;
+        console.log('image')
+    }
     this.x = x;
     this.y = y;
     this.color = color;
@@ -38,42 +46,48 @@ function Crawler(x, y, width, height, color) { //other functions can be programm
     this.height = height;
     this.alive = true;
     this.render = function () {
-        ctx.strokeStyle = 'black';
-        ctx.strokeRect(this.x, this.y, this.width, this.height);
-        ctx.fillStyle = this.color;
-        ctx.fillRect(this.x, this.y, this.width, this.height);
+        if (type == 'image') {
+        ctx.drawImage(this.image, 
+        this.x, 
+        this.y,
+        this.width,
+        this.height); 
+        } 
+    }
+    this.death = function () {
+        screamOne.play();
     }
 }
 
 //king
-let king = new Crawler(200, 200, 50, 50, '#6b6f78')
+let king = new Crawler(200, 200, 50, 50, 'king_artwork.jpg', 'image')
 //defenders
-let defender1 = new Crawler(150, 200, 50, 50, '#e4e7ed')
-let defender2 = new Crawler(100, 200, 50, 50, '#e4e7ed')
-let defender3 = new Crawler(250, 200, 50, 50, '#e4e7ed')
-let defender4 = new Crawler(300, 200, 50, 50, '#e4e7ed')
-let defender5 = new Crawler(200, 150, 50, 50, '#e4e7ed')
-let defender6 = new Crawler(200, 100, 50, 50, '#e4e7ed')
-let defender7 = new Crawler(200, 250, 50, 50, '#e4e7ed')
-let defender8 = new Crawler(200, 300, 50, 50, '#e4e7ed')
+let defender1 = new Crawler(150, 200, 50, 50, 'swedish_shield.jpg', 'image')
+let defender2 = new Crawler(100, 200, 50, 50, 'swedish_shield.jpg', 'image')
+let defender3 = new Crawler(250, 200, 50, 50, 'swedish_shield.jpg', 'image')
+let defender4 = new Crawler(300, 200, 50, 50, 'swedish_shield.jpg', 'image')
+let defender5 = new Crawler(200, 150, 50, 50, 'swedish_shield.jpg', 'image')
+let defender6 = new Crawler(200, 100, 50, 50, 'swedish_shield.jpg', 'image')
+let defender7 = new Crawler(200, 250, 50, 50, 'swedish_shield.jpg', 'image')
+let defender8 = new Crawler(200, 300, 50, 50, 'swedish_shield.jpg', 'image')
 let defenderArray = [king, defender1, defender2, defender3, defender4, defender5, defender6, defender7, defender8]
 //attackers
-let attacker1 = new Crawler(200, 0, 50, 50, '#964b4a')
-let attacker2 = new Crawler(150, 0, 50, 50, '#964b4a')
-let attacker3 = new Crawler(250, 0, 50, 50, '#964b4a')
-let attacker4 = new Crawler(200, 50, 50, 50, '#964b4a')
-let attacker5 = new Crawler(150, 400, 50, 50, '#964b4a')
-let attacker6 = new Crawler(200, 400, 50, 50, '#964b4a')
-let attacker7 = new Crawler(250, 400, 50, 50, '#964b4a')
-let attacker8 = new Crawler(200, 350, 50, 50, '#964b4a')
-let attacker9 = new Crawler(400, 150, 50, 50, '#964b4a')
-let attacker10 = new Crawler(400, 200, 50, 50, '#964b4a')
-let attacker11 = new Crawler(400, 250, 50, 50, '#964b4a')
-let attacker12 = new Crawler(350, 200, 50, 50, '#964b4a')
-let attacker13 = new Crawler(0, 150, 50, 50, '#964b4a')
-let attacker14 = new Crawler(0, 200, 50, 50, '#964b4a')
-let attacker15 = new Crawler(0, 250, 50, 50, '#964b4a')
-let attacker16 = new Crawler(50, 200, 50, 50, '#964b4a')
+let attacker1 = new Crawler(200, 0, 50, 50, 'norwegian_flag.jpg', 'image')
+let attacker2 = new Crawler(150, 0, 50, 50, 'norwegian_flag.jpg', 'image')
+let attacker3 = new Crawler(250, 0, 50, 50, 'norwegian_flag.jpg', 'image')
+let attacker4 = new Crawler(200, 50, 50, 50, 'norwegian_flag.jpg', 'image')
+let attacker5 = new Crawler(150, 400, 50, 50, 'norwegian_flag.jpg', 'image')
+let attacker6 = new Crawler(200, 400, 50, 50, 'norwegian_flag.jpg', 'image')
+let attacker7 = new Crawler(250, 400, 50, 50, 'norwegian_flag.jpg', 'image')
+let attacker8 = new Crawler(200, 350, 50, 50, 'norwegian_flag.jpg', 'image')
+let attacker9 = new Crawler(400, 150, 50, 50, 'norwegian_flag.jpg', 'image')
+let attacker10 = new Crawler(400, 200, 50, 50, 'norwegian_flag.jpg', 'image')
+let attacker11 = new Crawler(400, 250, 50, 50, 'norwegian_flag.jpg', 'image')
+let attacker12 = new Crawler(350, 200, 50, 50, 'norwegian_flag.jpg', 'image')
+let attacker13 = new Crawler(0, 150, 50, 50, 'norwegian_flag.jpg', 'image')
+let attacker14 = new Crawler(0, 200, 50, 50, 'norwegian_flag.jpg', 'image')
+let attacker15 = new Crawler(0, 250, 50, 50, 'norwegian_flag.jpg', 'image')
+let attacker16 = new Crawler(50, 200, 50, 50, 'norwegian_flag.jpg', 'image')
 let attackerArray = [attacker1, attacker2, attacker3, attacker4, attacker5, attacker6, attacker7, attacker8, attacker9, attacker10, attacker11, attacker12, attacker13, attacker14, attacker15, attacker16]
 
 
@@ -132,13 +146,13 @@ let switchPlayer = (e) => {
 
     if (!playerIndex) {
         if (currentPiece == 0) {
-            selectPlayer[currentPiece].color = '#6b6f78';
+            selectPlayer[currentPiece].image.src = 'king_artwork.jpg';
         } else if (currentPiece >= 1) {
-            selectPlayer[currentPiece].color = '#e4e7ed';
+            selectPlayer[currentPiece].image.src = 'swedish_shield.jpg';
         }
     }
     if (playerIndex) {
-        selectPlayer[currentPiece].color = '#964b4a';
+        selectPlayer[currentPiece].image.src = 'norwegian_flag.jpg';
     }
 
     playerIndex = (playerIndex + 1) % 2
@@ -146,7 +160,7 @@ let switchPlayer = (e) => {
     currentDirection = false;
 
     currentPiece = 0;
-    selectPlayer[currentPiece].color = 'yellow'
+    selectPlayer[currentPiece].image.src = 'blue_viking_shield.jpg'
     if (playerIndex == 0) {
         playerOneTurn()
     } else { playerTwoTurn() }
@@ -156,27 +170,30 @@ let turnButton = document.getElementById("turns").addEventListener('click', swit
 
 //change who the current piece is within a team
 let changePiece = (e) => {
+    console.log(attackerArray)
+
     if (e.which == '9') {
         if (playerIndex) { //selects attackerArray
             if(currentPiece == attackerArray.length - 1) {
-                attackerArray[currentPiece].color = '#964b4a'
+                attackerArray[currentPiece].image.src = 'norwegian_flag.jpg'
                 currentPiece = 0
-                attackerArray[currentPiece].color = 'yellow'
+                attackerArray[currentPiece].image.src = 'blue_viking_shield.jpg'
             } else {
-                attackerArray[currentPiece].color = '#964b4a'
+                attackerArray[currentPiece].image.src = 'norwegian_flag.jpg'
                 currentPiece++
-                attackerArray[currentPiece].color = 'yellow'
+                attackerArray[currentPiece].image.src = 'blue_viking_shield.jpg'
+
             } 
         }   else if(currentPiece == defenderArray.length - 1) {
-                    defenderArray[currentPiece].color = '#e4e7ed'
+                    defenderArray[currentPiece].image.src = 'swedish_shield.jpg'
                     currentPiece = 0
-                    defenderArray[currentPiece].color = 'yellow'
+                    defenderArray[currentPiece].image.src = 'blue_viking_shield.jpg'
                 }  else {
-                        defenderArray[currentPiece].color = '#e4e7ed'
+                        defenderArray[currentPiece].image.src = 'swedish_shield.jpg'
                         currentPiece++
-                        defenderArray[currentPiece].color = 'yellow'
+                        defenderArray[currentPiece].image.src = 'blue_viking_shield.jpg'
                     } if(currentPiece != 0) {
-                                defenderArray[0].color = '#6b6f78'
+                                defenderArray[0].image.src = 'king_artwork.jpg'
                     } 
         currentDirection = false;
         e.preventDefault()
@@ -197,8 +214,7 @@ let move = (e) => {
         currentDirection = 'w'
         if (selectPlayer[currentPiece].y - movement >= min_height) {
             selectPlayer[currentPiece].y -= movement
-        }
-
+        } 
         defenderArray.forEach(defender => {
             if (defender.alive) {
                 if (!Object.is(selectPlayer[currentPiece], defender)) { 
@@ -210,7 +226,6 @@ let move = (e) => {
                 }
             }
         })
-
         attackerArray.forEach(attacker => {
             if (attacker.alive) {
                 if (!Object.is(selectPlayer[currentPiece], attacker)) {
@@ -222,13 +237,11 @@ let move = (e) => {
                 }
             }
         })
-
     } else if (e.key === 'a' && currentDirection === false || currentDirection === 'a') {
         currentDirection = 'a'
         if (selectPlayer[currentPiece].x - movement >= min_height) {
             selectPlayer[currentPiece].x -= movement
         }
-
         defenderArray.forEach(defender => {
             if (defender.alive) {
                 if (!Object.is(selectPlayer[currentPiece], defender)) {
@@ -239,7 +252,6 @@ let move = (e) => {
                 }
             }
         })
-
         attackerArray.forEach(attacker => {
             if (attacker.alive) {
                 if (!Object.is(selectPlayer[currentPiece], attacker)) {
@@ -250,7 +262,6 @@ let move = (e) => {
                 }
             }
         })
-
     } else if (e.key === 's' && currentDirection === false || currentDirection === 's') {
         currentDirection = 's'
         if (selectPlayer[currentPiece].y + movement <= max_height) {
@@ -267,8 +278,6 @@ let move = (e) => {
                 }
             }
         })
-
-
         attackerArray.forEach(attacker => {
             if (attacker.alive) {
                 if (!Object.is(selectPlayer[currentPiece], attacker)) {
@@ -279,13 +288,11 @@ let move = (e) => {
                 }
             }
         })
-
     } else if (e.key === 'd' && currentDirection === false || currentDirection === 'd') {
         currentDirection = 'd'
         if (selectPlayer[currentPiece].x + movement <= max_width) {
             selectPlayer[currentPiece].x += movement
         }
-
         defenderArray.forEach(defender => {
             if (defender.alive) {
                 if (!Object.is(selectPlayer[currentPiece], defender)) {
@@ -296,7 +303,6 @@ let move = (e) => {
                 }
             }
         })
-
         attackerArray.forEach(attacker => {
             if (attacker.alive) {
                 if (!Object.is(selectPlayer[currentPiece], attacker)) {
@@ -480,14 +486,13 @@ if (playerIndex) {
                 if (top && bottom) {defender.alive}
                 if (left && right && bottom && top) {defender.alive = false; cheerTwo.play();}
             } else {
-                if (left && right) {defender.alive = false}
-                if (top && bottom) {defender.alive = false}
+                if (left && right) {defender.alive = false; defender.death()}
+                if (top && bottom) {defender.alive = false; defender.death()}
             }
             }
             let deathBtnOne = document.getElementById("turns").addEventListener('click', checkDefenderDeath);
         })
-    }
-    if (!playerIndex) {
+    } else {
         attackerArray.forEach(attacker => {
             let top = false;
             let bottom = false;
@@ -516,15 +521,15 @@ if (playerIndex) {
                 }
             })
             function checkAttackerDeath() {
-                if (left && right) { attacker.alive = false}
-                if (top && bottom) { attacker.alive = false}
+                if (left && right) { attacker.alive = false; attacker.death()}
+                if (top && bottom) { attacker.alive = false; attacker.death()}
             }
             let deathBtnTwo = document.getElementById("turns").addEventListener('click', checkAttackerDeath);
         })
     }
 // if characters are alive, then they are rendered. if not, no more rendering and the x,y position is changed to eliminate a post-death bug
    for (pieceArray of playerArray) {
-        console.log(pieceArray)
+        // console.log(pieceArray)
         for (viking of pieceArray) {
             if (viking.alive)  {
                 viking.render()   
@@ -535,8 +540,6 @@ if (playerIndex) {
         } 
    }
   
-
-
 //death conditions for the king trigger the win for the attackers
     let attackersWin = () => {
     victoryDisplay.innerText = "Attackers Win!!!"
@@ -555,4 +558,3 @@ if (playerIndex) {
 // let deathBtn = document.getElementById("turns").addEventListener('click', checkDefenderDeath();
 //initialize game
 let gameInterval = setInterval(gameLoop, 100)
-console.log(startButton)
