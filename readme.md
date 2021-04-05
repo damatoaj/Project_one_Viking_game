@@ -39,3 +39,9 @@ VI. Any roadblocks
 
 
 
+    React native;
+    Make it fully turn based with notifications
+    
+
+
+
