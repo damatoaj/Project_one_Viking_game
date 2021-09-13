@@ -124,6 +124,7 @@ main {
     grid-row: 3 / 4;
     background-image: url('https://cdn.shopify.com/s/files/1/1434/3274/products/r-white-oak-big_d13f65a4-c9eb-4325-be3b-bcf83ec2e6de.jpg?v=1477167446');
     background-size: cover;
+    place-items: center;
 }
 
 #playerOne {
@@ -174,6 +175,7 @@ main {
     background-image: url('https://i.pinimg.com/originals/76/8d/cc/768dccc199db0efed7daf3ff162e63aa.jpg');
     background-size: cover;
     border: .4rem solid var(--tertiary-color);
+    place-items: center;
 }
 
 #turns {
@@ -194,7 +196,7 @@ main {
     body {
         display: grid;
         grid-template-rows: 12vh 6vh 6vh 1fr 6vh 6vh;
-        grid-template-columns: 15vw 1fr 15vw;
+        grid-template-columns: 20vw 1fr 20vw;
         /* background-image: url('https://mk0lovehomedesiksan9.kinstacdn.com/wp-content/uploads/2017/03/shutterstock_537353776.jpg'); */
         background-size: cover;
         background-repeat: none;
@@ -258,11 +260,14 @@ main {
         grid-row: 4 / 5;
         border: .4rem solid var(--tertiary-color);
         width: 15vh;
+        background-size: contain;
+        background-repeat: no-repeat;
+        padding-top: 15rem;
     }
     
     main {
-        margin: 1rem; 
-        padding: 1rem;
+        margin: 0; 
+        padding: 0;
         grid-column: 2 / 3;
         grid-row: 4 / 5;
         background-image: none;
@@ -304,6 +309,10 @@ main {
         grid-row: 4 / 5;
         border: .4rem solid var(--tertiary-color);
         width: 15vh;
+        background-size: contain;
+        background-repeat: no-repeat;
+        padding-top: 15rem;
+
     }
 
     #turns {
@@ -318,4 +327,3 @@ main {
         color: var(--primary-color);
     }
 }
-/* 
