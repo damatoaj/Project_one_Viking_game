@@ -1,5 +1,5 @@
 * {
-    margin: 0 auto;
+    margin: 0;
     text-align: center;
     box-sizing: border-box;
     font-family: 'Germania One', cursive;
@@ -25,7 +25,7 @@ body {
     background-size: cover;
     background-repeat: none;
     color: var(--primary-color);
-    width: 100%;
+    width: 100vw;
 }
 
 button {
@@ -46,9 +46,6 @@ canvas {
     grid-row: 2 / 3;
     grid-column: 1 /2 ;
     text-align: left;
-    width: 100%;
-    margin: 1rem;
-    padding-left: 1rem;
 }
 
 #dropdown2 {
@@ -57,8 +54,6 @@ canvas {
     grid-row: 2 / 3;
     grid-column: 2 / 3 ;
     text-align: right;
-    width: 100%;
-    margin: 1rem;
 }
 
 #dropdown3 {
@@ -66,9 +61,7 @@ canvas {
     display: grid;
     grid-row: 2 / 3;
     grid-column: 4 / 5 ;
-    text-align: left;
-    width: 100%;
-    margin: 1rem;
+    text-align: left;    
 }
 
 #dropdown4 {
@@ -77,8 +70,7 @@ canvas {
     grid-row: 2 / 3;
     grid-column: 5 / 6 ;
     text-align: left;
-    width: 100%;
-    margin: 1rem;
+   
 }
 
 .dropdown-content {
@@ -86,7 +78,6 @@ canvas {
     position: absolute;
     text-align: left;
     font-size: 1.5vw;
-    width: 100%;
     padding: .5rem;
     z-index: 1;
     margin-top: 3rem;
@@ -97,6 +88,10 @@ canvas {
 }
 
 .dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:focus .dropdown-content {
     display: block;
 }
 
@@ -122,7 +117,6 @@ h2 {
     background-image: url('https://thegreywayfarer.files.wordpress.com/2018/09/odin-002.jpg');
     background-size: cover;
     border: .4rem solid var(--tertiary-color);
-    width: 30vw;
 }
 
 main {
@@ -181,7 +175,6 @@ main {
     background-image: url('https://i.pinimg.com/originals/76/8d/cc/768dccc199db0efed7daf3ff162e63aa.jpg');
     background-size: cover;
     border: .4rem solid var(--tertiary-color);
-    width: 30vw;
 }
 
 #turns {
