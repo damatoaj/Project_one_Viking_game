@@ -70,7 +70,6 @@ canvas {
     grid-row: 2 / 3;
     grid-column: 5 / 6 ;
     text-align: left;
-   
 }
 
 .dropdown-content {
@@ -103,7 +102,6 @@ header {
     background: var(--primary-color);
     border: .5rem solid var(--tertiary-color);
     text-align: center;
-    width: 100%;
     color: var(--tertiary-color);
 }
 
@@ -152,6 +150,7 @@ main {
 #songTwo {
     grid-row: 5 / 6;
     grid-column: 4 / 5;
+    padding-right: 10rem;
 }
 
 .dropdown {
@@ -293,6 +292,7 @@ main {
     #songTwo {
         grid-row: 6 / 7;
         grid-column: 2 /3 ;
+        padding-right: 0;
     }
 
     #reset {
