@@ -2,44 +2,46 @@
 <html lang="en">
 <head>
     <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Germania+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Germania+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="table.css">    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Viking Game</title>
 </head>
 <body>
-    <header><u>Hnafetafl</u></header>
-                <div id="dropdown1" class="dropdown">
-                <span><b><u>Goals</u></b></span>
-                    <div class="dropdown-content">
-                        The defenders <small>(Player One)</small> win if the king <small>(center)</small> escapes to any of the corner tiles</br></br>
-                        The attackers <small>(Player Two)</small> win if they capture the king, by surrounding him on four sides.
-                    </div>
-                </div>
-                <div id="dropdown2" class="dropdown">
-                    <span><b><u>Movement</u></b></span>
-                        <div class="dropdown-content" class="dropdown">
-                            Any piece may move any number of vacant spaces in any straight line.</br></br>
-                            No piece may ever pass over another piece in its path.</br></br>
-                            An enemy piece is captured and removed from the board if you move one of your pieces so that the enemy piece becomes surrounded on two opposite sides</br></br>
-                            A piece may be moved in between two enemy pieces without being captured.
-                        </div>
-                </div>
-                <div id="dropdown3" class="dropdown">
-                    <span><b><u>Turns</u></b></span>
-                        <div class="dropdown-content">
-                            Turns end after one player either kills their opponent's piece or has moved their character as far as they wanted</br></br>
-                            Only one character can be killed per turn</br></br>
-                            Hitting the "Switch Player" button swtiches players and kills the opponent's character
-                        </div>
-                </div>
-                <div id="dropdown4" class="dropdown">
-                    <span><b><u>Buttons</u></b></span>
-                        <div class="dropdown-content"> 
-                            <button>W is up</button><button>A is left</button><button>D is right</button><button>S is down</button><button>Tab Selects Pieces</button>
-                            <button>And Clicking the Switch Player Button Switches Teams</button>
-                        </div>
-                </div>
+    <header>
+        <u>Hnafetafl</u>
+    </header>
+    <div id="dropdown1" class="dropdown">
+        <u>Goals</u>
+        <div class="dropdown-content">
+            The defenders <small>(Player One)</small> win if the king <small>(center)</small> escapes to any of the corner tiles</br></br>
+            The attackers <small>(Player Two)</small> win if they capture the king, by surrounding him on four sides.
+        </div>
+    </div>
+    <div id="dropdown2" class="dropdown">
+        <u>Movement</u>
+        <div class="dropdown-content" class="dropdown">
+            Any piece may move any number of vacant spaces in any straight line.</br></br>
+            No piece may ever pass over another piece in its path.</br></br>
+            An enemy piece is captured and removed from the board if you move one of your pieces so that the enemy piece becomes surrounded on two opposite sides</br></br>
+            A piece may be moved in between two enemy pieces without being captured.
+        </div>
+    </div>
+    <div id="dropdown3" class="dropdown">
+       <u>Turns</u>
+        <div class="dropdown-content">
+            Turns end after one player either kills their opponent's piece or has moved their character as far as they wanted</br></br>
+            Only one character can be killed per turn</br></br>
+            Hitting the "Switch Player" button swtiches players and kills the opponent's character
+        </div>
+    </div>
+    <div id="dropdown4" class="dropdown">
+        <u>Buttons</u>
+        <div class="dropdown-content"> 
+            <button>W is up</button><button>A is left</button><button>D is right</button><button>S is down</button><button>Tab Selects Pieces</button>
+            <button>And Clicking the Switch Player Button Switches Teams</button>
+        </div>
+    </div>
     <div id="left">
         <button id="reset" onclick="reloadGame()">Reset</button>
     </div>
@@ -60,14 +62,11 @@
             <source src='Wind in the Waves.m4a' type="audio/mpeg">
         </audio>
     </div>
-</br>
-
     <div id="songTwo">
         <audio controls>
             <source src='Cut me up.m4a' type='audio/mpeg'>
         </audio>
     </div>
-    
     <script src="table.js"></script>
 </body>
 </html>
