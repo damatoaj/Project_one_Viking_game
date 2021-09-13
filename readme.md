@@ -1,6 +1,4 @@
 I. Game Idea
-    
-I. Game Idea
     A. Hnefatafl
         a. there are two teams: attackers and defenders. The attackers have 16 pieces and are trying to kill the king. Defenders have 9 pieces including a king piece, and win if the king reaches the edge of the board
         b. All pieces move in cardinal directions; only one direction at a time; 
@@ -34,8 +32,6 @@ V. Stretch Goals
 VI. Any roadblocks
     A. Getting the tic-tac-toe assignment finished in addtion to the project will slow me down
     B. I still have difficulty understanding javascript, and how to make it grab items that I would want to use
-
-    *look at minesweeper for win conditions and checking squares next to each other
 
 
 
