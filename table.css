@@ -1,20 +1,23 @@
 * {
     margin: 0;
+    padding: 0;
     text-align: center;
     box-sizing: border-box;
     font-family: 'Germania One', cursive;
 }
 
 :root {
-    --primary-color: #262d38;
-    --secondary-color: whitesmoke;
-    --tertiary-color: #bdc2c9;
-}
+    --primary-clr: #262d38;
+    --secondary-clr: whitesmoke;
+    --tertiary-clr: #bdc2c9;
 
-audio {
-    text-align: center;
-    margin: 0;
-    padding: 0;
+    --font-rg: 1.5rem;
+    --font-lg: calc(var(--font-rg) * 2);
+    --font-sm: calc(var(--font-rg) * .75);
+
+    --bdr-rg: .2rem;
+    --bdr-lg: calc(var(--bdr-rg) * 2);
+    --bdr-sm: calc(var(--bdr-rg) * .75);
 }
 
 body {
@@ -24,51 +27,41 @@ body {
     background-image: url('https://mk0lovehomedesiksan9.kinstacdn.com/wp-content/uploads/2017/03/shutterstock_537353776.jpg');
     background-size: cover;
     background-repeat: none;
-    color: var(--primary-color);
-    width: 100vw;
+    color: var(--primary-clr);
 }
 
 button {
-    color: var(--primary-color);
-    height: 2.5rem;
-    border: .1rem solid var(--primary-color);
+    color: var(--primary-clr);
+    border: var(--bdr-sm) solid var(--primary-clr);
 }
 
 canvas {
     background-size: cover;
-    border: .2rem solid var(--primary-color);
+    border: var(--bdr-rg) solid var(--primary-clr);
     background-image: url('https://www.onlinefabricstore.net/images/product-images/xl/NLNNAT_1.jpg');
 }
 
 #dropdown1 {
-    position: relative;
-    display: grid;
     grid-row: 2 / 3;
-    grid-column: 1 /2 ;
+    grid-column: 1 /2;
     text-align: left;
 }
 
 #dropdown2 {
-    position: relative;
-    display: grid;
     grid-row: 2 / 3;
-    grid-column: 2 / 3 ;
-    text-align: right;
+    grid-column: 2 / 3;
+    text-align: left;
 }
 
 #dropdown3 {
-    position: relative;
-    display: grid;
     grid-row: 2 / 3;
-    grid-column: 4 / 5 ;
+    grid-column: 4 / 5;
     text-align: left;    
 }
 
 #dropdown4 {
-    position: relative;
-    display: grid;
     grid-row: 2 / 3;
-    grid-column: 5 / 6 ;
+    grid-column: 5 / 6;
     text-align: left;
 }
 
@@ -76,14 +69,14 @@ canvas {
     display: none;
     position: absolute;
     text-align: left;
-    font-size: 1.5vw;
+    font-size: var(--font-sm);
     padding: .5rem;
     z-index: 1;
-    margin-top: 3rem;
-    letter-spacing: .1rem;
-    background-color: var(--primary-color);
-    box-shadow: .5rem .5rem var(--tertiary-color), -.5rem .5rem var(--tertiary-color), .5rem -.5rem var(--tertiary-color), -.5rem -.5rem var(--tertiary-color);
-    color: var(--secondary-color);
+    /* margin-top: 3rem; */
+    /* letter-spacing: .1rem; */
+    background-color: var(--primary-clr);
+    box-shadow: .1rem .1rem var(--tertiary-clr), -.1rem .1rem var(--tertiary-clr), .1rem -.1rem var(--tertiary-clr), -.1rem -.1rem var(--tertiary-clr);
+    color: var(--secondary-clr);
 }
 
 .dropdown:hover .dropdown-content {
@@ -98,11 +91,11 @@ header {
     grid-column: 1 / 6;
     grid-row: 1 / 2;
     padding: 1rem 5rem 2rem 5rem;
-    font-size: 3.5vw;
-    background: var(--primary-color);
-    border: .5rem solid var(--tertiary-color);
+    font-size: var(--font-lg);
+    background: var(--primary-clr);
+    border: var(--bdr-lg) solid var(--tertiary-clr);
     text-align: center;
-    color: var(--tertiary-color);
+    color: var(--tertiary-clr);
 }
 
 h2 {
@@ -114,7 +107,7 @@ h2 {
     grid-row: 3 / 4;
     background-image: url('https://thegreywayfarer.files.wordpress.com/2018/09/odin-002.jpg');
     background-size: cover;
-    border: .4rem solid var(--tertiary-color);
+    border: var(--bdr-rg) solid var(--tertiary-clr);
 }
 
 main {
@@ -132,7 +125,7 @@ main {
     grid-row: 4 / 5;
     font-size: 3vw;
     padding: .5rem 2rem 1rem 2rem;
-    color: var(--primary-color);
+    color: var(--primary-clr);
 }
 
 #playerTwo {
@@ -140,7 +133,7 @@ main {
     grid-row: 4 / 5;
     font-size: 3vw;
     padding: .5rem 2rem 1rem 2rem;;
-    color: var(--primary-color);
+    color: var(--primary-clr);
 }
 
 #songOne {
@@ -157,15 +150,14 @@ main {
 .dropdown {
     text-align: left;
     margin: 1rem;
-    font-size: 4vw;
-    color: var(--primary-color);
+    font-size: calc(var(--font-lg) * .75);
+    color: var(--primary-clr);
 }
 
 
 #reset {
-    width: 10vw;
-    padding: .1rem;
-    font-size: 3vw;
+    padding: .3rem;
+    font-size: calc(var(--font-lg) * .75);
     border-radius: .8rem;
 }
 
@@ -174,95 +166,65 @@ main {
     grid-row: 3 / 4;
     background-image: url('https://i.pinimg.com/originals/76/8d/cc/768dccc199db0efed7daf3ff162e63aa.jpg');
     background-size: cover;
-    border: .4rem solid var(--tertiary-color);
+    border: var(--bdr-rg) solid var(--tertiary-clr);
     place-items: center;
 }
 
 #turns {
     width: 20vw;
-    font-size: 2vw;
+    font-size: calc(var(--font-lg) * .75);
     border-radius: .8rem;
 }
 
 #victory {
     grid-column: 3 / 4;
     grid-row: 4 / 5;
-    font-size: 4vw;
+    font-size: var(--font-lg);
     padding: 2rem;
-    color: var(--primary-color);
+    color: var(--primary-clr);
 }
 
 @media only screen and (max-width: 768px) {
+    :root {
+        --font-rg: 1rem;
+    }
     body {
-        display: grid;
         grid-template-rows: 12vh 6vh 6vh 1fr 6vh 6vh;
         grid-template-columns: 20vw 1fr 20vw;
-        /* background-image: url('https://mk0lovehomedesiksan9.kinstacdn.com/wp-content/uploads/2017/03/shutterstock_537353776.jpg'); */
-        background-size: cover;
-        background-repeat: none;
-        color: var(--primary-color);
     }
 
     #dropdown1 {
-        position: relative;
-        display: grid;
         grid-row: 2 / 3;
         grid-column: 1 / 2 ;
-        text-align: left;
-        width: 100%;
-        margin: 1rem;
-        padding-left: 1rem;
     }
     
     #dropdown2 {
-        position: relative;
-        display: grid;
         grid-row: 3 / 4;
         grid-column: 1 / 2 ;
-        text-align: right;
-        width: 100%;
-        margin: 1rem;
     }
     
     #dropdown3 {
-        position: relative;
-        display: grid;
         grid-row: 2 / 3;
         grid-column: 3 / 4 ;
-        text-align: left;
-        width: 100%;
-        margin: 1rem;
     } 
     #dropdown4 {
-        position: relative;
-        display: grid;
         grid-row: 3 / 4;
-        grid-column: 3 / 4 ;
-        text-align: left;
-        width: 100%;
-        margin: 1rem;
+        grid-column: 3 / 4;
     }
 
     header {
         grid-column: 1 / 4;
         grid-row: 1 / 2;
-        padding: 1rem 5rem 2rem 5rem;
-        font-size: 3.5vw;
-        background: var(--primary-color);
-        border: .5rem solid var(--tertiary-color);
-        text-align: center;
-        width: 100%;
-        color: var(--tertiary-color);
     }
 
     #left {
         grid-column: 1 / 2;
         grid-row: 4 / 5;
-        border: .4rem solid var(--tertiary-color);
-        width: 15vh;
+        /* width: 15vh; */
         background-size: contain;
         background-repeat: no-repeat;
         padding-top: 15rem;
+        border: none;
     }
     
     main {
@@ -276,17 +238,11 @@ main {
     #playerOne {
         grid-column: 1 / 2;
         grid-row: 5 / 7;
-        font-size: 3vw;
-        padding: .5rem 2rem 1rem 2rem;
-        color: var(--primary-color);
     }
     
     #playerTwo {
         grid-column: 3 / 4;
         grid-row: 5 / 7;
-        font-size: 3vw;
-        padding: .5rem 2rem 1rem 2rem;;
-        color: var(--primary-color);
     }
     
     #songOne {
@@ -307,12 +263,10 @@ main {
     #right {
         grid-column: 3 / 4;
         grid-row: 4 / 5;
-        border: .4rem solid var(--tertiary-color);
-        width: 15vh;
         background-size: contain;
         background-repeat: no-repeat;
         padding-top: 15rem;
-
+        border: none;
     }
 
     #turns {
@@ -322,8 +276,5 @@ main {
     #victory {
         grid-column: 2 / 3;
         grid-row: 2 / 3;
-        font-size: 4vw;
-        padding: 2rem;
-        color: var(--primary-color);
     }
 }
