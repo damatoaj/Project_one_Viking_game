@@ -13,12 +13,11 @@ const max_height = 400;
 const min_width = 0;
 const min_height = 0;
 let movement = 50;
-let backGroundMusic = document.getElementById('backgroundMusic')
-let currentDirection
+let currentDirection;
 
 function reloadGame() {
     window.location.reload()
-}
+};
 
 //all sounds constructor, learned that sounds can be created like components and then be plugged into functions; 
 
@@ -31,14 +30,13 @@ let cheerTwo = new Audio('cheer2.mp3');
 /* Crawler  in retropect I should have put more functions in the crawlers that could be called later in the game, or made the
 the placement of the characters a function that could be used for the reset */
 
-
 function Crawler(x, y, width, height, color, type) { //other functions can be programmed right here in the Crawler/Component that then get called later
     this.type;
     if (type == 'image') {
         this.image = new Image();
         this.image.src = color;
         console.log('image')
-    }
+    };
     this.x = x;
     this.y = y;
     this.color = color;
@@ -53,11 +51,11 @@ function Crawler(x, y, width, height, color, type) { //other functions can be pr
         this.width,
         this.height); 
         } 
-    }
+    };
     this.death = function () {
         screamOne.play();
-    }
-}
+    };
+};
 
 //king
 let king = new Crawler(200, 200, 50, 50, 'king_artwork.jpg', 'image')
@@ -70,7 +68,7 @@ let defender5 = new Crawler(200, 150, 50, 50, 'swedish_shield.jpg', 'image')
 let defender6 = new Crawler(200, 100, 50, 50, 'swedish_shield.jpg', 'image')
 let defender7 = new Crawler(200, 250, 50, 50, 'swedish_shield.jpg', 'image')
 let defender8 = new Crawler(200, 300, 50, 50, 'swedish_shield.jpg', 'image')
-let defenderArray = [king, defender1, defender2, defender3, defender4, defender5, defender6, defender7, defender8]
+let defenderArray = [king, defender1, defender2, defender3, defender4, defender5, defender6, defender7, defender8];
 //attackers
 let attacker1 = new Crawler(200, 0, 50, 50, 'norwegian_flag.jpg', 'image')
 let attacker2 = new Crawler(150, 0, 50, 50, 'norwegian_flag.jpg', 'image')
@@ -88,8 +86,7 @@ let attacker13 = new Crawler(0, 150, 50, 50, 'norwegian_flag.jpg', 'image')
 let attacker14 = new Crawler(0, 200, 50, 50, 'norwegian_flag.jpg', 'image')
 let attacker15 = new Crawler(0, 250, 50, 50, 'norwegian_flag.jpg', 'image')
 let attacker16 = new Crawler(50, 200, 50, 50, 'norwegian_flag.jpg', 'image')
-let attackerArray = [attacker1, attacker2, attacker3, attacker4, attacker5, attacker6, attacker7, attacker8, attacker9, attacker10, attacker11, attacker12, attacker13, attacker14, attacker15, attacker16]
-
+let attackerArray = [attacker1, attacker2, attacker3, attacker4, attacker5, attacker6, attacker7, attacker8, attacker9, attacker10, attacker11, attacker12, attacker13, attacker14, attacker15, attacker16];
 
 let playerIndex = 0;
 let playerArray = [defenderArray, attackerArray]
@@ -97,8 +94,7 @@ let selectPlayer = playerArray[playerIndex]
 let currentPiece = 0;
 let previousPiece = currentPiece - 1;
 
-//Text display functions 
-// setTimeout(reset, 100);
+//Text display functions ;
 let defendersWin = () => {
     document.removeEventListener('keydown', changePiece);
     document.removeEventListener('keydown', move);
@@ -106,23 +102,22 @@ let defendersWin = () => {
     victoryDisplay.innerText = "Defenders Win!!!";
     cheerOne.play();
     setTimeout(() => window.location.reload(), 10000);
-}
-// setTimeout(reset, 100);
+};
 
 let attackersWin = () => {
-    victoryDisplay.innerText = "Attackers Win!!!"
-    cheerTwo.play()
-}
+    victoryDisplay.innerText = "Attackers Win!!!";
+    cheerTwo.play();
+};
 
 let playerOneTurn = () => {
-    playerOneDisplay.innerText = "Player One's Turn"
-    playerTwoDisplay.innerText = "                 "
-}
+    playerOneDisplay.innerText = "Player One's Turn";
+    playerTwoDisplay.innerText = "";
+};
 
 let playerTwoTurn = () => {
-    playerOneDisplay.innerText = "                 "
-    playerTwoDisplay.innerText = "Player Two's Turn"
-}
+    playerOneDisplay.innerText = "";
+    playerTwoDisplay.innerText = "Player Two's Turn";
+};
 
 //detect victory condition for defenders; run later in the move function
 let detectCornerKing = () => {
@@ -132,17 +127,16 @@ let detectCornerKing = () => {
         (king.x == 400 && king.y == 0) ||
         (king.x == 400 && king.y == 400)
     ) {
-        defendersWin()
-    }
-}
+        defendersWin();
+    };
+};
 
 /*   These functions allow the players to switch from team one to team two as they click the switch player button. 
 As the players switch then the current piece resets to zero and the color is toggled to yellow to indicate who the current piece is
 
 */
 let switchPlayer = (e) => {
-    e.preventDefault()
-    console.log(selectPlayer[currentPiece])
+    e.preventDefault();
 
     if (!playerIndex) {
         if (currentPiece == 0) {
@@ -150,28 +144,27 @@ let switchPlayer = (e) => {
         } else if (currentPiece >= 1) {
             selectPlayer[currentPiece].image.src = 'swedish_shield.jpg';
         }
-    }
+    };
+
     if (playerIndex) {
         selectPlayer[currentPiece].image.src = 'norwegian_flag.jpg';
-    }
+    };
 
-    playerIndex = (playerIndex + 1) % 2
-    selectPlayer = playerArray[playerIndex]
+    playerIndex = (playerIndex + 1) % 2;
+    selectPlayer = playerArray[playerIndex];
     currentDirection = false;
-
     currentPiece = 0;
-    selectPlayer[currentPiece].image.src = 'blue_viking_shield.jpg'
+    selectPlayer[currentPiece].image.src = 'blue_viking_shield.jpg';
+
     if (playerIndex == 0) {
         playerOneTurn()
     } else { playerTwoTurn() }
-}
-let turnButton = document.getElementById("turns").addEventListener('click', switchPlayer)//switch between players
+};
+let turnButton = document.getElementById("turns").addEventListener('click', switchPlayer); //switch between players
 
 
 //change who the current piece is within a team
 let changePiece = (e) => {
-    console.log(attackerArray)
-
     if (e.which == '9') {
         if (playerIndex) { //selects attackerArray
             if(currentPiece == attackerArray.length - 1) {
@@ -182,25 +175,23 @@ let changePiece = (e) => {
                 attackerArray[currentPiece].image.src = 'norwegian_flag.jpg'
                 currentPiece++
                 attackerArray[currentPiece].image.src = 'blue_viking_shield.jpg'
-
             } 
-        }   else if(currentPiece == defenderArray.length - 1) {
+        } else if (currentPiece == defenderArray.length - 1) {
                     defenderArray[currentPiece].image.src = 'swedish_shield.jpg'
                     currentPiece = 0
                     defenderArray[currentPiece].image.src = 'blue_viking_shield.jpg'
-                }  else {
-                        defenderArray[currentPiece].image.src = 'swedish_shield.jpg'
-                        currentPiece++
-                        defenderArray[currentPiece].image.src = 'blue_viking_shield.jpg'
-                    } if(currentPiece != 0) {
-                                defenderArray[0].image.src = 'king_artwork.jpg'
-                    } 
+                } else {
+                    defenderArray[currentPiece].image.src = 'swedish_shield.jpg'
+                    currentPiece++
+                    defenderArray[currentPiece].image.src = 'blue_viking_shield.jpg'
+                } if(currentPiece != 0) {
+                    defenderArray[0].image.src = 'king_artwork.jpg'
+                } 
         currentDirection = false;
-        e.preventDefault()
-    }
-}
-
-document.addEventListener('keydown', changePiece)
+        e.preventDefault();
+    };
+};
+document.addEventListener('keydown', changePiece);
 
 /*move my current piece based on the key pressed.
 first part set the borders
@@ -209,64 +200,68 @@ Object.is was a new thing I learned to use and set rules base on whether the man
 attack and defender conditions had to be set for eacsh direction key
 */
 let move = (e) => {
-
     if (e.key === 'w' && currentDirection === false || currentDirection === 'w') {
-        currentDirection = 'w'
+        currentDirection = 'w';
+
         if (selectPlayer[currentPiece].y - movement >= min_height) {
             selectPlayer[currentPiece].y -= movement
-        } 
+        };
+
         defenderArray.forEach(defender => {
             if (defender.alive) {
                 if (!Object.is(selectPlayer[currentPiece], defender)) { 
                     if (selectPlayer[currentPiece].y === defender.y && 
                         selectPlayer[currentPiece].x === defender.x) {
                         selectPlayer[currentPiece].y = defender.y + defender.height
-                        console.log('my current piece hit a defender')
-                    }
-                }
-            }
-        })
+                    };
+                };
+            };
+        });
+
         attackerArray.forEach(attacker => {
             if (attacker.alive) {
                 if (!Object.is(selectPlayer[currentPiece], attacker)) {
                     if (selectPlayer[currentPiece].y === attacker.y &&
                         selectPlayer[currentPiece].x === attacker.x) {
                         selectPlayer[currentPiece].y = attacker.y + attacker.height
-                        console.log('my piece hit an attacker')
-                    }
-                }
-            }
-        })
+                    };
+                };
+            };
+        });
     } else if (e.key === 'a' && currentDirection === false || currentDirection === 'a') {
-        currentDirection = 'a'
+        currentDirection = 'a';
+
         if (selectPlayer[currentPiece].x - movement >= min_height) {
             selectPlayer[currentPiece].x -= movement
-        }
+        };
+
         defenderArray.forEach(defender => {
             if (defender.alive) {
                 if (!Object.is(selectPlayer[currentPiece], defender)) {
                     if (selectPlayer[currentPiece].y === defender.y &&
                         selectPlayer[currentPiece].x === defender.x) {
                         selectPlayer[currentPiece].x = defender.x + defender.width
-                    }
-                }
-            }
-        })
+                    };
+                };
+            };
+        });
+
         attackerArray.forEach(attacker => {
             if (attacker.alive) {
                 if (!Object.is(selectPlayer[currentPiece], attacker)) {
                     if (selectPlayer[currentPiece].y === attacker.y &&
                         selectPlayer[currentPiece].x === attacker.x) {
                         selectPlayer[currentPiece].x = attacker.x + attacker.width
-                    }
-                }
-            }
-        })
+                    };
+                };
+            };
+        });
     } else if (e.key === 's' && currentDirection === false || currentDirection === 's') {
-        currentDirection = 's'
+        currentDirection = 's';
+
         if (selectPlayer[currentPiece].y + movement <= max_height) {
             selectPlayer[currentPiece].y += movement
-        }
+        };
 
         defenderArray.forEach(defender => {
             if (defender.alive) {
@@ -274,96 +269,96 @@ let move = (e) => {
                     if (selectPlayer[currentPiece].y === defender.y &&
                         selectPlayer[currentPiece].x === defender.x) {
                         selectPlayer[currentPiece].y = defender.y - defender.height
-                    }
-                }
-            }
-        })
+                    };
+                };
+            };
+        });
+
         attackerArray.forEach(attacker => {
             if (attacker.alive) {
                 if (!Object.is(selectPlayer[currentPiece], attacker)) {
                     if (selectPlayer[currentPiece].y === attacker.y &&
                         selectPlayer[currentPiece].x === attacker.x) {
                         selectPlayer[currentPiece].y = attacker.y - attacker.height
-                    }
-                }
-            }
-        })
+                    };
+                };
+            };
+        });
     } else if (e.key === 'd' && currentDirection === false || currentDirection === 'd') {
-        currentDirection = 'd'
+        currentDirection = 'd';
+
         if (selectPlayer[currentPiece].x + movement <= max_width) {
             selectPlayer[currentPiece].x += movement
-        }
+        };
         defenderArray.forEach(defender => {
             if (defender.alive) {
                 if (!Object.is(selectPlayer[currentPiece], defender)) {
                     if (selectPlayer[currentPiece].y === defender.y &&
                         selectPlayer[currentPiece].x === defender.x) {
                         selectPlayer[currentPiece].x = defender.x - defender.width
-                    }
-                }
-            }
-        })
+                    };
+                };
+            };
+        });
+
         attackerArray.forEach(attacker => {
             if (attacker.alive) {
                 if (!Object.is(selectPlayer[currentPiece], attacker)) {
                     if (selectPlayer[currentPiece].y === attacker.y &&
                         selectPlayer[currentPiece].x === attacker.x) {
                         selectPlayer[currentPiece].x = attacker.x - attacker.width
-                    }
-                }
-            }
-        })
-    }
-    detectCornerKing()
-}
-document.addEventListener('keydown', move)
-
+                    };
+                };
+            };
+        });
+    };
+    detectCornerKing();
+};
+document.addEventListener('keydown', move);
 
 /*gameloop sets down the lines for the board game and renders characters if they are alive
 also hosts the kill conditions using nested arrays
 */
-
-
-let gameLoop = () => {
-//clear canvas so that the pieces can then be rendered again
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
+let renderBoard = () => {
+    //clear canvas so that the pieces can then be rendered again
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 //gameboard corners
     ctx.fillStyle = '#323538';
-    ctx.fillRect(0, 0, 50, 50)
-    ctx.fillRect(400, 0, 50, 50)
-    ctx.fillRect(0, 400, 50, 50)
-    ctx.fillRect(400, 400, 50, 50)
+    ctx.fillRect(0, 0, 50, 50);
+    ctx.fillRect(400, 0, 50, 50);
+    ctx.fillRect(0, 400, 50, 50);
+    ctx.fillRect(400, 400, 50, 50);
  //castle square
     ctx.fillStyle = '#7e8508';
-    ctx.fillRect(200, 200, 50, 50)
+    ctx.fillRect(200, 200, 50, 50);
 // Defender Square
     ctx.fillStyle = '#4579ad';
-    ctx.fillRect(150, 200, 50, 50)
-    ctx.fillRect(100, 200, 50, 50)
-    ctx.fillRect(250, 200, 50, 50)
-    ctx.fillRect(300, 200, 50, 50)
-    ctx.fillRect(200, 150, 50, 50)
-    ctx.fillRect(200, 100, 50, 50)
-    ctx.fillRect(200, 250, 50, 50)
-    ctx.fillRect(200, 300, 50, 50)
+    ctx.fillRect(150, 200, 50, 50);
+    ctx.fillRect(100, 200, 50, 50);
+    ctx.fillRect(250, 200, 50, 50);
+    ctx.fillRect(300, 200, 50, 50);
+    ctx.fillRect(200, 150, 50, 50);
+    ctx.fillRect(200, 100, 50, 50);
+    ctx.fillRect(200, 250, 50, 50);
+    ctx.fillRect(200, 300, 50, 50);
  //Attacker Squares
     ctx.fillStyle = '#4d7855';
-    ctx.fillRect(200, 0, 50, 50)
-    ctx.fillRect(150, 0, 50, 50)
-    ctx.fillRect(250, 0, 50, 50)
-    ctx.fillRect(200, 50, 50, 50)
-    ctx.fillRect(400, 150, 50, 50)
-    ctx.fillRect(400, 200, 50, 50)
-    ctx.fillRect(400, 250, 50, 50)
-    ctx.fillRect(350, 200, 50, 50)
-    ctx.fillRect(150, 400, 50, 50)
-    ctx.fillRect(200, 400, 50, 50)
-    ctx.fillRect(250, 400, 50, 50)
-    ctx.fillRect(200, 350, 50, 50)
-    ctx.fillRect(0, 150, 50, 50)
-    ctx.fillRect(0, 200, 50, 50)
-    ctx.fillRect(0, 250, 50, 50)
-    ctx.fillRect(50, 200, 50, 50)
+    ctx.fillRect(200, 0, 50, 50);
+    ctx.fillRect(150, 0, 50, 50);
+    ctx.fillRect(250, 0, 50, 50);
+    ctx.fillRect(200, 50, 50, 50);
+    ctx.fillRect(400, 150, 50, 50);
+    ctx.fillRect(400, 200, 50, 50);
+    ctx.fillRect(400, 250, 50, 50);
+    ctx.fillRect(350, 200, 50, 50);
+    ctx.fillRect(150, 400, 50, 50);
+    ctx.fillRect(200, 400, 50, 50);
+    ctx.fillRect(250, 400, 50, 50);
+    ctx.fillRect(200, 350, 50, 50);
+    ctx.fillRect(0, 150, 50, 50);
+    ctx.fillRect(0, 200, 50, 50);
+    ctx.fillRect(0, 250, 50, 50);
+    ctx.fillRect(50, 200, 50, 50);
 // lines for gameboard
     ctx.beginPath();
     ctx.moveTo(50, 0);
@@ -449,6 +444,10 @@ let gameLoop = () => {
     ctx.moveTo(0, 450);
     ctx.lineTo(450, 450);
     ctx.stroke();
+};
+
+let gameLoop = () => {
+    renderBoard();
 /*nested arrays for piece deaths; if the defenders, for each defender, if in these positions they return true
 returning true then satisfies the death conditions and sound effect. 
 */

@@ -79,8 +79,13 @@ canvas {
     color: var(--secondary-clr);
 }
 
+.dropdown:hover {
+    cursor: pointer;
+}
+
 .dropdown:hover .dropdown-content {
     display: block;
+    cursor: pointer;
 }
 
 .dropdown:focus .dropdown-content {
@@ -126,6 +131,8 @@ main {
     font-size: 3vw;
     padding: .5rem 2rem 1rem 2rem;
     color: var(--primary-clr);
+    animation-name: border-animation;
+    animation-duration: 4s;
 }
 
 #playerTwo {
@@ -161,6 +168,12 @@ main {
     border-radius: .8rem;
 }
 
+#reset:hover, #turns:hover {
+    background-color: var(--primary-clr);
+    color: var(--secondary-clr);
+    cursor: pointer;
+}
+
 #right {
     grid-column: 4 / 6;
     grid-row: 3 / 4;
@@ -182,6 +195,13 @@ main {
     font-size: var(--font-lg);
     padding: 2rem;
     color: var(--primary-clr);
+}
+
+@keyframes border-animation {
+    0% {border-top: 1px solid var(--primary-clr);}
+    25% {border-right: 1px solid var(--primary-clr);}
+    50% {border-bottom: 1px solid var(--primary-clr);}
+    75% {border-left: 1px solid var(--primary-clr);}
 }
 
 @media only screen and (max-width: 768px) {
