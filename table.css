@@ -20,6 +20,15 @@
     --bdr-sm: calc(var(--bdr-rg) * .75);
 }
 
+
+audio::-webkit-media-controls-panel {
+    background-color: var(--primary-clr);
+}
+audio::-webkit-media-controls-play-button, -webkit-media-controls-play-button{
+    background-color:var(--tertiary-clr);
+  
+} 
+
 body {
     display: grid;
     grid-template-rows: 12vh 12vh 1fr 12vh 12vh;
@@ -72,11 +81,18 @@ canvas {
     font-size: var(--font-sm);
     padding: .5rem;
     z-index: 1;
-    /* margin-top: 3rem; */
-    /* letter-spacing: .1rem; */
+    transition: 10s;
     background-color: var(--primary-clr);
     box-shadow: .1rem .1rem var(--tertiary-clr), -.1rem .1rem var(--tertiary-clr), .1rem -.1rem var(--tertiary-clr), -.1rem -.1rem var(--tertiary-clr);
     color: var(--secondary-clr);
+}
+
+.dropdown {
+    text-align: left;
+    margin: 1rem;
+    font-size: calc(var(--font-lg) * .75);
+    color: var(--primary-clr);
+    transition: 10s;
 }
 
 .dropdown:hover {
@@ -131,8 +147,8 @@ main {
     font-size: 3vw;
     padding: .5rem 2rem 1rem 2rem;
     color: var(--primary-clr);
-    animation-name: border-animation;
-    animation-duration: 4s;
+    animation: border-animation 4s infinite;
+
 }
 
 #playerTwo {
@@ -141,6 +157,7 @@ main {
     font-size: 3vw;
     padding: .5rem 2rem 1rem 2rem;;
     color: var(--primary-clr);
+    animation: none 4s infinite;
 }
 
 #songOne {
@@ -154,21 +171,14 @@ main {
     padding-right: 10rem;
 }
 
-.dropdown {
-    text-align: left;
-    margin: 1rem;
-    font-size: calc(var(--font-lg) * .75);
-    color: var(--primary-clr);
-}
-
-
 #reset {
     padding: .3rem;
     font-size: calc(var(--font-lg) * .75);
     border-radius: .8rem;
+    transition: 2s;
 }
 
-#reset:hover, #turns:hover {
+#reset:hover, #turns:hover, audio:hover {
     background-color: var(--primary-clr);
     color: var(--secondary-clr);
     cursor: pointer;
@@ -187,6 +197,7 @@ main {
     width: 20vw;
     font-size: calc(var(--font-lg) * .75);
     border-radius: .8rem;
+    transition: 2s;
 }
 
 #victory {
@@ -198,10 +209,26 @@ main {
 }
 
 @keyframes border-animation {
-    0% {border-top: 1px solid var(--primary-clr);}
-    25% {border-right: 1px solid var(--primary-clr);}
-    50% {border-bottom: 1px solid var(--primary-clr);}
-    75% {border-left: 1px solid var(--primary-clr);}
+    0% {
+        border-top: var(--bdr-lg) solid var(--primary-clr);
+        border-radius: 50%;
+    }
+    25% {
+        border-right: var(--bdr-lg) solid var(--primary-clr);
+        border-radius: 50%;
+    }
+    50% {
+        border-bottom: var(--bdr-lg) solid var(--primary-clr);
+        border-radius: 50%;
+    }
+    75% {
+        border-left: var(--bdr-lg) solid var(--primary-clr);
+        border-radius: 50%;
+    }
+    100% {
+        border-top: var(--bdr-lg) solid var(--primary-clr);
+        border-radius: 50%;
+    }
 }
 
 @media only screen and (max-width: 768px) {

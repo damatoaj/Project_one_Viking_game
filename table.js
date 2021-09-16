@@ -35,7 +35,6 @@ function Crawler(x, y, width, height, color, type) { //other functions can be pr
     if (type == 'image') {
         this.image = new Image();
         this.image.src = color;
-        console.log('image')
     };
     this.x = x;
     this.y = y;
@@ -54,6 +53,8 @@ function Crawler(x, y, width, height, color, type) { //other functions can be pr
     };
     this.death = function () {
         screamOne.play();
+        delete this.render;
+        console.log(this, 'my game piece')
     };
 };
 
@@ -112,11 +113,15 @@ let attackersWin = () => {
 let playerOneTurn = () => {
     playerOneDisplay.innerText = "Player One's Turn";
     playerTwoDisplay.innerText = "";
+    playerOneDisplay.style.animationName = 'border-animation';
+    playerTwoDisplay.style.animationName = 'none';
 };
 
 let playerTwoTurn = () => {
     playerOneDisplay.innerText = "";
     playerTwoDisplay.innerText = "Player Two's Turn";
+    playerOneDisplay.style.animationName = 'none';
+    playerTwoDisplay.style.animationName = 'border-animation';
 };
 
 //detect victory condition for defenders; run later in the move function
@@ -128,6 +133,16 @@ let detectCornerKing = () => {
         (king.x == 400 && king.y == 400)
     ) {
         defendersWin();
+    };
+};
+
+let detectKingDeath = () => {
+    if (!king.alive) {
+        attackersWin()
+        document.removeEventListener('keydown', changePiece);
+        document.removeEventListener('keydown', move);
+        document.getElementById("turns").removeEventListener('click', switchPlayer);
+        setTimeout(() => window.location.reload(), 10000);
     };
 };
 
@@ -446,6 +461,8 @@ let renderBoard = () => {
     ctx.stroke();
 };
 
+
+
 let gameLoop = () => {
     renderBoard();
 /*nested arrays for piece deaths; if the defenders, for each defender, if in these positions they return true
@@ -456,40 +473,44 @@ if (playerIndex) {
             let top = false;
             let bottom = false;
             let right = false;
-            let left = false
+            let left = false;
+
             attackerArray.forEach(attacker => {
                 if (defender.x == attacker.x + attacker.width &&
                     defender.x + defender.height == attacker.x + attacker.width + attacker.height &&
                     defender.y == attacker.y) {
                     left = true;
-                }
+                };
                 if (defender.x + defender.width == attacker.x &&
                     defender.x + defender.width + defender.height == attacker.x + attacker.height &&
                     defender.y == attacker.y) {
                     right = true;
-                }
+                };
                 if (defender.y == attacker.y + attacker.height &&
                     defender.y + defender.width == attacker.y + attacker.height + attacker.width &&
                     defender.x == attacker.x) {
                     top = true;
-                }
+                };
                 if (defender.y + defender.height == attacker.y &&
                     defender.y + defender.width + defender.height == attacker.y + attacker.width &&
                     defender.x == attacker.x) {
                     bottom = true;
-                }
-            })
-        function checkDefenderDeath() {    
-            if (index == 0) {
-                if (left && right) {defender.alive}
-                if (top && bottom) {defender.alive}
-                if (left && right && bottom && top) {defender.alive = false; cheerTwo.play();}
-            } else {
-                if (left && right) {defender.alive = false; defender.death()}
-                if (top && bottom) {defender.alive = false; defender.death()}
-            }
-            }
-            let deathBtnOne = document.getElementById("turns").addEventListener('click', checkDefenderDeath);
+                };
+                function checkDefenderDeath() {  
+                    // console.log(index, "i killed a defender")  
+                    if (index == 0) {
+                        // console.log(index, 'my target')
+                        if (left && right) {defender.alive}
+                        if (top && bottom) {defender.alive}
+                        if (left && right && bottom && top) {defender.alive = false; cheerTwo.play();}
+                    } else {
+                        // console.log(index, 'not my target')
+                        if (left && right) {defender.alive = false; defender.death()}
+                        if (top && bottom) {defender.alive = false; defender.death()}
+                    };
+                };
+                let deathBtnOne = document.getElementById("turns").addEventListener('click', checkDefenderDeath);
+            });
         })
     } else {
         attackerArray.forEach(attacker => {
@@ -532,26 +553,11 @@ if (playerIndex) {
         for (viking of pieceArray) {
             if (viking.alive)  {
                 viking.render()   
-            } else {
-                viking.x = 0;
-                viking.y = 0;
-            }
-        } 
-   }
+            };
+        } ;
+   };
   
 //death conditions for the king trigger the win for the attackers
-    let attackersWin = () => {
-    victoryDisplay.innerText = "Attackers Win!!!"
-        }
-    let detectKingDeath = () => {
-        if (!king.alive) {
-            attackersWin()
-            document.removeEventListener('keydown', changePiece);
-            document.removeEventListener('keydown', move);
-            document.getElementById("turns").removeEventListener('click', switchPlayer);
-            setTimeout(() => window.location.reload(), 10000);
-        }
-    }
     detectKingDeath()
 }
 // let deathBtn = document.getElementById("turns").addEventListener('click', checkDefenderDeath();
