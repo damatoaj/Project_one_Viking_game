@@ -338,127 +338,51 @@ let renderBoard = () => {
     //clear canvas so that the pieces can then be rendered again
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 //gameboard corners
-    ctx.fillStyle = '#323538';
-    ctx.fillRect(0, 0, 50, 50);
-    ctx.fillRect(400, 0, 50, 50);
-    ctx.fillRect(0, 400, 50, 50);
-    ctx.fillRect(400, 400, 50, 50);
+    ctx.fillStyle = '#323538'; ctx.fillRect(0, 0, 50, 50); ctx.fillRect(400, 0, 50, 50); ctx.fillRect(0, 400, 50, 50); ctx.fillRect(400, 400, 50, 50);
  //castle square
-    ctx.fillStyle = '#7e8508';
-    ctx.fillRect(200, 200, 50, 50);
+    ctx.fillStyle = '#7e8508'; ctx.fillRect(200, 200, 50, 50);
 // Defender Square
-    ctx.fillStyle = '#4579ad';
-    ctx.fillRect(150, 200, 50, 50);
-    ctx.fillRect(100, 200, 50, 50);
-    ctx.fillRect(250, 200, 50, 50);
-    ctx.fillRect(300, 200, 50, 50);
-    ctx.fillRect(200, 150, 50, 50);
-    ctx.fillRect(200, 100, 50, 50);
-    ctx.fillRect(200, 250, 50, 50);
-    ctx.fillRect(200, 300, 50, 50);
+    ctx.fillStyle = '#4579ad'; ctx.fillRect(150, 200, 50, 50); ctx.fillRect(100, 200, 50, 50); ctx.fillRect(250, 200, 50, 50); ctx.fillRect(300, 200, 50, 50);
+    ctx.fillRect(200, 150, 50, 50); ctx.fillRect(200, 100, 50, 50); ctx.fillRect(200, 250, 50, 50); ctx.fillRect(200, 300, 50, 50);
  //Attacker Squares
-    ctx.fillStyle = '#4d7855';
-    ctx.fillRect(200, 0, 50, 50);
-    ctx.fillRect(150, 0, 50, 50);
-    ctx.fillRect(250, 0, 50, 50);
-    ctx.fillRect(200, 50, 50, 50);
-    ctx.fillRect(400, 150, 50, 50);
-    ctx.fillRect(400, 200, 50, 50);
-    ctx.fillRect(400, 250, 50, 50);
-    ctx.fillRect(350, 200, 50, 50);
-    ctx.fillRect(150, 400, 50, 50);
-    ctx.fillRect(200, 400, 50, 50);
-    ctx.fillRect(250, 400, 50, 50);
-    ctx.fillRect(200, 350, 50, 50);
-    ctx.fillRect(0, 150, 50, 50);
-    ctx.fillRect(0, 200, 50, 50);
-    ctx.fillRect(0, 250, 50, 50);
-    ctx.fillRect(50, 200, 50, 50);
+    ctx.fillStyle = '#4d7855'; ctx.fillRect(200, 0, 50, 50); ctx.fillRect(150, 0, 50, 50); ctx.fillRect(250, 0, 50, 50); ctx.fillRect(200, 50, 50, 50);
+    ctx.fillRect(400, 150, 50, 50); ctx.fillRect(400, 200, 50, 50); ctx.fillRect(400, 250, 50, 50); ctx.fillRect(350, 200, 50, 50); ctx.fillRect(150, 400, 50, 50);
+    ctx.fillRect(200, 400, 50, 50); ctx.fillRect(250, 400, 50, 50); ctx.fillRect(200, 350, 50, 50); ctx.fillRect(0, 150, 50, 50);
+    ctx.fillRect(0, 200, 50, 50); ctx.fillRect(0, 250, 50, 50); ctx.fillRect(50, 200, 50, 50);
 // lines for gameboard
-    ctx.beginPath();
-    ctx.moveTo(50, 0);
-    ctx.lineTo(50, 450);
-    ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(50, 0); ctx.lineTo(50, 450);ctx.stroke();
 
-    ctx.beginPath();
-    ctx.moveTo(100, 0);
-    ctx.lineTo(100, 450);
-    ctx.stroke();
+    ctx.beginPath();ctx.moveTo(100, 0);ctx.lineTo(100, 450);ctx.stroke();
 
-    ctx.beginPath();
-    ctx.moveTo(150, 0);
-    ctx.lineTo(150, 450);
-    ctx.stroke();
+    ctx.beginPath();ctx.moveTo(150, 0);ctx.lineTo(150, 450);ctx.stroke();
 
-    ctx.beginPath();
-    ctx.moveTo(200, 0);
-    ctx.lineTo(200, 450);
-    ctx.stroke();
+    ctx.beginPath();ctx.moveTo(200, 0);ctx.lineTo(200, 450);ctx.stroke();
 
-    ctx.beginPath();
-    ctx.moveTo(250, 0);
-    ctx.lineTo(250, 450);
-    ctx.stroke();
+    ctx.beginPath();ctx.moveTo(250, 0);ctx.lineTo(250, 450);ctx.stroke();
 
-    ctx.beginPath();
-    ctx.moveTo(300, 0);
-    ctx.lineTo(300, 450);
-    ctx.stroke();
+    ctx.beginPath();ctx.moveTo(300, 0);ctx.lineTo(300, 450);ctx.stroke();
 
-    ctx.beginPath();
-    ctx.moveTo(350, 0);
-    ctx.lineTo(350, 450);
-    ctx.stroke();
+    ctx.beginPath();ctx.moveTo(350, 0);ctx.lineTo(350, 450);ctx.stroke();
 
-    ctx.beginPath();
-    ctx.moveTo(400, 0);
-    ctx.lineTo(400, 450);
-    ctx.stroke();
+    ctx.beginPath();ctx.moveTo(400, 0);ctx.lineTo(400, 450);ctx.stroke();
 
-    ctx.beginPath();
-    ctx.moveTo(0, 50);
-    ctx.lineTo(450, 50);
-    ctx.stroke();
+    ctx.beginPath();ctx.moveTo(0, 50);ctx.lineTo(450, 50);ctx.stroke();
 
-    ctx.beginPath();
-    ctx.moveTo(0, 100);
-    ctx.lineTo(450, 100);
-    ctx.stroke();
+    ctx.beginPath();ctx.moveTo(0, 100);ctx.lineTo(450, 100);ctx.stroke();
 
-    ctx.beginPath();
-    ctx.moveTo(0, 150);
-    ctx.lineTo(450, 150);
-    ctx.stroke();
+    ctx.beginPath();ctx.moveTo(0, 150);ctx.lineTo(450, 150);ctx.stroke();
 
-    ctx.beginPath();
-    ctx.moveTo(0, 200);
-    ctx.lineTo(450, 200);
-    ctx.stroke();
+    ctx.beginPath();ctx.moveTo(0, 200);ctx.lineTo(450, 200);ctx.stroke();
 
-    ctx.beginPath();
-    ctx.moveTo(0, 250);
-    ctx.lineTo(450, 250);
-    ctx.stroke();
+    ctx.beginPath();ctx.moveTo(0, 250);ctx.lineTo(450, 250);ctx.stroke();
 
-    ctx.beginPath();
-    ctx.moveTo(0, 300);
-    ctx.lineTo(450, 300);
-    ctx.stroke();
+    ctx.beginPath();ctx.moveTo(0, 300);ctx.lineTo(450, 300);ctx.stroke();
 
-    ctx.beginPath();
-    ctx.moveTo(0, 350);
-    ctx.lineTo(450, 350);
-    ctx.stroke();
+    ctx.beginPath();ctx.moveTo(0, 350);ctx.lineTo(450, 350);ctx.stroke();
 
-    ctx.beginPath();
-    ctx.moveTo(0, 400);
-    ctx.lineTo(450, 400);
-    ctx.stroke();
+    ctx.beginPath();ctx.moveTo(0, 400);ctx.lineTo(450, 400);ctx.stroke();
 
-    ctx.beginPath();
-    ctx.moveTo(0, 450);
-    ctx.lineTo(450, 450);
-    ctx.stroke();
+    ctx.beginPath();ctx.moveTo(0, 450);ctx.lineTo(450, 450);ctx.stroke();
 };
 
 
