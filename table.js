@@ -163,9 +163,7 @@ let switchPlayer = (e) => {
         }
     };
 
-    if (playerIndex) {
-        selectPlayer[currentPiece].image.src = 'norwegian_flag.jpg';
-    };
+    if (playerIndex) {selectPlayer[currentPiece].image.src = 'norwegian_flag.jpg'};
 
     playerIndex = (playerIndex + 1) % 2;
     selectPlayer = playerArray[playerIndex];
@@ -176,15 +174,10 @@ let switchPlayer = (e) => {
     if (playerIndex == 0) {
         playerOneTurn();
         checkPlayerProximity();
-        
-        // renderLivingPlayers();
-        // console.log('check attacker death')
     } else { 
         playerTwoTurn();
         checkPlayerProximity();
-         
-        // console.log('check defender death')
-    }
+    };
 };
 let turnButton = document.getElementById("turns").addEventListener('click', switchPlayer); //switch between players
 
@@ -397,27 +390,18 @@ let renderBoard = () => {
 };
 
 function checkAttackerDeath(left, right, north, bottom, attacker, index) {
-        // console.log('left:', left, 'right:', right, 'north:', north, 'bottom:', bottom, attacker, 'check attacker death', 'index:', index)
-        if (left && right) { 
-            console.log('left:', left, 'right:', right)
-            return attacker.death();
-        }
-        
-        if (north && bottom) {attacker.death()}
-    
-}
+    if (left && right) {attacker.death()};
+    if (north && bottom) {attacker.death()};
+};
 
 function checkDefenderDeath(left, right, north, bottom, defender, index) {  
-    console.log(index, "i killed a defender")  
     if (index == 0) {
-        // console.log(index, 'my target')
         if (left && right) {defender.alive}
         if (north && bottom) {defender.alive}
-        if (left && right && bottom && north) {defender.alive = false; defender.death();}
+        if (left && right && bottom && north) {defender.death()};
     } else {
-        // console.log(index, 'not my target')
-        if (left && right) {defender.death()}
-        if (north && bottom) {defender.death()}
+        if (left && right) {defender.death()};
+        if (north && bottom) {defender.death()};
     };
 };
 
@@ -425,14 +409,12 @@ function checkPlayerProximity() {
     /*nested arrays for piece deaths; if the defenders, for each defender, if in these positions they return true
 returning true then satisfies the death conditions and sound effect. 
 */
-console.log('checkplayerproximity function')
 if (!playerIndex) {
     defenderArray.forEach((defender, idx) => {
         north = false;
         bottom = false;
         right = false;
         left = false;
-        // console.log(defender, index, 'this is the defender piece')
         attackerArray.forEach((attacker, index) => {
             console.log(index, north, left, right, bottom, idx)
             if (defender.x == attacker.x + attacker.width &&
@@ -455,18 +437,16 @@ if (!playerIndex) {
                 defender.x == attacker.x) {
                 bottom = true;
             };
-
             checkDefenderDeath(left, right, north, bottom, defender, index)
         });
     })
 } else {
     attackerArray.forEach(attacker => {
-        // console.log(attacker, 'checking this attacker')
         north = false;
         bottom = false;
         right = false;
         left = false;
-        defenderArray.forEach((defender, index) => {
+        defenderArray.forEach(defender => {
             if (attacker.x == defender.x + defender.width &&
                 attacker.x + attacker.height == defender.x + defender.width + defender.height &&
                 attacker.y == defender.y) {
@@ -502,7 +482,8 @@ function renderLivingPlayers() {
             } 
         };
     };
-}
+};
+
 let gameLoop = () => {
     renderBoard();
     renderLivingPlayers();
@@ -510,6 +491,6 @@ let gameLoop = () => {
 //death conditions for the king trigger the win for the attackers
     detectKingDeath()
 }
-// let deathBtn = document.getElementById("turns").addEventListener('click', checkDefenderDeath();
+
 //initialize game
 let gameInterval = setInterval(gameLoop, 100)
