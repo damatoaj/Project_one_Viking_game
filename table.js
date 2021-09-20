@@ -1,10 +1,9 @@
-//setting universal variables here at the top; in retrospect I could have put more variables up here.
+//setting universal variables here at the beginning; in retrospect I could have put more variables up here.
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 let victoryDisplay = document.getElementById('victory');
 let playerOneDisplay = document.getElementById('playerOne')
 let playerTwoDisplay = document.getElementById('playerTwo')
-let startButton = document.getElementById('start')
 let resetButton = document.getElementById('reset')
 canvas.height = '450';
 canvas.width = '450';
@@ -14,7 +13,6 @@ const min_width = 0;
 const min_height = 0;
 let movement = 50;
 let currentDirection;
-
 function reloadGame() {
     window.location.reload()
 };
@@ -52,9 +50,13 @@ function Crawler(x, y, width, height, color, type) { //other functions can be pr
         } 
     };
     this.death = function () {
-        screamOne.play();
+        if(this.alive) {screamOne.play()};
+        this.alive = false;
+        this.y = null;
+        this.x = null;
+        this.width = null;
+        this.height = null;
         delete this.render;
-        console.log(this, 'my game piece')
     };
 };
 
@@ -161,9 +163,7 @@ let switchPlayer = (e) => {
         }
     };
 
-    if (playerIndex) {
-        selectPlayer[currentPiece].image.src = 'norwegian_flag.jpg';
-    };
+    if (playerIndex) {selectPlayer[currentPiece].image.src = 'norwegian_flag.jpg'};
 
     playerIndex = (playerIndex + 1) % 2;
     selectPlayer = playerArray[playerIndex];
@@ -172,8 +172,12 @@ let switchPlayer = (e) => {
     selectPlayer[currentPiece].image.src = 'blue_viking_shield.jpg';
 
     if (playerIndex == 0) {
-        playerOneTurn()
-    } else { playerTwoTurn() }
+        playerOneTurn();
+        checkPlayerProximity();
+    } else { 
+        playerTwoTurn();
+        checkPlayerProximity();
+    };
 };
 let turnButton = document.getElementById("turns").addEventListener('click', switchPlayer); //switch between players
 
@@ -385,105 +389,108 @@ let renderBoard = () => {
     ctx.beginPath();ctx.moveTo(0, 450);ctx.lineTo(450, 450);ctx.stroke();
 };
 
+function checkAttackerDeath(left, right, north, bottom, attacker, index) {
+    if (left && right) {attacker.death()};
+    if (north && bottom) {attacker.death()};
+};
 
+function checkDefenderDeath(left, right, north, bottom, defender, index) {  
+    if (index == 0) {
+        if (left && right) {defender.alive}
+        if (north && bottom) {defender.alive}
+        if (left && right && bottom && north) {defender.death()};
+    } else {
+        if (left && right) {defender.death()};
+        if (north && bottom) {defender.death()};
+    };
+};
 
-let gameLoop = () => {
-    renderBoard();
-/*nested arrays for piece deaths; if the defenders, for each defender, if in these positions they return true
+function checkPlayerProximity() {
+    /*nested arrays for piece deaths; if the defenders, for each defender, if in these positions they return true
 returning true then satisfies the death conditions and sound effect. 
 */
-if (playerIndex) {
-        defenderArray.forEach((defender, index) => {
-            let top = false;
-            let bottom = false;
-            let right = false;
-            let left = false;
-
-            attackerArray.forEach(attacker => {
-                if (defender.x == attacker.x + attacker.width &&
-                    defender.x + defender.height == attacker.x + attacker.width + attacker.height &&
-                    defender.y == attacker.y) {
-                    left = true;
-                };
-                if (defender.x + defender.width == attacker.x &&
-                    defender.x + defender.width + defender.height == attacker.x + attacker.height &&
-                    defender.y == attacker.y) {
-                    right = true;
-                };
-                if (defender.y == attacker.y + attacker.height &&
-                    defender.y + defender.width == attacker.y + attacker.height + attacker.width &&
-                    defender.x == attacker.x) {
-                    top = true;
-                };
-                if (defender.y + defender.height == attacker.y &&
-                    defender.y + defender.width + defender.height == attacker.y + attacker.width &&
-                    defender.x == attacker.x) {
-                    bottom = true;
-                };
-                function checkDefenderDeath() {  
-                    // console.log(index, "i killed a defender")  
-                    if (index == 0) {
-                        // console.log(index, 'my target')
-                        if (left && right) {defender.alive}
-                        if (top && bottom) {defender.alive}
-                        if (left && right && bottom && top) {defender.alive = false; cheerTwo.play();}
-                    } else {
-                        // console.log(index, 'not my target')
-                        if (left && right) {defender.alive = false; defender.death()}
-                        if (top && bottom) {defender.alive = false; defender.death()}
-                    };
-                };
-                let deathBtnOne = document.getElementById("turns").addEventListener('click', checkDefenderDeath);
-            });
-        })
-    } else {
-        attackerArray.forEach(attacker => {
-            let top = false;
-            let bottom = false;
-            let right = false;
-            let left = false
-            defenderArray.forEach(defender => {
-                if (attacker.x == defender.x + defender.width &&
-                    attacker.x + attacker.height == defender.x + defender.width + defender.height &&
-                    attacker.y == defender.y) {
-                    left = true;
-                }
-                if (attacker.x + attacker.width == defender.x &&
-                    attacker.x + attacker.width + attacker.height == defender.x + defender.height &&
-                    attacker.y == defender.y) {
-                    right = true;
-                }
-                if (attacker.y == defender.y + defender.height &&
-                    attacker.y + attacker.width == defender.y + defender.height + defender.width &&
-                    attacker.x == defender.x) {
-                    top = true;
-                }
-                if (attacker.y + attacker.height == defender.y &&
-                    attacker.y + attacker.width + attacker.height == defender.y + defender.width &&
-                    attacker.x == defender.x) {
-                    bottom = true;
-                }
-            })
-            function checkAttackerDeath() {
-                if (left && right) { attacker.alive = false; attacker.death()}
-                if (top && bottom) { attacker.alive = false; attacker.death()}
+if (!playerIndex) {
+    defenderArray.forEach((defender, idx) => {
+        north = false;
+        bottom = false;
+        right = false;
+        left = false;
+        attackerArray.forEach((attacker, index) => {
+            console.log(index, north, left, right, bottom, idx)
+            if (defender.x == attacker.x + attacker.width &&
+                defender.x + defender.height == attacker.x + attacker.width + attacker.height &&
+                defender.y == attacker.y) {
+                left = true;
+            };
+            if (defender.x + defender.width == attacker.x &&
+                defender.x + defender.width + defender.height == attacker.x + attacker.height &&
+                defender.y == attacker.y) {
+                right = true;
+            };
+            if (defender.y == attacker.y + attacker.height &&
+                defender.y + defender.width == attacker.y + attacker.height + attacker.width &&
+                defender.x == attacker.x) {
+                north = true;
+            };
+            if (defender.y + defender.height == attacker.y &&
+                defender.y + defender.width + defender.height == attacker.y + attacker.width &&
+                defender.x == attacker.x) {
+                bottom = true;
+            };
+            checkDefenderDeath(left, right, north, bottom, defender, index)
+        });
+    })
+} else {
+    attackerArray.forEach(attacker => {
+        north = false;
+        bottom = false;
+        right = false;
+        left = false;
+        defenderArray.forEach(defender => {
+            if (attacker.x == defender.x + defender.width &&
+                attacker.x + attacker.height == defender.x + defender.width + defender.height &&
+                attacker.y == defender.y) {
+                left = true;
             }
-            let deathBtnTwo = document.getElementById("turns").addEventListener('click', checkAttackerDeath);
+            if (attacker.x + attacker.width == defender.x &&
+                attacker.x + attacker.width + attacker.height == defender.x + defender.height &&
+                attacker.y == defender.y) {
+                right = true;
+            }
+            if (attacker.y == defender.y + defender.height &&
+                attacker.y + attacker.width == defender.y + defender.height + defender.width &&
+                attacker.x == defender.x) {
+                north = true;
+            }
+            if (attacker.y + attacker.height == defender.y &&
+                attacker.y + attacker.width + attacker.height == defender.y + defender.width &&
+                attacker.x == defender.x) {
+                bottom = true;
+            }
+            checkAttackerDeath(left, right, north, bottom, attacker)
         })
-    }
-// if characters are alive, then they are rendered. if not, no more rendering and the x,y position is changed to eliminate a post-death bug
+    })
+}
+}
+
+function renderLivingPlayers() {
+    // if characters are alive, then they are rendered. if not, no more rendering and the x,y position is changed to eliminate a post-death bug
    for (pieceArray of playerArray) {
-        // console.log(pieceArray)
         for (viking of pieceArray) {
             if (viking.alive)  {
                 viking.render()   
-            };
-        } ;
-   };
+            } 
+        };
+    };
+};
+
+let gameLoop = () => {
+    renderBoard();
+    renderLivingPlayers();
   
 //death conditions for the king trigger the win for the attackers
     detectKingDeath()
 }
-// let deathBtn = document.getElementById("turns").addEventListener('click', checkDefenderDeath();
+
 //initialize game
 let gameInterval = setInterval(gameLoop, 100)
