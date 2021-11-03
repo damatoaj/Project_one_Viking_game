@@ -9,6 +9,7 @@
     A. Javascript
     B. CSS
     C. HTML
+    D. Canvas
 # III. WireFrames
     A. Header
     B. Board
